@@ -17,7 +17,7 @@
 \newtheorem*{theorem}{Theorem}
 \newtheorem*{definition}{Definition}
 \newtheorem{hint}{Hinweis}[exercise]
-\newenvironment{solution}[1][{Lösung}] {\begin{proof}[#1]} {\end{proof}}
+\newenvironment{solution}[1][{\textbf{Lösung}}] {\begin{proof}[#1]} {\end{proof}}
 
 %%%% define \begin{varthm}{<reference to \label{} of other theorem>}[<Exercise|Theorem|Def|...>]
 \newtheorem*{varthm+inner}{\varthmname}
@@ -64,9 +64,10 @@
 \newcommand{\Normal}{\cN}
 \newcommand{\charFct}{\varphi}
 \newcommand{\integer}{\mathbb{Z}}
-\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\rational}{\mathbb{Q}}
+\newcommand{\nat}{\mathbb{N}}
 \newcommand{\conj}[1]{\overline{#1}}
-\newcommand{\reals}{\mathbb{R}}
+\newcommand{\real}{\mathbb{R}}
 \newcommand{\complex}{\mathbb{C}}
 %
 \newcommand{\eps}{\varepsilon}

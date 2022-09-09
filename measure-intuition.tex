@@ -2,9 +2,7 @@
 \documentclass[11pt]{article}
 \usepackage{exerciseHead}
 
-\input{Macros.tex} % AFTER the solution true/false macro !!
-%%% DO NOT put the macro in the comment to explain
-%%% (the show_solutions.sh looks for it!)
+\input{Macros.tex} 
 
 % Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -19,24 +17,75 @@
 
 
 \begin{exercise}[Das Lebesgue Maß]
-	
+	Diskutiert welche Eigenschaften ein Volumenmaß \(\lambda\) für den
+	\(\real^n\) haben sollte.  Für \(n=2\) sollte das Volumenmaß ein
+	``Flächenmaß'' sein, für
+	\(n=1\) ein ``Längenmaß''. Versucht die Liste der Eigenschaften auf das
+	nötigste zu reduzieren. Es sollten keine Eigenschaften übrig bleiben die
+	sich aus den anderen ergeben.
+
+	Vergleicht eure Definition eines Volumenmaßes mit der Definition eines
+	allgemeinen Maßes in der Vorlesung. Versucht Gemeinsamkeiten und Unterschiede
+	zu finden und zu begründen.
 \end{exercise}
 
 \begin{hint}
-
+	Wie verändert sich das Volumen einer Menge, wenn sie verschoben wird?
+	Wie bestimmt man den Flächeninhalt eines Quaders, eines Kreises?
 \end{hint}
 
 \begin{hint}
+	Um den Flächeninhalt eines Kreises zu bestimmen, muss man den Grenzwert
+	von immer feineren Approximationen ziehen können. Welche Eigenschaft braucht
+	ein Maß damit das erlaubt ist?
+\end{hint}
 
+\begin{hint}
+	Gegeben \(\lambda([0,a]^n) = c\), lässt sich mit Verschiebungsinvarianz auch
+	das Volumen von \(\lambda([0,2a]^n)\) bestimmen? Wie sieht es mit allgemeinen
+	Quadern aus?
+\end{hint}
+
+\begin{hint}
+	Versucht Satz 1.2.12 zu verwenden um zu zeigen, dass die folgenden
+	Eigenschaften das Lebesgue-Maß eindeutig bestimmen:
+	\begin{itemize}
+		\item \(\lambda(\emptyset) = 0, \lambda(A)\ge 0\) für alle \(A\)
+		\item \(\lambda(\biguplus_{k=1}^\infty A_k) = \sum_{k=1}^\infty \lambda(A_k)\)
+		``Approximierbarkeit''
+	\end{itemize}
+	So weit haben wir nur ein allgemeines Maß wie in der Vorlesung definiert.
+	Jetzt kommen noch die zusätzlichen Eigenschaften:
+	\begin{itemize}
+		\item \(\lambda(A+x) = \lambda(A)\) für alle \(x\in\real^n\)
+		``Verschiebungsinvarianz''
+		\item \(\lambda([0,1]^n) = 1\) ``Normierung''
+	\end{itemize}
+	Wir lassen hier "Messbarkeit" von Mengen (\(\sigma\)-Algebren) unter den
+	Tisch fallen. Nehmt einfach an, dass die Borel \(\sigma\)-Algebra ``alle''
+	Mengen sind. Zunächst einmal möchte man ja vielleicht alle Mengen messen
+	können. In Aufgabe~\ref{ex: why measurability} erkunden wir, warum das nicht
+	geht.
 \end{hint}
 
 \begin{solution}
-
+	Durch Verschiebungsinvarianz muss für \(\lambda([0, 1/m]^n)=c\) gelten
+	\(\lambda([0,1]^n) = m^n c\). Folglich gilt \(c=\frac{1}{m^n}\). Mit
+	ähnlichen Tricks, kann man \(\lambda([q_1, p_1]\times ...\times [q_n, p_n])\)
+	für alle \(q_i,p_i\in\rational\) bestimmen. Aber \(\{\prod_{i=1}^n[q_i, p_i]
+	: q_i,p_i\in\rational\}\) ist ein schnittstabilier Erzeuger der Borel
+	\(\sigma\)-Algebra. Damit ist \(\lambda\) nach Satz 1.2.12 auf den
+	Borelmengen eindeutig.
 \end{solution}
 
 
-\begin{exercise}
-	
+\newpage
+
+\begin{exercise}[Warum Messbarkeit]\label{ex: why measurability}	
+	In dieser Aufgabe wollen wir diskutieren, warum wir \(\sigma\)-Algebren
+	(Mengen von ``Messbaren'' Mengen) brauchen. Das Ziel ist es also nicht-messbare
+	Mengen konstruieren, d.h. Mengen denen man nicht sinnvoll eine Größe zuordnen
+	kann.
 \end{exercise}
 \begin{hint}
 	
