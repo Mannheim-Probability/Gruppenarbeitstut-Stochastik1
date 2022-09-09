@@ -15,6 +15,8 @@
 
 \maketitle
 
+Ohne die Hinweise sind diese Aufgaben zu schwer. Versucht nur deren Hilfe so
+lange es geht hinauszuzuögern.
 
 \begin{exercise}[Das Lebesgue Maß]
 	Diskutiert welche Eigenschaften ein Volumenmaß \(\lambda\) für den
@@ -84,11 +86,62 @@
 \begin{exercise}[Warum Messbarkeit]\label{ex: why measurability}	
 	In dieser Aufgabe wollen wir diskutieren, warum wir \(\sigma\)-Algebren
 	(Mengen von ``Messbaren'' Mengen) brauchen. Das Ziel ist es also nicht-messbare
-	Mengen konstruieren, d.h. Mengen denen man nicht sinnvoll eine Größe zuordnen
-	kann.
+	Mengen zu konstruieren, d.h. Mengen denen man nicht sinnvoll eine Größe zuordnen
+	kann. Bevor ihr den ersten Hinweis lest, überlegt selbst, wie man dieses
+	Ziel erreichen könnte.
 \end{exercise}
 \begin{hint}
-	
+	Um dieses Ziel zu erreichen brauchen wir alle definierten Eigenschaften:	
+	Wir wollen eine disjunkte, abzählbare Zerlegung von \([0,1]\) konstruieren.
+	Die Volumen dieser Zerlegung muss sich wegen der Approximierbarkeit und
+	Normierung also zu eins aufsummieren. Zuletzt wollen wir, dass all diese
+	abzählbar vielen, disjunkten Mengen nur Verschiebungen voneinander sind,
+	also nach der Verschiebungsinvarianz gleich groß sein müssen. Denn eine
+	unendliche anzahl von gleich großen Mengen, kann sich nicht zu eins
+	aufsummieren, was dann der gewünschte Widerspruch ist.
+
+	Die wesentlichen Werkzeuge um diese ``Vitali-Mengen'' zu konstruieren sind
+	Äquivalenzklassen, die Abzählbarkeit von \(\rational\) und das Auswahlaxiom.
+	Spielt ein wenig mit diesen Werkzeugen herum und versucht euch selbst an der
+	Konstruktion, bevor ihr den nächsten Hinweis lest.
 \end{hint}
+
+\begin{hint}\label{hint: Repräsentantensystem}
+	Wählt mit dem Auswahlaxiom ein Repräsentantensystem der Äquivalenzklassen von
+	der Äquivalenzrelation
+	\[
+		x\sim y \iff x-y \in \rational.
+	\]
+	Indem man die Äquivalenzklassen mit \([0,1]\) schneidet, ist das ganze
+	Repräsentantensystem ohne Beschränkung der Allgemeinheit in \([0,1]\).
+	Mit abzählbar vielen Verschiebungen (um alle Elemente aus \(\rational\)) kann
+	man aus diesem Repräsentantensystem wieder ganz \(\real\) gewinnen.
+
+	Diskutiert welche formalen Probleme es mit diesem Ansatz noch zu bewältigen
+	gilt.
+\end{hint}
+
+\begin{hint}
+	Die Addition modulus \(1\)	von Elementen \(a,b\in[0,1]\) ist definiert als
+	\[
+		a+_1 b := a + b - \lfloor a + b \rfloor.
+	\]
+	Vergewissert euch, dass für \(A\subseteq [0,1]\), \(A +_1 x \subseteq [0,1]\)
+	und dass Verschiebungsinvarianz immer noch bedeutet \(\lambda(A +_1
+	x)=\lambda(A)\).
+\end{hint}
+
+\begin{solution}
+	Mit dem Repräsentantensystem \(V\subseteq [0,1]\) aus Hinweis~\ref{hint:
+	Repräsentantensystem} definieren wir
+	\[
+		V_q := V +_1 q \qquad \forall q\in\rational\cap [0,1].
+	\]
+	Dann gilt
+	\[
+		\biguplus_{q\in\rational\cap[0,1]} V_1 = [0,1]
+	\]
+	und \(\lambda(V_q)=\lambda(V)\), was zum geplanten Widerspruch führt.
+\end{solution}
 
 \end{document} 
