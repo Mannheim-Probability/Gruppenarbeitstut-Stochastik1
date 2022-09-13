@@ -1,0 +1,56 @@
+
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+
+\title{Inclusion-Exclusion Prinzip}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+Sei \((\Omega, \cA, \Pr)\) ein Wahrscheinlichkeitsraum.
+
+\begin{exercise}[Zwei Mengen]
+	Beweise für alle \(A,B\in\cA\)
+	\[
+		\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A\cap B)
+	\]
+\end{exercise}
+
+\begin{exercise}[n-Mengen]\label{ex: n-Mengen}
+	Beweise für alle \(n\in\nat\), \(A_1,\dots, A_n\in\cA\)
+	\[
+		\Pr\left(
+			\bigcup_{k=1}^n A_k
+		\right)
+		= \sum_{k=1}^n (-1)^{k+1} \sum_{I\subseteq \{1,\dots,n\}: |I|=k} \Pr(A_I)
+	\]
+	wobei wir definieren
+	\[
+		A_I := \bigcap_{i\in I} A_i
+	\]
+\end{exercise}
+
+\begin{exercise}[Spezialfall]
+	Im gleichen Setting wie Aufgabe~\ref{ex: n-Mengen} nehmen wir zusätzlich an,
+	dass es \(p_1, \dots, p_n\) gibt mit
+	\[
+		\Pr(A_I) = p_{|I|},
+	\]
+	d.h. die Wahrscheinlichkeit von \(\Pr(A_I)\) nur von der Anzahl der Elemente
+	in \(I\) abhängt.
+	Zeige dass dann gilt:
+	\[
+		\Pr\left(\bigcup_{k=1}^n A_k\right) = \sum_{k=1}^n (-1)^{k+1} \binom{n}{k}p_k
+	\]
+\end{exercise}
+
+\end{document} 
