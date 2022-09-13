@@ -53,4 +53,21 @@ Sei \((\Omega, \cA, \Pr)\) ein Wahrscheinlichkeitsraum.
 	\]
 \end{exercise}
 
+\begin{exercise}
+	
+\end{exercise}
+	Im gleichen Setting wie Aufgabe~\ref{ex: n-Mengen} zeige, dass für gerade
+	\(m\le n\) gilt
+	\[
+		\Pr\left(
+			\bigcup_{k=1}^n A_k
+		\right)
+		\ge \sum_{k=1}^{{\color{red}{m}}} (-1)^{k+1} \sum_{I\subseteq \{1,\dots,n\}: |I|=k} \Pr(A_I),
+	\]
+	und genauso ``\(\le\)'' für \(m\) ungerade. Insbesondere haben wir
+	\[
+		\Pr\left(
+			\bigcup_{k=1}^n A_k
+		\right) \ge \sum_{k=1}^n \Pr(A_k) - \sum_{i=1}^n \sum_{j=1, j\neq i}^n \Pr(A_i\cap A_j).
+	\]
 \end{document} 
