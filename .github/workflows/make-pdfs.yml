@@ -27,7 +27,7 @@ jobs:
 
       - uses: xu-cheng/latex-action@v2
         with:
-          root_file: "week_*/*.tex"
+          root_file: "w[0-9]*_*.tex"
           glob_root_file: true
       
       - name: move outputs to folder
