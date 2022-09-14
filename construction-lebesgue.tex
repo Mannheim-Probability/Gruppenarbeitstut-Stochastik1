@@ -8,14 +8,14 @@
 
 \input{semester_info.tex} % (file) for one update per semester
 
-\title{Lebesgue-Maß Konstruktion}
+\title{Lebesgue-Maß}
 
 %%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \maketitle
 
-\begin{exercise}
+\begin{exercise}[Konstruktion]
 	Auf dem Blatt zur ``Intuition von Maßräumen'' haben wir schon skizziert,
 	warum die Eigenschaften
 	\begin{itemize}
@@ -39,5 +39,25 @@
 	Daher ist die Aufgabe: Beweise dass es genau ein Maß gibt (Existenz und
 	Eindeutigkeit) welches die oben genannten Eigenschaften erfüllt.
 \end{exercise}
+
+\begin{exercise}[Verzerrung]
+	Sei \(f:\real^n\to\real^n\) eine lineare Abbildung. Dann definieren wir
+	\[
+		\lambda_f(A) := \lambda(f^{-1}(A))
+	\]
+	als das ``Push-Forward'' Maß oder ``Bildmaß'' von \(\lambda\) mit \(f\).
+	(Das geht auch allgemeiner für ``messbare'' Funktionen, die in Kapitel 2
+	der Vorlesung eingeführ werden.)
+
+	Zeigt
+	\[
+		\lambda_f(A) = \det(f) \lambda(A)
+	\]
+\end{exercise}
+\begin{hint}
+	Zeigt \(\lambda_f\) ist Verschiebungsinvariant. Zeigt es für \(f\), die
+	isomorph zu einer Diagonalmatrix sind, und verallgemeinert dann.
+\end{hint}
+
 
 \end{document} 
