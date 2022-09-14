@@ -16,11 +16,76 @@
 \maketitle
 
 \begin{exercise}[Nullmengen]
-	Für ein beliebiges äußeres Maß \(\mu^*\) gilt, alle Nullmengen,
+	Zeige, dass für ein beliebiges äußeres Maß \(\mu^*\) gilt, alle Nullmengen,
 	\[
 		A\subseteq \Omega : \mu^*(A) = 0,
 	\]
 	sind \(\mu^*\)-messbar.
+\end{exercise}
+\begin{exercise}
+	Zeige, dass für jede Menge \(A\subseteq \real\) mit positivem äußerem Maß
+	\(\mu^*(A)\ge 0\) eine nicht \(\mu^*\)-messbare Teilmenge existiert.
+\end{exercise}
+\begin{hint}
+	Es gibt ein Intervall mit \(\mu^*(A\cap I)\ge 0\). O.B.d.A \(A=A\cap I\) und
+	Vitali Mengen mit \(A\) schneiden und Subadditivität verwenden.
+\end{hint}
+
+\begin{remark}
+	Da wir das Lebesgue Maß \(\lambda\) über ein äußeres Maß konstruieren, gilt
+	also dass alle Nullmengen ``Lebesgue messbar'' sind, d.h. in
+	\(\cA_{\lambda^*}\) enthalten sind. In ``Intuition von Maßräumen'' haben wir
+	Vitali-Mengen konstruiert die nicht Lebesgue messbar sein können. Wir
+	wollen nun Nullmengen finden, die nicht Borel messbar sind um zu zeigen
+	\[
+		\cB(\real^n)
+		\overset{\text{Ziel}}{\subsetneq} \cA_{\lambda^*}
+		\overset{\text{Vitali}}{\subsetneq} \cP(\real^n).
+	\]
+\end{remark}
+
+\begin{exercise}[Cantor Menge]
+	Zeige dass die ``Cantor Menge'' \(\cC\) (nachschlagen) Lebesgue Maß Null hat.
+\end{exercise}
+
+\begin{remark}
+	Leider ist \(\cC\) aber Borel messbar. Um eine nicht Borel-messbare Nullmenge
+	zu finden, wollen wir deren Teilmengen betrachten. Es gibt zwei Möglichkeiten
+	die Existenz einer nicht Borel-messbaren Teilmenge zu beweisen.
+
+	Die erste ist ein Kardinalitätsargument: Die Cantor Menge hat die gleiche
+	Kardinalität wie das Kontinuum (ist überabzählbar). Also ist die Kardinalität
+	ihrer Potenzmenge strikt größer als das Kontinuum (``größeres Unendlich'').
+	Die Menge der Borel messbaren Mengen ist dagegen genaus groß wie das
+	Kontinuum, also gibt es mehr Teilmengen der Cantor Menge als Borel Mengen.
+	Daraus folgt, dass es eine Teilmenge geben muss, die keine Borel-Menge ist.
+
+	Um ein bisschen näher an den Werkzeugen dieser Vorlesung zu bleiben,
+	versuchen wir uns an einem etwas konstruktiveren Argument.
+\end{remark}
+
+
+\begin{exercise}[Cantor Funktion]
+	Zeige dass die ``Cantor Funktion'' \(\phi:[0,1]\to [0,1]\) (nachschlagen) stetig und
+	(schwach) monoton wachsend ist. Folgere, dass
+	\[
+		\psi : \begin{cases}
+			[0,1] \to [0,2]\\
+			x\mapsto x + \phi(x)
+		\end{cases}	
+	\]
+	stetig, strikt monoton wachsend und stetig invertierbar ist.
+\end{exercise}
+
+\begin{exercise}[Finde Nicht Borel Messbare Menge]
+	Beweise dass \(\psi(\cC)\) Lebesgue Maß \(1\) hat und folgere, dass es somit
+	ein Lebesgue messbares \(B\subseteq \cC\) gibt, mit \(\psi(B)\) nicht
+	Lebesgue (also auch nicht Borel messbar).
+\end{exercise}
+
+\begin{exercise}[Zielgerade]
+	Zeige, dass stetige Abbildungen Borel Mengen auf Borel Mengen abbilden und
+	folgere dass es Lebesgue messbare Mengen gibt, die nicht Borel messbar sind.	
 \end{exercise}
 
 \end{document} 
