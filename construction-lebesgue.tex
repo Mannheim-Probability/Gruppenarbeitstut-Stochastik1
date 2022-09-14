@@ -47,16 +47,35 @@
 	\]
 	als das ``Push-Forward'' Maß oder ``Bildmaß'' von \(\lambda\) mit \(f\).
 	(Das geht auch allgemeiner für ``messbare'' Funktionen, die in Kapitel 2
-	der Vorlesung eingeführ werden.)
+	der Vorlesung in Satz 2.2 eingeführ werden.)
 
 	Zeigt
 	\[
-		\lambda_f(A) = \det(f) \lambda(A)
+		\lambda_f(A) = \frac1{|\det(f)|}\lambda(A).
 	\]
 \end{exercise}
+\begin{remark}
+	Warum ist das interessant? Zum einen sieht man hier, warum man die
+	Determinante als ein Maß für die Volumenverzerrung sehen kann, die eine
+	lineare Funktion verursacht. Hat die lineare Abbildung nicht vollen Rang,
+	bildet sie einen \(n\)-Dimensionalen raum in einen Unterraum ab. Also
+	verschwindet das Volumen, da eine (Hyper-)ebene kein Volumen hat. Eine
+	nicht-invertierbare Matrix hat also Determinante Null.
+
+	Da differenzierbare Funktionen lokal wie eine lineare Funktionen aussehen
+	(die Ableitung), kann man mit dieser Aussage außerdem eine konkrete Version
+	des abstrakten Transformationssatzes (Satz 3.1.16) basteln. Diese konkrete
+	Version ist bekannter als ``Substitutionsregel''.
+\end{remark}
+
 \begin{hint}
 	Zeigt \(\lambda_f\) ist Verschiebungsinvariant. Zeigt es für \(f\), die
 	isomorph zu einer Diagonalmatrix sind, und verallgemeinert dann.
+\end{hint}
+\begin{hint}
+	Zeigt oder erinnert euch, dass \(\det(AB)=\det(A)\det(B)\). Folgt daraus,
+	dass für orthogonale Matrizen \(U\) gilt \(\det(U)=\pm 1\). Zuletzt, wendet
+	die Singulärwertzerlegung einer Matrix an.
 \end{hint}
 
 
