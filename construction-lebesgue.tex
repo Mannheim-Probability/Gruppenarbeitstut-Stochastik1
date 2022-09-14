@@ -1,0 +1,43 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+
+\title{Construction-Lebesgue Measure}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\begin{exercise}
+	Auf dem Blatt zur ``Intuition von Maßräumen'' haben wir schon skizziert,
+	warum die Eigenschaften
+	\begin{itemize}
+		\item \(\lambda(\emptyset) = 0, \lambda(A)\ge 0\) für alle \(A\in\cB(\real)\)
+		\item \(\lambda(\biguplus_{k=1}^\infty A_k) = \sum_{k=1}^\infty \lambda(A_k)\)
+		``Approximierbarkeit''
+		\item \(\lambda(A+x) = \lambda(A)\) für alle \(x\in\real^n\)
+		``Verschiebungsinvarianz''
+		\item \(\lambda([0,1]^n) = 1\) ``Normierung''
+	\end{itemize}
+	das Lebesgue Maß eindeutig definieren. Allerdings haben wir bei den Sigma
+	Algebren ein bisschen geschludert weil wir die Intuition betont haben
+	und auch nicht die Existenz gezeigt, sondern nur die Eindeutigkeit skizziert.
+	
+	In dieser Aufgabe geht es darum diese Lücken zu füllen. Dazu wollen wir
+	auch den Fortsetzungssatz von Carathéodory (Satz 1.3.7) anwenden. Der Satz wird
+	zwar erst in am Anfang der Vorlesung 5 eingeführt, aber um ihn zu verwenden
+	braucht ihr nur die Objekte in den Voraussetzungen des Satzes zu konstruieren,
+	die alle schon vorher eingeführt wurden.
+
+	Daher ist die Aufgabe: Beweise dass es genau ein Maß gibt (Existenz und
+	Eindeutigkeit) welches die oben genannten Eigenschaften erfüllt.
+\end{exercise}
+
+\end{document} 
