@@ -15,8 +15,46 @@
 
 \maketitle
 
-\begin{exercise}
+\begin{exercise}[\(\cB(\real)\) Erzeuger]
+	Bei Definition sind wird die Borel Sigma Algebra von den offenen Mengen
+	erzeugt \(\cB(\real)=\sigma(\cE_0)\). Zeige, dass all diese Mengensysteme
+	die Borel Sigma Algebra erzeugen
+	\[
+		\begin{aligned}
+		\cE_0 &= \{O\subseteq \real : O \text{ offen}\}\\
+		\cE_1 &= \{A\subseteq \real : A \text{ abgeschlossen}\}\\
+		\cE_2 &= \{K\subseteq \real : K \text{ kompakt}\}\\
+		\cE_3 &= \{ (a, b) : a,b\in \real \}\\
+		\end{aligned}
+		\qquad
+		\begin{aligned}
+		\cE_4 &= \{ (a, b) : a,b\in\rational\}\\
+		\cE_5 &= \{ [a, b) : a,b\in\rational\}\\
+		\cE_6 &= \{ (-\infty, b] : a,b\in\rational\}\\
+		\cE_7 &= \{ (-\infty, b) : a,b\in\rational\}\\
+		\end{aligned}
+	\]
+\end{exercise}
 
+\begin{exercise}
+	Für eine beliebige Funktion \(f\) und Mengensystem \(\cE\), zeige
+	\[
+		\sigma(f^{-1}(\cE)) = f^{-1}(\sigma(\cE))
+	\]	
+\end{exercise}
+
+\begin{exercise}[Spur-\(\sigma\)-Algebra]
+	Für eine beliebige Menge \(A\) und Mengensystem \(\cE\) ist zu zeigen
+	\[
+		\sigma(\cE \cap A) = \sigma(\cE) \cap A.
+	\]
+	wobei wir eine Menge mit einem Mengensystem schneiden, indem wir alle
+	Elemente schneiden
+	\[
+		\cE \cap A := \{ E\cap A : E\in \cE\}.
+	\]
+	Folgere, dass der Schnitt einer \(\sigma\)-Algebra mit einer Menge wieder
+	eine Sigma Algebra ist.
 \end{exercise}
 
 \end{document} 
