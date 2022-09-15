@@ -15,32 +15,36 @@
 
 \maketitle
 
-\begin{exercise}[\(\cB(\real)\) Erzeuger]
-	Bei Definition sind wird die Borel Sigma Algebra von den offenen Mengen
-	erzeugt \(\cB(\real)=\sigma(\cE_0)\). Zeige, dass all diese Mengensysteme
-	die Borel Sigma Algebra erzeugen
+\begin{exercise}[Metrischer Raum]\label{ex: metrischer Raum}
+	Sei \((X,d)\) ein metrischer Raum. Ein Ball ist definiert als
 	\[
-		\begin{aligned}
-		\cE_0 &= \{O\subseteq \real : O \text{ offen}\}\\
-		\cE_1 &= \{A\subseteq \real : A \text{ abgeschlossen}\}\\
-		\cE_2 &= \{K\subseteq \real : K \text{ kompakt}\}\\
-		\cE_3 &= \{ (a, b) : a,b\in \real \}\\
-		\end{aligned}
-		\qquad
-		\begin{aligned}
-		\cE_4 &= \{ (a, b) : a,b\in\rational\}\\
-		\cE_5 &= \{ [a, b) : a,b\in\rational\}\\
-		\cE_6 &= \{ (-\infty, b] : a,b\in\rational\}\\
-		\cE_7 &= \{ (-\infty, b) : a,b\in\rational\}\\
-		\end{aligned}
+		B_\epsilon(x) := \{y\in X: d(x,y) < \epsilon\}.
 	\]
+	Eine offene Menge \(O\) besitzt die definierende Eigenschaft
+	\[
+		\forall x\in O, \exists \epsilon >0 : B_\epsilon(x) \subseteq O.
+	\]
+	Sei \(\tau\) die Topologie (Menge der offenen Mengen) von \(X\) induziert
+	durch \(d\). Dann ist die Borel \(\sigma\)-Algebra definiert als
+	\[
+		\cB(X):=\sigma(\tau).
+	\]
+	Nehme nun an, dass der metrische Raum \(X\) separabel ist, mit abzählbarer
+	dichter Teilmenge \(Q\). Zeige, dass dann
+	\[
+		\cE:= \{ B_{\frac1n}(x): x\in Q, n\in\nat \}
+	\]
+	ein Erzeuger von \(\cB(X)\) ist. Folgere, dass die Menge der Würfel
+	\(\cB(\real^n)\) erzeugen.
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[Urbilder]
 	Für eine beliebige Funktion \(f\) und Mengensystem \(\cE\), zeige
 	\[
-		\sigma(f^{-1}(\cE)) = f^{-1}(\sigma(\cE))
+		\sigma(f^{-1}(\cE)) = f^{-1}(\sigma(\cE)).
 	\]	
+	Folgere, dass stetig invertierbare Funktionen Borelmengen auf Borelmengen
+	abbilden.
 \end{exercise}
 
 \begin{exercise}[Spur-\(\sigma\)-Algebra]
@@ -56,5 +60,32 @@
 	Folgere, dass der Schnitt einer \(\sigma\)-Algebra mit einer Menge wieder
 	eine Sigma Algebra ist.
 \end{exercise}
+
+\begin{exercise}[Kartesisches Produkt]
+	Seien \(\cE_1,\cE_2\) Mengensysteme mit \(\cA_i:=\sigma(\cE_i)\) und der
+	Eigenschaft, dass jeweils Folgen \((E_i^{(k)})_{k\ge 1}\subseteq \cE_i\)
+	existieren mit \(\bigcup_{k=1}^\infty E_i^{(k)} = \Omega_i\). Zeige, dass
+	dann gilt
+	\[
+		\sigma(\cE_1 \times \cE_2) = \sigma(\cA_1\times \cA_2).
+	\]
+	Erkläre, wie man diese Aussage zusammen mit Aufgabe~\ref{ex: metrischer Raum}
+	verwenden kann, um viele der Erzeugendensysteme von \(\cB(\real^n)\) aus den
+	Erzeugendensystemen von \(\cB(\real)\) herzuleiten.
+\end{exercise}
+\begin{hint}
+	Zeige für die Projektionsabbildungen \(\pi_i: \Omega_1\times\Omega_2 \to
+	\Omega_i, x\mapsto x_i\), dass gilt
+	\[
+		\begin{aligned}
+			\sigma(\cE_1 \times \cE_2)
+			&\subseteq \sigma(\cA_1\times \cA_2)\\
+			&\subseteq \sigma(\pi_1^{-1}(\cA_1)\cap \pi_2^{-1}(\cA_2))\\
+			&\subseteq \sigma(\pi_1^{-1}(\cA_1)\cup \pi_2^{-1}(\cA_2))\\
+			&\subseteq \sigma(\pi_1^{-1}(\cE_1)\cup \pi_2^{-1}(\cE_2))\\
+			&\subseteq \sigma(\cE_1 \times \cE_2)
+		\end{aligned}
+	\]
+\end{hint}
 
 \end{document} 
