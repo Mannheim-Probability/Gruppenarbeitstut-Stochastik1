@@ -1,0 +1,75 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+
+\title{Zerlegung}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\begin{exercise}[Maße]
+	Sei \((\Omega,\cA,\mu)\) ein Maßraum.
+	\begin{enumerate}
+		\item 
+		Zeige, dass wenn \(\mu\) ein eindliches Maß ist, für alle \(\epsilon>0\)
+		höchstens endlich viele Punkte \(x\) existieren mit \(\mu(\{x\})>\epsilon\).
+
+		\item Sei \(E\) eine messbare Menge mit \(\mu(E)<\infty\). Zeige, dass dann
+		\(\eta(A):=\mu(A\cap E)\) für \(A\in\cA\) ein endliches Maß ist.
+
+		\item Folgere, dass ein \(\sigma\)-endliches Maß höchstens abzählbar viele
+		Punkte \(x\) mit positiver Masse \(\mu(\{x\})>0\) besitzt.
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Funktionen]
+	\leavevmode
+	\begin{enumerate}
+		\item Zeige, dass eine Verteilungsfunktion \(F\) höchstens abzählbar viele
+		``Sprungstellen'' (bzw. ``Unstetigkeitsstellen'') besitzt. Wobei eine
+		Sprungstelle \(x\) über die Folgende Eigenschaft definiert ist:
+		\[
+			\lim_{y\uparrow x}F(x)\neq \lim_{y\downarrow x} F(y).
+		\]
+
+
+		\item Sei \(f\) eine beliebige monotone Funktion. Zeige, dass es für jedes
+		Intervall \([a,b]\) Konstanten \(c,d\in\real\) gibt, sodass
+		\[
+			F(x):= \begin{cases}
+				0 & x\le a\\
+				\lim_{y\downarrow x} cf(y) + d & x\in [a,b]\\
+				1 & x\ge b
+			\end{cases}
+		\]
+		eine Verteilungsfunktion ist.
+
+		\item Folgere, dass jede monotone Funktion höchstens abzählbar viele
+		Unstetigkeitsstellen besitzt.
+	\end{enumerate}	
+\end{exercise}
+
+\begin{exercise}[Zerlegung]
+	Sei \(\mu\) ein Wahrscheinlichkeitsmaß auf \(\real\) mit Verteilungsfunktion
+	\(F\). Zeige dass es zwei Wahrscheinlichkeitsmaße \(\mu_d,\mu_s\) gibt, mit
+	Verteilungsfunktionen \(F_d, F_s\), sodass \(F_s\) eine stetige Funktion ist,
+	\[
+		\mu_d = \sum_{k=1}^\infty a_k \delta_{x_k},
+		\qquad (x_i)_{i\in\nat}, (a_i)_{i\in\nat} \subseteq \real
+	\]
+	und zuletzt gilt, dass
+	\[
+		\mu = c_d \mu_d + c_s \mu_s
+	\]
+	für \(c_d,c_s\in[0,1]\).
+\end{exercise}
+
+\end{document} 
