@@ -59,17 +59,23 @@
 
 \begin{exercise}[Zerlegung]
 	Sei \(\mu\) ein Wahrscheinlichkeitsmaß auf \(\real\) mit Verteilungsfunktion
-	\(F\). Zeige dass es zwei Wahrscheinlichkeitsmaße \(\mu_d,\mu_s\) gibt, mit
-	Verteilungsfunktionen \(F_d, F_s\), sodass \(F_s\) eine stetige Funktion ist,
-	\[
-		\mu_d = \sum_{k=1}^\infty a_k \delta_{x_k},
-		\qquad (x_i)_{i\in\nat}, (a_i)_{i\in\nat} \subseteq \real
-	\]
-	und zuletzt gilt, dass
-	\[
-		\mu = c_d \mu_d + c_s \mu_s \quad\text{und}\quad F = c_d F_d + c_s F_s
-	\]
-	für \(c_d,c_s\in[0,1]\).
+	\(F\). Zeige dass es zwei Wahrscheinlichkeitsmaße \(\mu_d,\mu_s\) mit
+	Verteilungsfunktionen \(F_d, F_s\) gibt, sodass 
+	\begin{enumerate}
+		\item \(F_s\) eine stetige Funktion ist,
+
+		\item \(\mu_d\) ein diskretes Maß ist, i.e.
+		\[
+			\mu_d = \sum_{k=1}^\infty a_k \delta_{x_k},
+			\qquad (x_i)_{i\in\nat}, (a_i)_{i\in\nat} \subseteq \real,
+		\]
+
+		\item und zuletzt gilt, dass
+		\[
+			\mu = c_d \mu_d + c_s \mu_s \quad\text{und}\quad F = c_d F_d + c_s F_s
+		\]
+		für \(c_d,c_s\in[0,1]\).
+	\end{enumerate}
 \end{exercise}
 
 \end{document} 
