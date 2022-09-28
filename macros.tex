@@ -17,10 +17,12 @@
 \newtheorem{exercise}{Aufgabe}
 \newtheorem*{exercise*}{Aufgabe}
 \theoremstyle{plain}
-\newtheorem*{theorem}{Theorem}
-\newtheorem*{corollary}{Korollar}
-\newtheorem*{definition}{Definition}
-\newtheorem*{example}{Beispiel}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Korollar}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Beispiel}[section]
 \newtheorem{hint}{Hinweis}[exercise]
 \newenvironment{solution}[1][{\textbf{Lösung}}] {\begin{proof}[#1]} {\end{proof}}
 
@@ -68,6 +70,7 @@
 \newcommand{\Poi}{\text{Poi}}
 \newcommand{\Unif}{\cU}
 \newcommand{\Normal}{\cN}
+\newcommand{\identity}{\mathbb{I}}
 \newcommand{\charFct}{\varphi}
 \newcommand{\integer}{\mathbb{Z}}
 \newcommand{\rational}{\mathbb{Q}}

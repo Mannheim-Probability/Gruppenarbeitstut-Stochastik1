@@ -129,6 +129,8 @@ Beispiel die Verteilung von Summen von quadrierten Normalverteilten
 Zufallsvariablen oder Summen von Exponentiell verteilten Zufallsvariablen
 beschreibt.
 
+\clearpage
+
 \section{Substitutionsregel}
 
 \begin{theorem}[Substitutionsregel] Für ein differenzierbares \(g\), gilt
@@ -174,11 +176,11 @@ beschreibt.
 \end{remark}
 \begin{corollary}
 	Wenn \(g\) zusätzlich invertierbar ist, dann gilt
-	\begin{align*}
+	\begin{equation*}
 		\int_{a}^{b} f(g(x)) {\color{cyan} dx}
 		=\int_{g(a)}^{g(b)}f(y) {\color{red}(g^{-1})'(y) dy}
 		=\int_{g(a)}^{g(b)}f(y) {\color{red} \frac{dx}{dy} dy}.
-	\end{align*}
+	\end{equation*}
 \end{corollary}
 
 \begin{example}[Parameter Entfernen]
@@ -207,11 +209,126 @@ beschreibt.
 
 \section{Transformationssatz}
 
+\begin{theorem}[Abstrakter Transformationssatz]
+	Sei \(g:\Omega\to\Omega'\) messbar, \(f:\Omega'\to\real\) messbar und so dass
+	folgendes wohldefiniert ist (\(f\ge 0\) oder integrierbar)
+	\[
+		\int_\Omega f\circ g {\color{cyan} d\mu} = \int_{\Omega'} f {\color{red} d\mu_g}
+	\]	
+	mit \(\mu_g(B):= \mu(g^{-1}(B))\).
+\end{theorem}
+
+Während der Beweis relativ einfach ist, ist das Ergebnis so auch noch nicht
+sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
+
+\begin{lemma}[Lineares Bildmaß des Lebesgue Maß]\label{lem: lin pushforward lebesgue measure}
+	Se \(\lambda\) das Lebesgue Maß auf \(\real^n\) und \(g\) eine invertierbare lineare Funktion, d.h.
+	\[
+		g(x) = Ax,
+	\]
+	dann gilt
+	\[
+		\lambda_g = \frac1{|\det(A)|}\lambda = |\det(A^{-1})|\lambda
+	\]
+\end{lemma}
+\begin{proof}[Beweisskizze]
+	\begin{enumerate}[wide, label=\textbf{Schritt \arabic*:}]
+		\item 
+		Zeige für jedes verschiebungsinvariantes Maß \(\mu\), dass es
+		zwangsläufig von der Form \(c\lambda\) sein muss.
+
+		Definiere hierfür
+		\(c:=\mu([0,1]^n)\) und leite die Größe aller rationalen Quader durch
+		Verschieben und zusammenstecken von kleineren Quadern aus dieser Konstante her.
+		Da die Menge alle rationalen Quader ein schnittstabiles Erzeuger ist, der
+		die Borel-\(\sigma\)-Algebra erzeugt, folgt mit dem Eindeutigkeitssatz,
+		dass \(\mu=c\lambda\).
+
+		\item Zeige, dass \(\lambda_g\) verschiebungsinvariant ist (folglich \(\lambda_g=c\lambda\)).
+
+		Es gilt, für eine Borelmenge \(B\) und \(x\in\real^n\) 
+		\[
+			\lambda_g(B+x) = \lambda(g^{-1}(B+x))
+			\overset{g^{-1} \text{linear}}=\lambda(g^{-1}(B)+g^{-1}(x))
+			\overset{\lambda\text{ versch.inv.}}=\lambda(g^{-1}(B)) = \lambda_g(B).
+		\]
+
+		\item Bestimme die Konstante \(c\) durch einsetzen von \([0,1]^n\). Zuerst
+		für diagonale \(A\).
+
+		\(A^{-1}[0,1]^n\) streckt den Quader um \(1/a_{ii}\) in die Richtung \(i\).
+		Falls \(a_{ii}<0\) flippt das Intervall außerdem auf die negative Seite,
+		das hat allerdings keinen Einfluss auf die Größe.
+		Das resultierende Volumen ist also
+		\[
+			\lambda_g([0,1]^n)=\lambda(A^{-1}[0,1]^n)
+			= \bigl|\prod_{i=1}^n 1/a_{ii}\bigr| = \frac1{|\det(A)|}
+		\]
+
+		\item Verwende die Singulärwertzerlegung von \(A\), d.h. \(A=UDV^T\) mit
+		\(U\), \(V\) Basiswechselmatrizen auf andere orthonormale Vektoren und \(D\)
+		diagonal. \(U\) und \(V\) sind Isometrien (verändern das Volumen nicht).
+		Also gilt
+		\[
+			\lambda_g([0,1]^n) = \frac1{|\det(D)|}.
+		\]
+		Zuletzt gilt für beliebige quadratische Matrizen \(C,B\)
+		\[
+			\det(CB)=\det(C)\det(B),
+		\]
+		also \(1=\det(\identity)=\det(UU^T)=\det(U)^2\) und somit
+		\(\det(D)=\det(A)\).
+		\qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Transformationssatz in \(\real^n\)]
+	Sei \(g:\Omega\to\Omega'\) ein Diffeomorphismus (stetig differenzierbar und invertierbar)
+	mit \(\Omega,\Omega'\subseteq\real^n\), dann gilt
+	\[
+		\int_\Omega f\circ g {\color{cyan}d\lambda}
+		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\bigl((g^{-1})'(y)\bigr)\bigr| dy}
+	\]
+	oder auch
+	\[
+		\int_\Omega f(y) {\color{red}dy}
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\bigl(g'(x)\bigr)\bigr| dx}.
+	\]
+\end{theorem}
+\begin{proof}[Beweisskizze]
+	Zerteile \(\Omega\) durch ein \(\delta\) Gitter, sodass \(g\) dort bis auf
+	ein \(\epsilon\) seiner ersten Taylorapproximation entpricht. Die erste
+	Taylorapproximation ist aber eine affin-lineare Abbildung. Wir wenden also das
+	Lemma~\ref{lem: lin pushforward lebesgue measure} für lineare Funktionen an,
+	und stecke die Integrale vorsichtig wieder mit der Linearität von Integralen
+	zusammen.
+
+	Die zweite Gleichung ergibt sich aus \(\tilde{f}=f\circ g\) und \(\tilde{g}=g^{-1}\)
+	und der ersten Formel.
+\end{proof}
+
+\begin{remark}
+	Auch wenn dieser konkrete Transformationssatz sehr ähnlich zur Substitutionsregel
+	aussieht, und in einer Dimension tatsächlich für invertierbare \(g\) mit ihr
+	übereinstimmt\footnote{
+		Invertierbarkeit von \(g\) impliziert, dass \(g'\) entweder strikt positiv
+		oder strikt negativ ist. Und das Tauschen der Integralgrenzen bei
+		monotonem Fallen führt zu einem Minus, was dem Betrag im
+		Transformationssatz entspricht.
+	}, ist er eigentlich nicht die Substitutionsregel in \(n\) Dimensionen.
+	Denn da die Kettenregel auch in \(n\) Dimensionen gilt, ist die Substitutionsregel
+	auch von sich aus schon in \(n\) Dimensionen gültig. Typischerweise möchte man
+	aber lieber mit der Determinanten der Ableitung als der Ableitungsmatrix
+	selbst arbeiten, weshalb die ``echte'' \(n\)-Dimensionale Substitutionsregel
+	kaum Anwendung findet und dieser Transformationssatz häufig auch
+	\(n\)-dimensionale Substitutionsregel genannt wird.
+\end{remark}
+
 \section{Vertauschen von Differenzieren und Integrieren}
 
 \clearpage
 
-\section*{Merkblatt Integration}
+\section*{Integrationshilfe}
 
 \begin{theorem}[Partielle Integration]
 	\[
@@ -225,17 +342,27 @@ beschreibt.
 
 \begin{itemize}
 	\item Funktioniert gut bei Produkten mit, oder Potenzen von \(\exp, \cos, \sin\)
-	\item Wird werwendet zum Ableiten von Distributionen (vgl. ``Intro PDE'')
+	\item Wird verwendet zum Ableiten von Distributionen (vgl. ``Intro PDE'')
 \end{itemize}
 
 \begin{theorem}[Substitutionsregel]
-	\[
-		\int_{g(a)}^{g(b)}f(y)dy= \int_a^b f(g(x)) g'(x)dx
-	\]
+	Für differenzierbare \(g\) gilt
+	\begin{align*}
+		\int_a^b f(g(x)) {\color{cyan} g'(x)dx}
+		&=\int_{g(a)}^{g(b)}f(y){\color{red} dy}\\
+	\intertext{ist g zusätzlich invertierbar, gilt}
+		\int_{a}^{b} f(g(x)) {\color{cyan} dx}
+		&=\int_{g(a)}^{g(b)}f(y) {\color{red}(g^{-1})'(y) dy}
+		=\int_{g(a)}^{g(b)}f(y) {\color{red} \frac{dx}{dy} dy}.
+	\end{align*}
 \end{theorem}
 \begin{proof}
 	Folgt aus der \textbf{Kettenregel}.
 \end{proof}
+
+\begin{itemize}
+	\item Nützlich zum Entfernen von unnötigen Parametern
+\end{itemize}
 
 
 
