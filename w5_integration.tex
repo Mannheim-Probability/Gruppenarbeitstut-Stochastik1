@@ -133,7 +133,9 @@ beschreibt.
 
 \begin{theorem}[Substitutionsregel] Für ein differenzierbares \(g\), gilt
 	\[
-		\int_{g(a)}^{g(b)}f(y)dy= \int_a^b f(g(x)) g'(x)dx
+		\int_{g(a)}^{g(b)}f(y){\color{red} dy}
+		= \int_a^b f(g(x)) {\color{cyan} g'(x)dx}
+		= \int_a^b f(g(x)) {\color{cyan} \frac{dy}{dx}dx}
 	\]
 \end{theorem}
 \begin{proof}
@@ -157,49 +159,46 @@ beschreibt.
 	\[
 		y:=g(x) \implies \frac{dy}{dx} = g'(x) \implies \text{``}{\color{red}dy} = {\color{cyan}g'(x)dx}\text{''}
 	\]
-	Diese Intuition hilft bei der umgekehrten Verwendung. Sei \(g=h^{-1}\)
+	Diese Intuition hilft bei der umgekehrten Verwendung. Sei \(g:=h^{-1}\), also
 	\[
-		y:=h^{-1}(x) \implies \frac{dy}{dx} = \frac1{h'(h^{-1}(x))} = \frac1{h'(y)}
+		y=h^{-1}(x) \implies \frac{dy}{dx} = \frac1{h'(h^{-1}(x))} = \frac1{h'(y)} = \frac1{\frac{dx}{dy}}
 		\implies \text{``}{\color{red}h'(y)dy }= {\color{cyan}dx}\text{''}
 	\]
-	und definiere \(a:=h^{-1}(\tilde{a})\), \(b:=h^{-1}(\tilde{b})\) und
+	und definiere
 	\(\tilde{f}(y) := f(y)h'(y)\), dann gilt
 	\[
-		\int_{a}^{b}f(y) {\color{red}h'(y) dy}
-		= \int_{h^{-1}(\tilde{a})}^{h^{-1}(\tilde{b})} \tilde{f}(y) dy
-		= \int_{\tilde{a}}^{\tilde{b}} \tilde{f}(h^{-1}(x)) (h^{-1})'(x) dx
-		= \int_{h(a)}^{h(b)} f(h^{-1}(x)) {\color{cyan} dx}.
+		\int_{h^{-1}(a)}^{h^{-1}(b)} \overbrace{f(y){\color{red}h'(y)}}^{=:\tilde{f}(y)}{\color{red}dy}
+		= \int_{a}^{b} \tilde{f}(h^{-1}(x)) (h^{-1})'(x) dx
+		= \int_{a}^{b} f(h^{-1}(x)) {\color{cyan} dx}.
 	\]
 \end{remark}
 \begin{corollary}
 	Wenn \(g\) zusätzlich invertierbar ist, dann gilt
 	\begin{align*}
-		\int_a^b f(y){\color{red}dy}
-		&= \int_{g^{-1}(a)}^{g^{-1}(b)} f(g(x)){\color{cyan}g'(x)dx}
-		= \int_{g^{-1}(a)}^{g^{-1}(b)} f(g(x)){\color{cyan}\frac{dy}{dx}dx}\\
-		\int_{a}^{b}f(y) {\color{red} \frac{dx}{dy} dy}
-		=\int_{a}^{b}f(y) {\color{red}(g^{-1})'(y) dy}
-		&= \int_{g^{-1}(a)}^{g^{-1}(b)} f(g(x)) {\color{cyan} dx}.
+		\int_{a}^{b} f(g(x)) {\color{cyan} dx}
+		=\int_{g(a)}^{g(b)}f(y) {\color{red}(g^{-1})'(y) dy}
+		=\int_{g(a)}^{g(b)}f(y) {\color{red} \frac{dx}{dy} dy}.
 	\end{align*}
 \end{corollary}
 
 \begin{example}[Parameter Entfernen]
-	Wir können uns mit der Substitutionsregel das berechnen der Verteilungsfunktion
-	der allgemeinen Exponentialverteilung auf die kanonische Variante zurückführen:
+	Mit der Substitutionsregel, lassen sich die Parameter der allgemeinen
+	Exponentialverteilung entfernen:
 	\[
-		F_\lambda(t) = \int_0^t \underbrace{\lambda}_{=\frac{dy}{dx}}\exp(-\lambda x)dx
+		F_\lambda(t)
+		= \int_0^t \underbrace{\lambda}_{=\color{cyan}\frac{dy}{dx}}\exp(-\lambda x){\color{cyan} dx}
 		\overset{y=\lambda x}=
-		\int_0^{\lambda t} \exp(-y)dy
+		\int_0^{\lambda t} \exp(-y){\color{red} dy}
 		= F_1(\lambda t).
 	\]
-	Ähnlich kann man eine allgemeine Normalverteilung leicht in \(\cN(0,1)\)
-	überführen:
+	Ähnlich kann man eine allgemeine Normalverteilung leicht auf \(\cN(0,1)\)
+	zurückführen:
 	\begin{align*}
 		F_{\mu,\sigma^2}(t) &= \frac1{\sqrt{2\pi \sigma^2}}\int_{-\infty}^t
-		\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx
+		\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right){\color{cyan} dx}
 		\overset{y=\frac{x-\mu}{\sigma}}=
 		\frac1{\sqrt{2\pi \sigma^2}}\int_{-\infty}^{\frac{t-\mu}\sigma}
-		\exp\left(-y/2\right)\underbrace{\frac{dy}{dx}}_{=\sigma}dy\\
+		\exp\left(-y/2\right)\underbrace{\color{red}\frac{dx}{dy}}_{=\sigma}{\color{red} dy}\\
 		&= \frac1{\sqrt{2\pi}}\int_{-\infty}^{\frac{t-\mu}\sigma}
 		\exp\left(-y/2\right)dy\\
 		&= F_{0, 1}\left(\frac{t-\mu}\sigma\right).
