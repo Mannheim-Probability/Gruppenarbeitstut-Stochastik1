@@ -156,7 +156,7 @@ beschreibt.
 	\end{align*}
 \end{proof}
 
-\begin{remark}[Physikermerkregel]
+\begin{remark}[Merkregel]
 	So tun als sei \(\frac{dy}{dx}\) ein Bruch:
 	\[
 		y:=g(x) \implies \frac{dy}{dx} = g'(x) \implies \text{``}{\color{red}dy} = {\color{cyan}g'(x)dx}\text{''}
@@ -324,18 +324,22 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 	\(n\)-dimensionale Substitutionsregel genannt wird.
 \end{remark}
 
+\begin{example}[Polarkoordinaten]
+	%TODO
+\end{example}
+
 \section{Vertauschen von Differenzieren und Integrieren}
 
 \clearpage
 
 \section*{Integrationshilfe}
 
-\begin{theorem}[Partielle Integration]
+\begin{theorem*}[Partielle Integration]
 	\[
 		\int_a^b f(x)g'(x)dx
 		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx
 	\]
-\end{theorem}
+\end{theorem*}
 \begin{proof}
 	Folgt aus der \textbf{Produktregel}.
 \end{proof}
@@ -345,7 +349,7 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 	\item Wird verwendet zum Ableiten von Distributionen (vgl. ``Intro PDE'')
 \end{itemize}
 
-\begin{theorem}[Substitutionsregel]
+\begin{theorem*}[Substitutionsregel]
 	Für differenzierbare \(g\) gilt
 	\begin{align*}
 		\int_a^b f(g(x)) {\color{cyan} g'(x)dx}
@@ -355,7 +359,7 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 		&=\int_{g(a)}^{g(b)}f(y) {\color{red}(g^{-1})'(y) dy}
 		=\int_{g(a)}^{g(b)}f(y) {\color{red} \frac{dx}{dy} dy}.
 	\end{align*}
-\end{theorem}
+\end{theorem*}
 \begin{proof}
 	Folgt aus der \textbf{Kettenregel}.
 \end{proof}
@@ -364,6 +368,28 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 	\item Nützlich zum Entfernen von unnötigen Parametern
 \end{itemize}
 
+\begin{theorem*}[Transformationssatz in \(\real^n\)]
+	Sei \(g:\Omega\to\Omega'\) ein Diffeomorphismus (stetig differenzierbar und invertierbar)
+	mit \(\Omega,\Omega'\subseteq\real^n\), dann gilt
+	\[
+		\int_\Omega f\circ g {\color{cyan}d\lambda}
+		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\bigl((g^{-1})'(y)\bigr)\bigr| dy}
+	\]
+	oder auch
+	\[
+		\int_\Omega f(y) {\color{red}dy}
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\bigl(g'(x)\bigr)\bigr| dx}.
+	\]
+\end{theorem*}
+\begin{proof}
+	Bildmaß von linearen Funktionen bestimmen und abstrakten Trafo anwenden. Die
+	erste Taylorapproximation ist auf immer kleineren Zerstückelungen von
+	\(\Omega\) schlussendlich exakt.
+\end{proof}
+
+\begin{itemize}
+	\item Besonderer Trick: Polarkoordinaten
+\end{itemize}
 
 
 \end{document} 
