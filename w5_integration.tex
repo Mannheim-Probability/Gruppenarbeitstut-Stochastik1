@@ -1,0 +1,219 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+\tutorial{Merkblatt}
+\author{Felix Benning}
+
+\title{Integration}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\section{Hauptsatz der Analysis}
+
+\begin{theorem}[Hauptsatz I]
+	Sei
+	\[
+		F(x) = \int_a^x f(t) dt,
+	\]	
+	für ein {\color{red} stetiges} \(f\). Dann ist \(F\) stetig differenzierbar
+	mit \(F'=f'\).
+\end{theorem}
+\begin{proof}
+	\[
+		F^{\delta}(x):=\frac{F(x+\delta) - F(x)}{\delta}
+		= \frac1\delta \int_x^{x+\delta} f(t)dt
+		\le \frac1\delta
+		\int_x^{x+\delta}\sup_{s\in[x,x+\delta]} f(s)dt
+		= \sup_{s\in[x,x+\delta]} f(s)
+	\]
+	Analog bekommt man die untere Schranke, mit der man mithilfe des
+	Sandwichtheorems den Beweis beenden kann:
+	\begin{align*}
+		f(x)
+		\overset{\text{stetig}}&= \liminf_{\delta\to 0}
+		\inf_{s\in[x,x+\delta]} f(x)
+		\le \liminf_{\delta\to 0} F^\delta(x)\\
+		&\le F'(x)\\
+		&\le \limsup_{\delta\to 0} F^\delta(x)
+		\le \limsup_{\delta\to 0} \sup_{s\in[x,x+\delta]} f(x)
+		\overset{\text{stetig}}= f(x).
+		\qedhere
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Hauptsatz II]
+	Sei \(F\) differenzierbar mit \(F'=f\) für ein Riemann {\color{red}
+	integrierbares} \(f\). Dann gilt
+	\[
+		F(b) - F(a) = \int_a^b f(t)dt.
+	\]	
+\end{theorem}
+\begin{proof}
+	Definiere eine Diskretisierung \(a=x_0\le \dots \le x_{n}=b\)
+	\begin{equation*}
+		F(b)-F(a) = \sum_{k=1}^n F(x_{k}) - F(x_{k-1})
+		\overset{\text{\color{red}MWS}}= \sum_{k=1}^n f(\xi_k)\Delta x_k
+		\le \sum_{k=1}^n\sup_{c\in[x_{k-1}, x_k]} f(c) \Delta x_k
+	\end{equation*}	
+	Da \(f\) Riemann integrierbar ist, gilt für \(\Delta x = \sup_k \Delta x_k\)
+	\[
+		\lim_{\Delta x \to 0}\sum_{k=1}^n\sup_{c\in[x_{k-1}, x_k]} f(c) \Delta x_k
+		=\int_a^b f(x)dx.
+	\]
+	Analog bekommt man die untere Schranke.
+\end{proof}
+
+\section{Partielle Integration}
+
+\begin{theorem}[Partielle Integration]
+	\[
+		\int_a^b f(x)g'(x)dx
+		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx
+	\]
+\end{theorem}
+\begin{proof}
+	Folgt aus der \textbf{Produktregel}
+	\[
+		\frac{d}{dx}f(x)g(x) = f(x) g'(x) + f'(x)g(x),
+	\]
+	da mit Umstellen gilt:
+	\begin{equation*}
+		\int_a^b f(x)g'(x)dx
+		= \int_a^b \frac{d}{dx}f(x)g(x) - f'(x)g(x) dx
+		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx.
+		\qedhere
+	\end{equation*}
+\end{proof}
+
+
+\begin{example}[Gamma Funktion]
+	Die Gamma Funktion ist definiert als
+	\[
+		\Gamma(z) = \int_0^\infty x^{z-1}\exp(-x)dx
+	\]
+	Es gilt \(\Gamma(n) = (n-1)!\) für alle \(n\in\nat\) und allgemeiner
+	\(\Gamma(z+1) = z\Gamma(z)\). Die Gamma Funktion ist
+	also eine Verallgemeinerung der Fakultät auf die reellen (komplexen) Zahlen.
+\end{example}
+\begin{proof}
+	Die Aussage über die natürlichen Zahlen zweigen wir per Induktion mit
+	Induktionsanfang \(n=1\)
+	\[
+		\Gamma(1) = \int_0^\infty \exp(-x)dx = \lim_{k\to\infty} -\exp(-x)\Bigl|_0^k
+		= 1.
+	\]
+	Der Induktionsschluss folgt direkt aus der allgemeinen Aussage
+	\(\Gamma(z+1)=z\Gamma(z)\), die wir nun zeigen:
+	\begin{align*}
+		\Gamma(z+1) &= \int_0^\infty x^z \exp(-x)dx\\
+		\overset{\text{PI}}&=
+		\underbrace{\lim_{k\to\infty} -x^z\exp(-x)\Bigl|_0^k}_{=0}
+		- \int_0^k -zx^{z-1}\exp(-x)dx\\
+		&= z\underbrace{\int_0^k -x^{n-1}\exp(-x)dx}_{=\Gamma(z)}.
+		\qedhere
+	\end{align*}
+\end{proof}
+
+Die Gammafunktion braucht man beispielsweise für die Gammaverteilung, die zum
+Beispiel die Verteilung von Summen von quadrierten Normalverteilten
+Zufallsvariablen oder Summen von Exponentiell verteilten Zufallsvariablen
+beschreibt.
+
+\section{Substitutionsregel}
+
+\begin{theorem}[Substitutionsregel] Für ein differenzierbares \(g\), gilt
+	\[
+		\int_{g(a)}^{g(b)}f(y)dy= \int_a^b f(g(x)) g'(x)dx
+	\]
+\end{theorem}
+\begin{proof}
+	Folgt aus der \textbf{Kettenregel}
+	\begin{equation}\label{eq: chain rule}
+		\frac{d}{dx} F(g(x)) = F'(g(x))g'(x).
+	\end{equation}
+	Denn sei \(F'=f\), dann gilt
+	\begin{align*}
+		\int_{g(a)}^{g(b)}f(y)dy
+		&= F(g(b))-F(g(a))\\
+		&= \int_a^b \frac{d}{dx} F(g(x))dx
+		\overset{\eqref{eq: chain rule}}= \int_a^b f(g(x))g'(x)dx
+		= \int_a^b f(g(x)) g'(x)dx.
+		\qedhere
+	\end{align*}
+\end{proof}
+
+\begin{remark}[Physikermerkregel]
+	So tun als sei \(\frac{dy}{dx}\) ein Bruch:
+	\[
+		y:=g(x) \implies \frac{dy}{dx} = g'(x) \implies \text{``}{\color{red}dy} = {\color{cyan}g'(x)dx}\text{''}
+	\]
+	Diese Intuition hilft bei der umgekehrten Verwendung. Sei \(g=h^{-1}\)
+	\[
+		y:=h^{-1}(x) \implies \frac{dy}{dx} = \frac1{h'(h^{-1}(x))} = \frac1{h'(y)}
+		\implies \text{``}{\color{red}h'(y)dy }= {\color{cyan}dx}\text{''}
+	\]
+	und definiere \(a:=h^{-1}(\tilde{a})\), \(b:=h^{-1}(\tilde{b})\) und
+	\(\tilde{f}(y) := f(y)h'(y)\), dann gilt
+	\[
+		\int_{a}^{b}f(y) {\color{red}h'(y) dy}
+		= \int_{h^{-1}(\tilde{a})}^{h^{-1}(\tilde{b})} \tilde{f}(y) dy
+		= \int_{\tilde{a}}^{\tilde{b}} \tilde{f}(h^{-1}(x)) (h^{-1})'(x) dx
+		= \int_{h(a)}^{h(b)} f(h^{-1}(x)) {\color{cyan} dx}.
+	\]
+\end{remark}
+\begin{corollary}
+	Wenn \(g\) zusätzlich invertierbar ist, dann gilt
+	\begin{align*}
+		\int_a^b f(y){\color{red}dy}
+		&= \int_{g^{-1}(a)}^{g^{-1}(b)} f(g(x)){\color{cyan}g'(x)dx}
+		= \int_{g^{-1}(a)}^{g^{-1}(b)} f(g(x)){\color{cyan}\frac{dy}{dx}dx}\\
+		\int_{a}^{b}f(y) {\color{red} \frac{dx}{dy} dy}
+		=\int_{a}^{b}f(y) {\color{red}(g^{-1})'(y) dy}
+		&= \int_{g^{-1}(a)}^{g^{-1}(b)} f(g(x)) {\color{cyan} dx}.
+	\end{align*}
+\end{corollary}
+
+\section{Transformationssatz}
+
+\section{Vertauschen von Differenzieren und Integrieren}
+
+\clearpage
+
+\section*{Merkblatt Integration}
+
+\begin{theorem}[Partielle Integration]
+	\[
+		\int_a^b f(x)g'(x)dx
+		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx
+	\]
+\end{theorem}
+\begin{proof}
+	Folgt aus der \textbf{Produktregel}.
+\end{proof}
+
+\begin{itemize}
+	\item Funktioniert gut bei Produkten mit, oder Potenzen von \(\exp, \cos, \sin\)
+	\item Wird werwendet zum Ableiten von Distributionen (vgl. ``Intro PDE'')
+\end{itemize}
+
+\begin{theorem}[Substitutionsregel]
+	\[
+		\int_{g(a)}^{g(b)}f(y)dy= \int_a^b f(g(x)) g'(x)dx
+	\]
+\end{theorem}
+\begin{proof}
+	Folgt aus der \textbf{Kettenregel}.
+\end{proof}
+
+
+
+\end{document} 
