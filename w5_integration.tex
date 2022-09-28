@@ -25,7 +25,7 @@
 		F(x) = \int_a^x f(t) dt,
 	\]	
 	für ein {\color{red} stetiges} \(f\). Dann ist \(F\) stetig differenzierbar
-	mit \(F'=f'\).
+	mit \(F'=f\).
 \end{theorem}
 \begin{proof}
 	\[
@@ -82,13 +82,14 @@
 \end{theorem}
 \begin{proof}
 	Folgt aus der \textbf{Produktregel}
-	\[
+	\begin{equation}
+		\label{eq: product rule}
 		\frac{d}{dx}f(x)g(x) = f(x) g'(x) + f'(x)g(x),
-	\]
+	\end{equation}
 	da mit Umstellen gilt:
 	\begin{equation*}
 		\int_a^b f(x)g'(x)dx
-		= \int_a^b \frac{d}{dx}f(x)g(x) - f'(x)g(x) dx
+		\overset{\eqref{eq: product rule}}= \int_a^b \frac{d}{dx}f(x)g(x) - f'(x)g(x) dx
 		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx.
 		\qedhere
 	\end{equation*}
@@ -181,6 +182,29 @@ beschreibt.
 		&= \int_{g^{-1}(a)}^{g^{-1}(b)} f(g(x)) {\color{cyan} dx}.
 	\end{align*}
 \end{corollary}
+
+\begin{example}[Parameter Entfernen]
+	Wir können uns mit der Substitutionsregel das berechnen der Verteilungsfunktion
+	der allgemeinen Exponentialverteilung auf die kanonische Variante zurückführen:
+	\[
+		F_\lambda(t) = \int_0^t \underbrace{\lambda}_{=\frac{dy}{dx}}\exp(-\lambda x)dx
+		\overset{y=\lambda x}=
+		\int_0^{\lambda t} \exp(-y)dy
+		= F_1(\lambda t).
+	\]
+	Ähnlich kann man eine allgemeine Normalverteilung leicht in \(\cN(0,1)\)
+	überführen:
+	\begin{align*}
+		F_{\mu,\sigma^2}(t) &= \frac1{\sqrt{2\pi \sigma^2}}\int_{-\infty}^t
+		\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx
+		\overset{y=\frac{x-\mu}{\sigma}}=
+		\frac1{\sqrt{2\pi \sigma^2}}\int_{-\infty}^{\frac{t-\mu}\sigma}
+		\exp\left(-y/2\right)\underbrace{\frac{dy}{dx}}_{=\sigma}dy\\
+		&= \frac1{\sqrt{2\pi}}\int_{-\infty}^{\frac{t-\mu}\sigma}
+		\exp\left(-y/2\right)dy\\
+		&= F_{0, 1}\left(\frac{t-\mu}\sigma\right).
+	\end{align*}
+\end{example}
 
 \section{Transformationssatz}
 
