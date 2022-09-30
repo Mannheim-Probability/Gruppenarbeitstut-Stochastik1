@@ -72,6 +72,21 @@
 	Analog bekommt man die untere Schranke.
 \end{proof}
 
+\begin{example}[\(\sin\) Integration]\label{ex: sin integration}
+	Zeige
+	\[
+		\int_0^x\sin(t)dt = 1-\cos(x)
+	\]
+\end{example}
+\begin{proof}
+	Es gilt \((-\cos)'(x) = \sin(x)\). Also gilt nach dem zweiten Hauptsatz
+	\[ 
+		\int_0^x\sin(t)dt
+		= (-\cos)(x) - (-\cos(0)) = 1-\cos(x).
+		\qedhere
+	\]
+\end{proof}
+
 \section{Partielle Integration}
 
 \begin{theorem}[Partielle Integration]
@@ -95,6 +110,47 @@
 	\end{equation*}
 \end{proof}
 
+\begin{example}[\(\sin\)-Potenzen]
+	Zeige
+	\[
+		I_n=\int_0^\pi\sin^n(t)dt
+		= \frac{(n-1)!!}{n!!}\begin{cases}
+			\pi & n\text{ gerade}\\
+			2 & n\text{ ungerade}
+		\end{cases}
+	\]
+	mit \(0!!=(-1)!!=1\) und \(n!! = n(n-2)!!\).
+\end{example}
+\begin{proof}
+	Wir wenden Induktion an. Der Induktionsanfang ist \(I_0=\pi\) und \(I_1=2\)
+	nach Beispiel~\ref{ex: sin integration}. Angenommen wir haben nun
+	\(I_{n-1},I_n\), dann gilt
+	\[\begin{aligned}
+		I_{n+1}
+		=\int_0^\pi\sin^{n+1}(t)dt
+		&= \int_0^\pi\sin^n(t)\frac{d}{dt}\left(-\cos(t)\right)dt\\
+		&= \underbrace{-\sin^n(t)\cos(t)\Bigl|_0^\pi}_{=0}
+		- \int_0^\pi -n\sin^{n-1}(t)\underbrace{\cos^2(t)}_{1-\sin^2(t)}dt\\
+		&= nI_{n-1} - nI_{n+1}.
+	\end{aligned}
+	\]
+	Damit haben wir den Induktionsschritt:
+	\[
+		I_{n+1}
+		= \frac{n}{n+1} I_{n-1}
+		= \frac{n}{n+1}\frac{(n-2)!!}{(n-1)!!}
+		\begin{cases}
+			\pi & n-1 \text{ gerade}\\
+			2 & n-1 \text{ ungerade}
+		\end{cases}
+		=\frac{n!!}{(n+1)!!}
+		\begin{cases}
+			\pi & n+1 \text{ gerade}\\
+			2 & n+1 \text{ ungerade}.
+		\end{cases}
+		\qedhere
+	\]
+\end{proof}
 
 \begin{example}[Gamma Funktion]
 	Die Gamma Funktion ist definiert als
@@ -129,8 +185,6 @@ Beispiel die Verteilung von Summen von quadrierten Normalverteilten
 Zufallsvariablen oder Summen von Exponentiell verteilten Zufallsvariablen
 beschreibt.
 
-\begin{example}[\(\sin\)-Potenzen]
-\end{example}
 
 \begin{example}[Distributionen]
 \end{example}
