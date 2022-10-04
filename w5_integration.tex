@@ -17,7 +17,9 @@
 
 \maketitle
 
-\section{Hauptsatz der Analysis}
+\section{Riemann Integral}
+
+\subsection{Hauptsatz der Analysis}
 
 \begin{theorem}[Hauptsatz I]
 	Sei
@@ -54,7 +56,7 @@
 	Sei \(F\) differenzierbar mit \(F'=f\) für ein Riemann {\color{red}
 	integrierbares} \(f\). Dann gilt
 	\[
-		F(b) - F(a) = \int_a^b f(t)dt.
+		\int_a^b f(t)dt = F(x)\Bigl|_a^b := F(b) - F(a) 
 	\]	
 \end{theorem}
 \begin{proof}
@@ -87,7 +89,44 @@
 	\]
 \end{proof}
 
-\section{Partielle Integration}
+\subsection{Uneigentliche Integrale}
+
+Es gibt immer wieder Fälle, in denen der Hauptsatz II nicht anwendbar ist, weil
+\(a\) und/oder \(b\) nicht in \(F\) einsetzbar ist, z.B. weil \(a=-\infty\)
+oder \(b=-\infty\), oder weil \(F\) dort eine
+Polstelle hat. In diesen Fällen, greifen wir zu uneigentlichen Integralen.
+Ein uneigentliches Integral für \(a\in\real\), \(a\le b \le \infty\) ist
+definiert als
+ \[
+	\int_a^b f(x)dx
+	:= \lim_{\beta\uparrow b}\int_a^\beta f(x)dx
+	= \lim_{\beta\uparrow b} F(x)\Bigl|_a^\beta
+	=: F(x)\Bigl|_a^b
+\]
+Und analog für die untere Grenze. Falls beide Grenzen problematisch sind, teilt
+man das Integral in zwei Teile. Konvergieren beide Seiten, kann man das
+Integral wieder zusammensetzen:
+ \[
+	\int_a^b f(x)dx
+	:= \lim_{\beta\uparrow b}\int_0^\beta f(x)dx
+	+ \lim_{\alpha\downarrow a}\int_\alpha^0 f(x)dx
+	= \underbrace{
+		\lim_{\beta\uparrow b} F(x)\Bigl|_0^\beta
+		+ \lim_{\alpha\downarrow a} F(x)\Bigl|_\alpha^0
+	}_{
+		=\lim_{\beta\uparrow b} F(\beta)
+		- \lim_{\alpha\downarrow a} F(\alpha)
+	}
+	=: F(x)\Bigl|_a^b
+\]
+\begin{example}[\(\exp\) Integration]
+	\[
+		\int_0^\infty \exp(-t)dt = \lim_{x\to\infty}-\exp(-t)\Bigl|_0^x = -(0-1)=1.
+	\]	
+\end{example}
+
+
+\subsection{Partielle Integration}
 
 \begin{theorem}[Partielle Integration]
 	\[
@@ -274,7 +313,7 @@ beschreibt.
 
 \clearpage
 
-\section{Substitutionsregel}
+\subsection{Substitutionsregel}
 
 \begin{theorem}[Substitutionsregel] Für ein differenzierbares \(g\), gilt
 	\[
@@ -350,7 +389,10 @@ beschreibt.
 	\end{align*}
 \end{example}
 
-\section{Transformationssatz}
+
+\section{Lebesgue Integral}
+
+\subsection{Transformationssatz}
 
 \begin{theorem}[Abstrakter Transformationssatz]
 	Sei \(g:\Omega\to\Omega'\) messbar, \(f:\Omega'\to\real\) messbar und so dass
@@ -471,11 +513,11 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 	%TODO
 \end{example}
 
-\section{Vertauschen von Differenzieren und Integrieren}
+\subsection{Vertauschen von Differenzieren und Integrieren}
 
 \clearpage
 
-\section*{Integrationshilfe}
+\subsection*{Integrationshilfe}
 
 \begin{theorem*}[Partielle Integration]
 	\[
