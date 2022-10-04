@@ -548,7 +548,7 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 \end{example}
 
 
-\subsection{Vertauschen von Differenzieren und Integrieren}
+\subsection{Vertauschung von Ableitung und Integral}
 
 Wenn man den Hauptsatz der Analysis im Kopf hat, klingt das zunächst einmal
 sinnlos. Aber wenn man eine andere Koordinate ableitet, als man integriert,
@@ -599,17 +599,22 @@ macht diese Frage durchaus Sinn.
 Wie man sieht, brauchen wir eigentlich alle Voraussetzungen nur, damit die Objekte
 über die wir sprechen wohldefiniert sind. So wie Fubini ``immer'' geht, geht
 also auch das Vertauschen von Ableitung und Integral ``immer''. Die einzige
-Stelle, an der das nicht ganz richtig ist, ist bei der ``lokalen Integrierbarkeit''
-es genügt nicht, dass die Ableitung nur in \(x\) über \(\omega\) \(\mu\)-integrierbar
-ist. Die resultierende Funktion in \(x\) muss friedlich genug sein, dass man
-sie zumindest in einer Umgebung noch integrieren kann. Es genügt also, wenn
+Stelle, an der das nicht ganz richtig ist, ist bei der ``lokalen Integrierbarkeit''.
+Es genügt nicht, dass die Ableitung nur in \(x\) über \(\omega\) \(\mu\)-integrierbar
+ist. Die resultierende Funktion in \(x\)
 \[
-	x\to \int \frac{\partial}{\partial t}f(x,\omega)d\mu(\omega)
+	F: x\to \int \left|\frac{\partial}{\partial t}f(x,\omega)\right|d\mu(\omega)
 \]
-stetig in \(x\) ist, oder beschränkt, oder wenn uniform
-\(\bigl|\frac{\partial}{\partial t}f(t,\omega)\bigr| \le g(\omega)\) für ein
-integrierbares \(g\), oder wenn \(\frac{\partial}{\partial t}f(t,\omega)\)
-monoton in \(t\) ist.
+muss friedlich genug sein, dass man sie zumindest in einer Umgebung noch
+integrieren kann. Die Folgenden Bedingungen sind also hinreichend:
+\begin{enumerate}
+	\item \(F\) stetig in \(x\)
+	\item \(F\) beschränkt in \(x\)
+	\item uniform \(\bigl|\frac{\partial}{\partial t}f(t,\omega)\bigr| \le
+	g(\omega)\) für ein integrierbares \(g\)
+	\item \(t\mapsto |\frac{\partial}{\partial t}f(t,\omega)|\)
+	ist lokal um \(x\) monoton in \(t\).
+\end{enumerate}
 
 
 \clearpage
