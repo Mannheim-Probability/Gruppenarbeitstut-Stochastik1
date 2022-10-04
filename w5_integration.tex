@@ -3,6 +3,7 @@
 \usepackage{exerciseHead}
 
 \input{Macros.tex} 
+\pagenumbering{arabic}
 
 % Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -311,8 +312,6 @@ beschreibt.
 	Somit gilt \(\ind_{[0,\infty)}'=\delta_0\) im Sinne von Distributionen.
  \end{example}
 
-\clearpage
-
 \subsection{Substitutionsregel}
 
 \begin{theorem}[Substitutionsregel] Für ein differenzierbares \(g\), gilt
@@ -541,14 +540,77 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 			\sin(\varphi) & r\cos(\varphi)
 		\end{pmatrix}\right) = r \cos(\varphi)^2 + r\sin(\varphi)^2 = r.
 	\end{equation}
+	Hier haben wir ein bisschen geschummelt: \(\phi\) ist kein Diffeomorphismus, da
+	da \(\phi^{-1}\) nicht differenzierbar ist für \(\varphi\) nahe \(0\) bzw \(2\pi\).
+	Um diesen Sprung zu entfernen, betrachte nur \((0,2\pi)\). Das entfernt nur
+	eine Linie aus \(\real^2\), was Maß Null hat und hat somit keinen Effekt
+	auf das Integral (richtiger Beweis ist Übung). 
 \end{example}
 
-Folglich haben wir
-\[
-	\int \exp(-x^2/2)dx = \sqrt{2\pi}.
-\]
 
 \subsection{Vertauschen von Differenzieren und Integrieren}
+
+Wenn man den Hauptsatz der Analysis im Kopf hat, klingt das zunächst einmal
+sinnlos. Aber wenn man eine andere Koordinate ableitet, als man integriert,
+macht diese Frage durchaus Sinn.
+
+\begin{theorem}[Ableitung und Integral Vertauschen]
+	Sei \((t,\omega)\mapsto f(t,\omega)\) eine 
+	\begin{itemize}[noitemsep,topsep=0pt]
+		\item messbare Funktion,
+		\item die über \(\omega\) \(\mu\)-integrierbar ist für alle feste \(t\),
+		\item und für \(\mu\)-fast alle \(\omega\in\Omega\) gilt: \(t\to
+		f(t,\omega)\) ist differenzierbar (bzw. absolutstetig) in \(t\).
+	\end{itemize}
+	Falls \(\frac{\partial}{\partial t}f\) ``lokal integrierbar in x'' ist, d.h.
+	es \(a<b\in\real\) gibt, sodass \(x\in[a,b]\) und
+	\[
+		\int_a^b \int_\Omega
+		\left|\frac{d}{dt}f(t,\omega)\right| d\mu(\omega)dt<\infty
+	\]
+	gilt, dann darf man Ableitung und Integral an der Stelle \(x\) vertauschen
+	\[
+		\frac{\partial}{\partial t}\int f(x, \omega)d\mu(\omega)
+		= \int \frac{\partial}{\partial t}f(x,\omega)d\mu(\omega).
+	\]
+\end{theorem}
+\begin{proof}
+	Sei o.B.d.A. \(x<b\). Dann gilt	
+	\begin{align*}
+		\frac{\partial}{\partial t}\int f(x,\omega)d\mu(\omega)
+		&= \lim_{\epsilon\to 0}
+		\frac{\int f(x+\epsilon,\omega)d\mu(\omega) - \int f(x,\omega)d\mu(\omega)}{\epsilon}\\
+		\overset{\text{linear}}&= \lim_{\epsilon\to 0}\int
+		\frac{f(x+\epsilon,\omega) - f(x,\omega)}{\epsilon}d\mu(\omega)\\
+		\overset{\text{Hauptsatz II}}&= \lim_{\epsilon\to 0}\int
+		\frac1\epsilon \int_x^{x+\epsilon}\frac{\partial}{\partial t} f(t,\omega) dt d\mu(\omega)\\
+		\overset{\text{Fubini}}&=
+		\lim_{\epsilon\to 0}\frac1\epsilon \int_x^{x+\epsilon}
+		\int \frac{\partial}{\partial t}f(t,\omega) d\mu(\omega)dt \\
+		&=
+		\frac{d}{dy}\Bigl|_{y=x} \int_x^{y}
+		\int \frac{\partial}{\partial t}f(t,\omega) d\mu(\omega)dt\\
+		\overset{\text{Hauptsatz I}}&=
+		\int \frac{\partial}{\partial t}f(t,\omega) d\mu(\omega)dt.
+		\qedhere
+	\end{align*}
+\end{proof}
+
+Wie man sieht, brauchen wir eigentlich alle Voraussetzungen nur, damit die Objekte
+über die wir sprechen wohldefiniert sind. So wie Fubini ``immer'' geht, geht
+also auch das Vertauschen von Ableitung und Integral ``immer''. Die einzige
+Stelle, an der das nicht ganz richtig ist, ist bei der ``lokalen Integrierbarkeit''
+es genügt nicht, dass die Ableitung nur in \(x\) über \(\omega\) \(\mu\)-integrierbar
+ist. Die resultierende Funktion in \(x\) muss friedlich genug sein, dass man
+sie zumindest in einer Umgebung noch integrieren kann. Es genügt also, wenn
+\[
+	x\to \int \frac{\partial}{\partial t}f(x,\omega)d\mu(\omega)
+\]
+stetig in \(x\) ist, oder beschränkt, oder wenn uniform
+\(\bigl|\frac{\partial}{\partial t}f(t,\omega)\bigr| \le g(\omega)\) für ein
+integrierbares \(g\), oder wenn \(\frac{\partial}{\partial t}f(t,\omega)\)
+monoton in \(t\) ist.
+
 
 \clearpage
 
