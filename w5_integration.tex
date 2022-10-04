@@ -1,0 +1,684 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+\pagenumbering{arabic}
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+\tutorial{Merkblatt}
+\author{Felix Benning}
+
+\title{Integration}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\section{Riemann Integral}
+
+\subsection{Hauptsatz der Analysis}
+
+\begin{theorem}[Hauptsatz I]
+	Sei
+	\[
+		F(x) = \int_a^x f(t) dt,
+	\]	
+	für ein {\color{red} stetiges} \(f\). Dann ist \(F\) stetig differenzierbar
+	mit \(F'=f\).
+\end{theorem}
+\begin{proof}
+	\[
+		F^{\delta}(x):=\frac{F(x+\delta) - F(x)}{\delta}
+		= \frac1\delta \int_x^{x+\delta} f(t)dt
+		\le \frac1\delta
+		\int_x^{x+\delta}\sup_{s\in[x,x+\delta]} f(s)dt
+		= \sup_{s\in[x,x+\delta]} f(s)
+	\]
+	Analog bekommt man die untere Schranke, mit der man mithilfe des
+	Sandwichtheorems den Beweis beenden kann:
+	\begin{align*}
+		f(x)
+		\overset{\text{stetig}}&= \liminf_{\delta\to 0}
+		\inf_{s\in[x,x+\delta]} f(x)
+		\le \liminf_{\delta\to 0} F^\delta(x)\\
+		&\le F'(x)\\
+		&\le \limsup_{\delta\to 0} F^\delta(x)
+		\le \limsup_{\delta\to 0} \sup_{s\in[x,x+\delta]} f(x)
+		\overset{\text{stetig}}= f(x).
+		\qedhere
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Hauptsatz II]
+	Sei \(F\) differenzierbar mit \(F'=f\) für ein Riemann {\color{red}
+	integrierbares} \(f\). Dann gilt
+	\[
+		\int_a^b f(t)dt = F(x)\Bigl|_a^b := F(b) - F(a) 
+	\]	
+\end{theorem}
+\begin{proof}
+	Definiere eine Diskretisierung \(a=x_0\le \dots \le x_{n}=b\)
+	\begin{equation*}
+		F(b)-F(a) = \sum_{k=1}^n F(x_{k}) - F(x_{k-1})
+		\overset{\text{\color{red}MWS}}= \sum_{k=1}^n f(\xi_k)\Delta x_k
+		\le \sum_{k=1}^n\sup_{c\in[x_{k-1}, x_k]} f(c) \Delta x_k
+	\end{equation*}	
+	Da \(f\) Riemann integrierbar ist, gilt für \(\Delta x = \sup_k \Delta x_k\)
+	\[
+		\lim_{\Delta x \to 0}\sum_{k=1}^n\sup_{c\in[x_{k-1}, x_k]} f(c) \Delta x_k
+		=\int_a^b f(x)dx.
+	\]
+	Analog bekommt man die untere Schranke.
+\end{proof}
+
+\begin{example}[\(\sin\) Integration]\label{ex: sin integration}
+	Zeige
+	\[
+		\int_0^x\sin(t)dt = 1-\cos(x)
+	\]
+\end{example}
+\begin{proof}
+	Es gilt \((-\cos)'(x) = \sin(x)\). Also gilt nach dem zweiten Hauptsatz
+	\[ 
+		\int_0^x\sin(t)dt
+		= (-\cos)(x) - (-\cos(0)) = 1-\cos(x).
+		\qedhere
+	\]
+\end{proof}
+
+\subsection{Uneigentliche Integrale}
+
+Es gibt immer wieder Fälle, in denen der Hauptsatz II nicht anwendbar ist, weil
+\(a\) und/oder \(b\) nicht in \(F\) einsetzbar ist, z.B. weil \(a=-\infty\)
+oder \(b=-\infty\), oder weil \(F\) dort eine
+Polstelle hat. In diesen Fällen, greifen wir zu uneigentlichen Integralen.
+Ein uneigentliches Integral für \(a\in\real\), \(a\le b \le \infty\) ist
+definiert als
+ \[
+	\int_a^b f(x)dx
+	:= \lim_{\beta\uparrow b}\int_a^\beta f(x)dx
+	= \lim_{\beta\uparrow b} F(x)\Bigl|_a^\beta
+	=: F(x)\Bigl|_a^b
+\]
+Und analog für die untere Grenze. Falls beide Grenzen problematisch sind, teilt
+man das Integral in zwei Teile. Konvergieren beide Seiten, kann man das
+Integral wieder zusammensetzen:
+ \[
+	\int_a^b f(x)dx
+	:= \lim_{\beta\uparrow b}\int_0^\beta f(x)dx
+	+ \lim_{\alpha\downarrow a}\int_\alpha^0 f(x)dx
+	= \underbrace{
+		\lim_{\beta\uparrow b} F(x)\Bigl|_0^\beta
+		+ \lim_{\alpha\downarrow a} F(x)\Bigl|_\alpha^0
+	}_{
+		=\lim_{\beta\uparrow b} F(\beta)
+		- \lim_{\alpha\downarrow a} F(\alpha)
+	}
+	=: F(x)\Bigl|_a^b
+\]
+\begin{example}[\(\exp\) Integration]
+	\[
+		\int_0^\infty \exp(-t)dt = \lim_{x\to\infty}-\exp(-t)\Bigl|_0^x = -(0-1)=1.
+	\]	
+\end{example}
+
+
+\subsection{Partielle Integration}
+
+\begin{theorem}[Partielle Integration]
+	\[
+		\int_a^b f(x)g'(x)dx
+		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx
+	\]
+\end{theorem}
+\begin{proof}
+	Folgt aus der \textbf{Produktregel}
+	\begin{equation}
+		\label{eq: product rule}
+		\frac{d}{dx}f(x)g(x) = f(x) g'(x) + f'(x)g(x),
+	\end{equation}
+	da mit Umstellen gilt:
+	\begin{equation*}
+		\int_a^b f(x)g'(x)dx
+		\overset{\eqref{eq: product rule}}= \int_a^b \frac{d}{dx}f(x)g(x) - f'(x)g(x) dx
+		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx.
+		\qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{example}[\(\sin\)-Potenzen]
+	Zeige
+	\[
+		I_n=\int_0^\pi\sin^n(t)dt
+		= \frac{(n-1)!!}{n!!}\begin{cases}
+			\pi & n\text{ gerade}\\
+			2 & n\text{ ungerade}
+		\end{cases}
+	\]
+	mit \(0!!=(-1)!!=1\) und \(n!! = n(n-2)!!\).
+\end{example}
+\begin{proof}
+	Wir wenden Induktion an. Der Induktionsanfang ist \(I_0=\pi\) und \(I_1=2\)
+	nach Beispiel~\ref{ex: sin integration}. Angenommen wir haben nun
+	\(I_{n-1},I_n\), dann gilt
+	\[\begin{aligned}
+		I_{n+1}
+		=\int_0^\pi\sin^{n+1}(t)dt
+		&= \int_0^\pi\sin^n(t)\frac{d}{dt}\left(-\cos(t)\right)dt\\
+		&= \underbrace{-\sin^n(t)\cos(t)\Bigl|_0^\pi}_{=0}
+		- \int_0^\pi -n\sin^{n-1}(t)\underbrace{\cos^2(t)}_{1-\sin^2(t)}dt\\
+		&= nI_{n-1} - nI_{n+1}.
+	\end{aligned}
+	\]
+	Damit haben wir den Induktionsschritt:
+	\[
+		I_{n+1}
+		= \frac{n}{n+1} I_{n-1}
+		= \frac{n}{n+1}\frac{(n-2)!!}{(n-1)!!}
+		\begin{cases}
+			\pi & n-1 \text{ gerade}\\
+			2 & n-1 \text{ ungerade}
+		\end{cases}
+		=\frac{n!!}{(n+1)!!}
+		\begin{cases}
+			\pi & n+1 \text{ gerade}\\
+			2 & n+1 \text{ ungerade}.
+		\end{cases}
+		\qedhere
+	\]
+\end{proof}
+
+\begin{example}[Gamma Funktion]
+	Die Gamma Funktion ist definiert als
+	\[
+		\Gamma(z) = \int_0^\infty x^{z-1}\exp(-x)dx
+	\]
+	Es gilt \(\Gamma(n) = (n-1)!\) für alle \(n\in\nat\) und allgemeiner
+	\(\Gamma(z+1) = z\Gamma(z)\). Die Gamma Funktion ist
+	also eine Verallgemeinerung der Fakultät auf die reellen (komplexen) Zahlen.
+\end{example}
+\begin{proof}
+	Die Aussage über die natürlichen Zahlen zweigen wir per Induktion mit
+	Induktionsanfang \(n=1\)
+	\[
+		\Gamma(1) = \int_0^\infty \exp(-x)dx = \lim_{k\to\infty} -\exp(-x)\Bigl|_0^k
+		= 1.
+	\]
+	Der Induktionsschluss folgt direkt aus der allgemeinen Aussage
+	\(\Gamma(z+1)=z\Gamma(z)\), die wir nun zeigen:
+	\begin{align*}
+		\Gamma(z+1) &= \int_0^\infty x^z \exp(-x)dx\\
+		\overset{\text{PI}}&=
+		\underbrace{\lim_{k\to\infty} -x^z\exp(-x)\Bigl|_0^k}_{=0}
+		- \int_0^k -zx^{z-1}\exp(-x)dx\\
+		&= z\underbrace{\int_0^k -x^{n-1}\exp(-x)dx}_{=\Gamma(z)}.
+		\qedhere
+	\end{align*}
+\end{proof}
+
+Die Gammafunktion braucht man beispielsweise für die Gammaverteilung, die zum
+Beispiel die Verteilung von Summen von quadrierten Normalverteilten
+Zufallsvariablen oder Summen von Exponentiell verteilten Zufallsvariablen
+beschreibt.
+
+
+\begin{example}[Distributionen]
+	Sei \(\varphi\in C^\infty_c\) (glatt mit kompaktem Support). Dann
+	gilt für alle differenzierbaren \(f\)
+	\begin{equation}\label{eq: ableitung vertauschen}
+		\begin{split}
+		\int f'(x) \varphi(x)dx 
+		&=\underbrace{f(x)\varphi(x)\Bigl|_{-\infty}^\infty}_{
+			=0\mathrlap{\quad\text{(kompakter Support)}}}
+		- \int f(x)\varphi'(x) dx\\
+		&= - \int f(x)\varphi'(x) dx.
+		\end{split}
+	\end{equation}
+	D.h. wir können statt \(f\) auch immer \(\varphi\) ableiten. Man kann diesen
+	Trick verwenden um nicht differenzierbare Funktionen ``abzuleiten''. Das
+	wird verwendet, um Lösungen für PDEs mit unstetigen Anfangsbedingungen zu
+	bestimmen. Diese Lösungen werden auch ``schwache Lösungen'' gennant, weil
+	es sich dabei nicht um differenzierbare Funktionen, sondern
+	``Distributionen'' handelt.
+	
+	Die Menge der Distributionen ist formal definiert als
+	\(\cD:=(C^\infty_c)^*\), d.h. der Dualraum der glatten Funktionen mit
+	kompaktem Support. Zur Erinnerung: der Dualraum
+	enthält alle linearen Funktionen \(C^\infty_c\to\real\).
+	Sei nun \(f\in C^\infty_c\), dann ist
+	\[
+		F:\begin{cases}
+			C^\infty_c \to \real\\
+			\varphi\mapsto \int \varphi(x)f(x) dx
+		\end{cases}
+	\]
+	ein Element aus \(\cD\). Indem wir \(F\) mit \(f\) identifizieren
+	wird \(C^\infty_c\) ein Unterraum von \(\cD\). Aber \(\cD\) ist noch viel
+	größer. Alle stetigen Funktionen sind beispielsweise mit einer ähnlichen
+ 	Integral Identifizierung enthalten. Ebenso können wir ein Maß
+	\(\mu\) mit der Distribution \(\varphi\mapsto \int \varphi(x)d\mu(x)\)
+	identifizieren.
+	
+	Nun können wir Ableiten auf Distributionen definieren. Da für alle
+	\(\varphi\in C^\infty_c\) gilt \(\varphi'\in C^\infty_c\), ist für alle \(F\in\cD\)
+	\[
+		F':= \frac{d}{dx} F := - F\circ \frac{d}{dx}
+	\]
+	wohldefiniert. Außerdem ist \(F'\) eine Distribution, da die Ableitung
+ 	linear ist, die Verknüpfung somit auch, und nach \(\real\) abbildet.
+	Wegen \eqref{eq: ableitung vertauschen} ist die Ableitung von Distributionen
+	auf dem Unterraum der differenzierbaren Funktionen identisch mit
+	der normalen Ableitung. Somit handelt es sich wirklich um eine Erweiterung
+	des Ableitungsbegriffs.
+
+	Wir wollen nun zeigen, dass \(\ind_{[0,\infty)}'=\delta_0\) im Sinne von
+	Distributionen. Mit anderen Worten: Wir können auch diskrete
+	Verteilungsfunktionen ableiten um eine Art ``Dichte'' zu erhalten.
+
+	Doch bevor
+	wir das tun, wollen wir unsere Intuition für Gleichheit im Sinne von
+	Distributionen schärfen. Denn im Sinne von Distributionen gilt
+	\(\ind_{[0,\infty)}=\ind_{(0,\infty)}\). Warum ist das der Fall? Es gilt
+	für jedes \(\varphi\in C^\infty_c\), dass
+	\[
+		\ind_{[0,\infty)}(\varphi)
+		= \int \ind_{[0,\infty)}(x)\varphi(x) dx
+		= \int \ind_{(0,\infty)}(x)\varphi(x)dx = \ind_{(0,\infty)}(\varphi)
+	\]
+	also handelt es sich um die selbe duale Abbildung. Allgemeiner tritt dieses
+	Problem auf, wenn zwei Funktionen Lebesgue fast sicher gleich sind. Da wir
+	bei stetigen Funktionen nicht einzelne Punkte versetzen können, haben wir
+	dort dieses Problem dagegen nicht. Ein ähnliches Problem tritt bei der
+	Definition der \(L^p\) Räume in Lemma~3.4.8 der Vorlesung auf.
+	Das Problem wird dort mit Äquivalenzklassen gelöst. Hier könnte man so etwas
+	auch tun.
+	
+	Zurück zu unserem ursprünglichen Ziel: es gilt für alle \(\varphi\in C^\infty_c\)
+	\[
+		\begin{aligned}
+		\ind_{[0,\infty)}'(\varphi) 
+		&= -\ind_{[0,\infty)}(\varphi')
+		= -\int \ind_{[0,\infty)}(x)\varphi'(x)dx
+		= -\varphi(x)\Bigl|_0^\infty\\
+		&= \varphi(0)\\
+		&= \int \varphi(x)d\delta_0(x)
+		= \delta_0(\varphi).
+		\end{aligned}
+	\]
+	Somit gilt \(\ind_{[0,\infty)}'=\delta_0\) im Sinne von Distributionen.
+ \end{example}
+
+\subsection{Substitutionsregel}
+
+\begin{theorem}[Substitutionsregel] Für ein differenzierbares \(g\), gilt
+	\[
+		\int_{g(a)}^{g(b)}f(y){\color{red} dy}
+		= \int_a^b f(g(x)) {\color{cyan} g'(x)dx}
+		= \int_a^b f(g(x)) {\color{cyan} \frac{dy}{dx}dx}
+	\]
+\end{theorem}
+\begin{proof}
+	Folgt aus der \textbf{Kettenregel}
+	\begin{equation}\label{eq: chain rule}
+		\frac{d}{dx} F(g(x)) = F'(g(x))g'(x).
+	\end{equation}
+	Denn sei \(F'=f\), dann gilt
+	\begin{align*}
+		\int_{g(a)}^{g(b)}f(y)dy
+		&= F(g(b))-F(g(a))\\
+		&= \int_a^b \frac{d}{dx} F(g(x))dx
+		\overset{\eqref{eq: chain rule}}= \int_a^b f(g(x))g'(x)dx
+		= \int_a^b f(g(x)) g'(x)dx.
+		\qedhere
+	\end{align*}
+\end{proof}
+
+\begin{remark}[Merkregel]
+	So tun als sei \(\frac{dy}{dx}\) ein Bruch:
+	\[
+		y:=g(x) \implies \frac{dy}{dx} = g'(x) \implies \text{``}{\color{red}dy} = {\color{cyan}g'(x)dx}\text{''}
+	\]
+	Diese Intuition hilft bei der umgekehrten Verwendung. Sei \(g:=h^{-1}\), also
+	\[
+		y=h^{-1}(x) \implies \frac{dy}{dx} = \frac1{h'(h^{-1}(x))} = \frac1{h'(y)} = \frac1{\frac{dx}{dy}}
+		\implies \text{``}{\color{red}h'(y)dy }= {\color{cyan}dx}\text{''}
+	\]
+	und definiere
+	\(\tilde{f}(y) := f(y)h'(y)\), dann gilt
+	\[
+		\int_{h^{-1}(a)}^{h^{-1}(b)} \overbrace{f(y){\color{red}h'(y)}}^{=:\tilde{f}(y)}{\color{red}dy}
+		= \int_{a}^{b} \tilde{f}(h^{-1}(x)) (h^{-1})'(x) dx
+		= \int_{a}^{b} f(h^{-1}(x)) {\color{cyan} dx}.
+	\]
+\end{remark}
+\begin{corollary}
+	Wenn \(g\) zusätzlich invertierbar ist, dann gilt
+	\begin{equation*}
+		\int_{a}^{b} f(g(x)) {\color{cyan} dx}
+		=\int_{g(a)}^{g(b)}f(y) {\color{red}(g^{-1})'(y) dy}
+		=\int_{g(a)}^{g(b)}f(y) {\color{red} \frac{dx}{dy} dy}.
+	\end{equation*}
+\end{corollary}
+
+\begin{example}[Parameter Entfernen]
+	Mit der Substitutionsregel, lassen sich die Parameter der allgemeinen
+	Exponentialverteilung entfernen:
+	\[
+		F_\lambda(t)
+		= \int_0^t \underbrace{\lambda}_{=\color{cyan}\frac{dy}{dx}}\exp(-\lambda x){\color{cyan} dx}
+		\overset{y=\lambda x}=
+		\int_0^{\lambda t} \exp(-y){\color{red} dy}
+		= F_1(\lambda t).
+	\]
+	Ähnlich kann man eine allgemeine Normalverteilung leicht auf \(\cN(0,1)\)
+	zurückführen:
+	\begin{align*}
+		F_{\mu,\sigma^2}(t) &= \frac1{\sqrt{2\pi \sigma^2}}\int_{-\infty}^t
+		\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right){\color{cyan} dx}
+		\overset{y=\frac{x-\mu}{\sigma}}=
+		\frac1{\sqrt{2\pi \sigma^2}}\int_{-\infty}^{\frac{t-\mu}\sigma}
+		\exp\left(-y/2\right)\underbrace{\color{red}\frac{dx}{dy}}_{=\sigma}{\color{red} dy}\\
+		&= \frac1{\sqrt{2\pi}}\int_{-\infty}^{\frac{t-\mu}\sigma}
+		\exp\left(-y/2\right)dy\\
+		&= F_{0, 1}\left(\frac{t-\mu}\sigma\right).
+	\end{align*}
+\end{example}
+
+
+\section{Lebesgue Integral}
+
+\subsection{Transformationssatz}
+
+\begin{theorem}[Abstrakter Transformationssatz]
+	Sei \(g:\Omega\to\Omega'\) messbar, \(f:\Omega'\to\real\) messbar und so dass
+	folgendes wohldefiniert ist (\(f\ge 0\) oder integrierbar)
+	\[
+		\int_\Omega f\circ g {\color{cyan} d\mu} = \int_{\Omega'} f {\color{red} d\mu_g}
+	\]	
+	mit \(\mu_g(B):= \mu(g^{-1}(B))\).
+\end{theorem}
+
+Während der Beweis relativ einfach ist, ist das Ergebnis so auch noch nicht
+sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
+
+\begin{lemma}[Lineares Bildmaß des Lebesgue Maß]\label{lem: lin pushforward lebesgue measure}
+	Se \(\lambda\) das Lebesgue Maß auf \(\real^n\) und \(g\) eine invertierbare lineare Funktion, d.h.
+	\[
+		g(x) = Ax,
+	\]
+	dann gilt
+	\[
+		\lambda_g = \frac1{|\det(A)|}\lambda = |\det(A^{-1})|\lambda
+	\]
+\end{lemma}
+\begin{proof}[Beweisskizze]
+	\begin{enumerate}[wide, label=\textbf{Schritt \arabic*:}]
+		\item 
+		Zeige für jedes verschiebungsinvariantes Maß \(\mu\), dass es
+		zwangsläufig von der Form \(c\lambda\) sein muss.
+
+		Definiere hierfür
+		\(c:=\mu([0,1]^n)\) und leite die Größe aller rationalen Quader durch
+		Verschieben und zusammenstecken von kleineren Quadern aus dieser Konstante her.
+		Da die Menge alle rationalen Quader ein schnittstabiles Erzeuger ist, der
+		die Borel-\(\sigma\)-Algebra erzeugt, folgt mit dem Eindeutigkeitssatz,
+		dass \(\mu=c\lambda\).
+
+		\item Zeige, dass \(\lambda_g\) verschiebungsinvariant ist (folglich \(\lambda_g=c\lambda\)).
+
+		Es gilt, für eine Borelmenge \(B\) und \(x\in\real^n\) 
+		\[
+			\lambda_g(B+x) = \lambda(g^{-1}(B+x))
+			\overset{g^{-1} \text{linear}}=\lambda(g^{-1}(B)+g^{-1}(x))
+			\overset{\lambda\text{ versch.inv.}}=\lambda(g^{-1}(B)) = \lambda_g(B).
+		\]
+
+		\item Bestimme die Konstante \(c\) durch einsetzen von \([0,1]^n\). Zuerst
+		für diagonale \(A\).
+
+		\(A^{-1}[0,1]^n\) streckt den Quader um \(1/a_{ii}\) in die Richtung \(i\).
+		Falls \(a_{ii}<0\) flippt das Intervall außerdem auf die negative Seite,
+		das hat allerdings keinen Einfluss auf die Größe.
+		Das resultierende Volumen ist also
+		\[
+			\lambda_g([0,1]^n)=\lambda(A^{-1}[0,1]^n)
+			= \bigl|\prod_{i=1}^n 1/a_{ii}\bigr| = \frac1{|\det(A)|}
+		\]
+
+		\item Verwende die Singulärwertzerlegung von \(A\), d.h. \(A=UDV^T\) mit
+		\(U\), \(V\) Basiswechselmatrizen auf andere orthonormale Vektoren und \(D\)
+		diagonal. \(U\) und \(V\) sind Isometrien (verändern das Volumen nicht).
+		Also gilt
+		\[
+			\lambda_g([0,1]^n) = \frac1{|\det(D)|}.
+		\]
+		Zuletzt gilt für beliebige quadratische Matrizen \(C,B\)
+		\[
+			\det(CB)=\det(C)\det(B),
+		\]
+		also \(1=\det(\identity)=\det(UU^T)=\det(U)^2\) und somit
+		\(\det(D)=\det(A)\).
+		\qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Transformationssatz in \(\real^n\)]
+	Sei \(g:\Omega\to\Omega'\) ein Diffeomorphismus (stetig differenzierbar und invertierbar)
+	mit \(\Omega,\Omega'\subseteq\real^n\), dann gilt
+	\[
+		\int_\Omega f\circ g(x) {\color{cyan}dx}
+		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\bigl((g^{-1})'(y)\bigr)\bigr| dy}
+		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\Bigl(\frac{dx}{dy}\Bigr)\bigr| dy}
+	\]
+	oder auch
+	\[
+		\int_\Omega f(y) {\color{red}dy}
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\bigl(g'(x)\bigr)\bigr| dx}
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\Bigl(\frac{dy}{dx}\Bigr)\bigr| dx}.
+	\]
+\end{theorem}
+\begin{proof}[Beweisskizze]
+	Zerteile \(\Omega\) durch ein \(\delta\) Gitter, sodass \(g\) dort bis auf
+	ein \(\epsilon\) seiner ersten Taylorapproximation entpricht. Die erste
+	Taylorapproximation ist aber eine affin-lineare Abbildung. Wir wenden also das
+	Lemma~\ref{lem: lin pushforward lebesgue measure} für lineare Funktionen an,
+	und stecke die Integrale vorsichtig wieder mit der Linearität von Integralen
+	zusammen.
+
+	Die zweite Gleichung ergibt sich aus \(\tilde{f}=f\circ g\) und \(\tilde{g}=g^{-1}\)
+	und der ersten Formel.
+\end{proof}
+
+\begin{remark}
+	Auch wenn dieser konkrete Transformationssatz sehr ähnlich zur Substitutionsregel
+	aussieht, und in einer Dimension tatsächlich für invertierbare \(g\) mit ihr
+	übereinstimmt\footnote{
+		Invertierbarkeit von \(g\) impliziert, dass \(g'\) entweder strikt positiv
+		oder strikt negativ ist. Und das Tauschen der Integralgrenzen bei
+		monotonem Fallen führt zu einem Minus, was dem Betrag im
+		Transformationssatz entspricht.
+	}, ist er eigentlich nicht die Substitutionsregel in \(n\) Dimensionen.
+	Denn da die Kettenregel auch in \(n\) Dimensionen gilt, ist die Substitutionsregel
+	auch von sich aus schon in \(n\) Dimensionen gültig. Typischerweise möchte man
+	aber lieber mit der Determinanten der Ableitung als der Ableitungsmatrix
+	selbst arbeiten, weshalb die ``echte'' \(n\)-Dimensionale Substitutionsregel
+	kaum Anwendung findet und dieser Transformationssatz häufig auch
+	\(n\)-dimensionale Substitutionsregel genannt wird.
+\end{remark}
+
+\begin{example}[Polarkoordinaten]
+	Ein besonderer Trick, der durch den Transformationssatz möglich wird, sind
+	die Polarkoordinaten
+	\[
+		\phi:\begin{cases}
+			[0,\infty)\times[0,2\pi) \to \real^2\\
+			(r,\varphi) \mapsto r(\cos(\varphi),\sin(\varphi))
+		\end{cases}
+	\]
+	Mit diesem Trick, lässt sich das Quadrat der Gaussdichte integrieren
+	\[
+		\begin{aligned}
+			\left(\int \exp\bigl(-x^2/2\bigr)dx\right)^2
+			&= \int \int \exp\left(-\frac{x^2+y^2}2\right) dxdy\\
+			&= \int_0^{2\pi} \int_0^\infty \exp\Bigl(
+				-\underbrace{\frac{(r\cos(\varphi))^2+(r\sin(\varphi))^2}2}_{=r^2/2}
+			\Bigr)
+			\underbrace{|\det(\phi'(r,\varphi))|}_{\overset{\eqref{eq: determinant}}=r} dr d\varphi
+			\\
+			&= \int_0^{2\pi} -\exp(-r^2/2)\Bigl|_0^\infty d\varphi\\
+			&= 2\pi,
+		\end{aligned}
+	\]
+	da gilt
+	\begin{equation}\label{eq: determinant}
+		\det(\phi'(r,\varphi))= \det\left(\begin{pmatrix}
+			\cos(\varphi)	& -r\sin(\varphi)\\
+			\sin(\varphi) & r\cos(\varphi)
+		\end{pmatrix}\right) = r \cos(\varphi)^2 + r\sin(\varphi)^2 = r.
+	\end{equation}
+	Hier haben wir ein bisschen geschummelt: \(\phi\) ist kein Diffeomorphismus, da
+	da \(\phi^{-1}\) nicht differenzierbar ist für \(\varphi\) nahe \(0\) bzw \(2\pi\).
+	Um diesen Sprung zu entfernen, betrachte nur \((0,2\pi)\). Das entfernt nur
+	eine Linie aus \(\real^2\), was Maß Null hat und hat somit keinen Effekt
+	auf das Integral (richtiger Beweis ist Übung). 
+\end{example}
+
+
+\subsection{Vertauschung von Ableitung und Integral}
+
+Wenn man den Hauptsatz der Analysis im Kopf hat, klingt das zunächst einmal
+sinnlos. Aber wenn man eine andere Koordinate ableitet, als man integriert,
+macht diese Frage durchaus Sinn.
+
+\begin{theorem}[Ableitung und Integral Vertauschen]
+	Sei \((t,\omega)\mapsto f(t,\omega)\) eine 
+	\begin{itemize}[noitemsep,topsep=0pt]
+		\item messbare Funktion,
+		\item die über \(\omega\) \(\mu\)-integrierbar ist für alle feste \(t\),
+		\item und für \(\mu\)-fast alle \(\omega\in\Omega\) gilt: \(t\to
+		f(t,\omega)\) ist differenzierbar (bzw. absolutstetig) in \(t\).
+	\end{itemize}
+	Falls \(\frac{\partial}{\partial t}f\) ``lokal integrierbar in x'' ist, d.h.
+	es \(a<b\in\real\) gibt, sodass \(x\in[a,b]\) und
+	\[
+		\int_a^b \int_\Omega
+		\left|\frac{d}{dt}f(t,\omega)\right| d\mu(\omega)dt<\infty
+	\]
+	gilt, dann darf man Ableitung und Integral an der Stelle \(x\) vertauschen
+	\[
+		\frac{\partial}{\partial t}\int f(x, \omega)d\mu(\omega)
+		= \int \frac{\partial}{\partial t}f(x,\omega)d\mu(\omega).
+	\]
+\end{theorem}
+\begin{proof}
+	Sei o.B.d.A. \(x<b\). Dann gilt	
+	\begin{align*}
+		\frac{\partial}{\partial t}\int f(x,\omega)d\mu(\omega)
+		&= \lim_{\epsilon\to 0}
+		\frac{\int f(x+\epsilon,\omega)d\mu(\omega) - \int f(x,\omega)d\mu(\omega)}{\epsilon}\\
+		\overset{\text{linear}}&= \lim_{\epsilon\to 0}\int
+		\frac{f(x+\epsilon,\omega) - f(x,\omega)}{\epsilon}d\mu(\omega)\\
+		\overset{\text{Hauptsatz II}}&= \lim_{\epsilon\to 0}\int
+		\frac1\epsilon \int_x^{x+\epsilon}\frac{\partial}{\partial t} f(t,\omega) dt d\mu(\omega)\\
+		\overset{\text{Fubini}}&=
+		\lim_{\epsilon\to 0}\frac1\epsilon \int_x^{x+\epsilon}
+		\int \frac{\partial}{\partial t}f(t,\omega) d\mu(\omega)dt \\
+		&=
+		\frac{d}{dy}\Bigl|_{y=x} \int_x^{y}
+		\int \frac{\partial}{\partial t}f(t,\omega) d\mu(\omega)dt\\
+		\overset{\text{Hauptsatz I}}&=
+		\int \frac{\partial}{\partial t}f(t,\omega) d\mu(\omega)dt.
+		\qedhere
+	\end{align*}
+\end{proof}
+
+Wie man sieht, brauchen wir eigentlich alle Voraussetzungen nur, damit die Objekte
+über die wir sprechen wohldefiniert sind. So wie Fubini ``immer'' geht, geht
+also auch das Vertauschen von Ableitung und Integral ``immer''. Die einzige
+Stelle, an der das nicht ganz richtig ist, ist bei der ``lokalen Integrierbarkeit''.
+Es genügt nicht, dass die Ableitung nur in \(x\) über \(\omega\) \(\mu\)-integrierbar
+ist. Die resultierende Funktion in \(x\)
+\[
+	F: x\to \int \left|\frac{\partial}{\partial t}f(x,\omega)\right|d\mu(\omega)
+\]
+muss friedlich genug sein, dass man sie zumindest in einer Umgebung noch
+integrieren kann. Die Folgenden Bedingungen sind also hinreichend:
+\begin{enumerate}
+	\item \(F\) stetig in \(x\)
+	\item \(F\) beschränkt in \(x\)
+	\item uniform \(\bigl|\frac{\partial}{\partial t}f(t,\omega)\bigr| \le
+	g(\omega)\) für ein integrierbares \(g\)
+	\item \(t\mapsto |\frac{\partial}{\partial t}f(t,\omega)|\)
+	ist lokal um \(x\) monoton in \(t\).
+\end{enumerate}
+
+
+\clearpage
+
+\subsection*{Integrationshilfe}
+
+\begin{theorem*}[Partielle Integration]
+	\[
+		\int_a^b f(x)g'(x)dx
+		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx
+	\]
+\end{theorem*}
+\begin{proof}
+	Folgt aus der \textbf{Produktregel}.
+\end{proof}
+
+\begin{itemize}
+	\item Funktioniert gut bei Produkten mit, oder Potenzen von \(\exp, \cos, \sin\)
+	\item Wird verwendet zum Ableiten von Distributionen
+\end{itemize}
+
+\begin{theorem*}[Substitutionsregel]
+	Für differenzierbare \(g\) gilt
+	\begin{align*}
+		\int_a^b f(g(x)) {\color{cyan} g'(x)dx}
+		&=\int_{g(a)}^{g(b)}f(y){\color{red} dy}\\
+	\intertext{ist g zusätzlich invertierbar, gilt}
+		\int_{a}^{b} f(g(x)) {\color{cyan} dx}
+		&=\int_{g(a)}^{g(b)}f(y) {\color{red}(g^{-1})'(y) dy}
+		=\int_{g(a)}^{g(b)}f(y) {\color{red} \frac{dx}{dy} dy}.
+	\end{align*}
+\end{theorem*}
+\begin{proof}
+	Folgt aus der \textbf{Kettenregel}.
+\end{proof}
+
+\begin{itemize}
+	\item Nützlich zum Entfernen von unnötigen Parametern
+\end{itemize}
+
+\begin{theorem*}[Transformationssatz in \(\real^n\)]
+	Sei \(g:\Omega\to\Omega'\) ein Diffeomorphismus (stetig differenzierbar und invertierbar)
+	mit \(\Omega,\Omega'\subseteq\real^n\), dann gilt
+	\[
+		\int_\Omega f\circ g(x) {\color{cyan}dx}
+		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\bigl((g^{-1})'(y)\bigr)\bigr| dy}
+		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\Bigl(\frac{dx}{dy}\Bigr)\bigr| dy}
+	\]
+	oder auch
+	\[
+		\int_\Omega f(y) {\color{red}dy}
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\bigl(g'(x)\bigr)\bigr| dx}
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\Bigl(\frac{dy}{dx}\Bigr)\bigr| dx}.
+	\]
+\end{theorem*}
+\begin{proof}
+	Bildmaß von linearen Funktionen bestimmen und abstrakten Trafo anwenden. Die
+	erste Taylorapproximation ist auf immer kleineren Zerstückelungen von
+	\(\Omega\) schlussendlich exakt.
+\end{proof}
+
+\begin{itemize}
+	\item Besonderer Trick: Polarkoordinaten
+\end{itemize}
+
+
+\end{document} 
