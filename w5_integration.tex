@@ -186,8 +186,91 @@ Zufallsvariablen oder Summen von Exponentiell verteilten Zufallsvariablen
 beschreibt.
 
 
-\begin{example}[Distributionen]
-\end{example}
+\begin{example}[Distributionen*]
+	Sei \(\varphi\in C^\infty_c\) (glatt mit kompaktem Support). Dann
+	gilt für alle differenzierbaren \(f\)
+	\begin{equation}\label{eq: ableitung vertauschen}
+		\begin{split}
+		\int f'(x) \varphi(x)dx 
+		&=\underbrace{f(x)\varphi(x)\Bigl|_{-\infty}^\infty}_{
+			=0\mathrlap{\quad\text{(kompakter Support)}}}
+		- \int f(x)\varphi'(x) dx\\
+		&= - \int f(x)\varphi'(x) dx.
+		\end{split}
+	\end{equation}
+	D.h. wir können statt \(f\) auch immer \(\varphi\) ableiten. Man kann diesen
+	Trick verwenden um nicht differenzierbare Funktionen ``abzuleiten''. Das
+	wird verwendet, um Lösungen für PDEs mit unstetigen Anfangsbedingungen zu
+	bestimmen. Diese Lösungen werden auch ``schwache Lösungen'' gennant, weil
+	es sich dabei nicht um differenzierbare Funktionen, sondern
+	``Distributionen'' handelt.
+	
+	Die Menge der Distributionen ist formal definiert als
+	\(\cD:=(C^\infty_c)^*\), d.h. der Dualraum der glatten Funktionen mit
+	kompaktem Support. Zur Erinnerung: der Dualraum
+	enthält alle linearen Funktionen \(C^\infty_c\to\real\).
+	Sei nun \(f\in C^\infty_c\), dann ist
+	\[
+		F:\begin{cases}
+			C^\infty_c \to \real\\
+			\varphi\mapsto \int \varphi(x)f(x) dx
+		\end{cases}
+	\]
+	ein Element aus \(\cD\). Indem wir \(F\) mit \(f\) identifizieren
+	wird \(C^\infty_c\) ein Unterraum von \(\cD\). Aber \(\cD\) ist noch viel
+	größer. Alle stetigen Funktionen sind beispielsweise mit einer ähnlichen
+ 	Integral Identifizierung enthalten. Ebenso können wir ein Maß
+	\(\mu\) mit der Distribution \(\varphi\mapsto \int \varphi(x)d\mu(x)\)
+	identifizieren.
+	
+	Nun können wir Ableiten auf Distributionen definieren. Da für alle
+	\(\varphi\in C^\infty_c\) gilt \(\varphi'\in C^\infty_c\), ist für alle \(F\in\cD\)
+	\[
+		F':= \frac{d}{dx} F := - F\circ \frac{d}{dx}
+	\]
+	wohldefiniert. Außerdem ist \(F'\) eine Distribution, da die Ableitung
+ 	linear ist, die Verknüpfung somit auch, und nach \(\real\) abbildet.
+	Wegen \eqref{eq: ableitung vertauschen} ist die Ableitung von Distributionen
+	auf dem Unterraum der differenzierbaren Funktionen identisch mit
+	der normalen Ableitung. Somit handelt es sich wirklich um eine Erweiterung
+	des Ableitungsbegriffs.
+
+	Wir wollen nun zeigen, dass \(\ind_{[0,\infty)}'=\delta_0\) im Sinne von
+	Distributionen. Mit anderen Worten: Wir können auch diskrete
+	Verteilungsfunktionen ableiten um eine Art ``Dichte'' zu erhalten.
+
+	Doch bevor
+	wir das tun, wollen wir unsere Intuition für Gleichheit im Sinne von
+	Distributionen schärfen. Denn im Sinne von Distributionen gilt
+	\(\ind_{[0,\infty)}=\ind_{(0,\infty)}\). Warum ist das der Fall? Es gilt
+	für jedes \(\varphi\in C^\infty_c\), dass
+	\[
+		\ind_{[0,\infty)}(\varphi)
+		= \int \ind_{[0,\infty)}(x)\varphi(x) dx
+		= \int \ind_{(0,\infty)}(x)\varphi(x)dx = \ind_{(0,\infty)}(\varphi)
+	\]
+	also handelt es sich um die selbe duale Abbildung. Allgemeiner tritt dieses
+	Problem auf, wenn zwei Funktionen Lebesgue fast sicher gleich sind. Da wir
+	bei stetigen Funktionen nicht einzelne Punkte versetzen können, haben wir
+	dort dieses Problem dagegen nicht. Ein ähnliches Problem tritt bei der
+	Definition der \(L^p\) Räume in Lemma~3.4.8 der Vorlesung auf.
+	Das Problem wird dort mit Äquivalenzklassen gelöst. Hier könnte man so etwas
+	auch tun.
+	
+	Zurück zu unserem ursprünglichen Ziel: es gilt für alle \(\varphi\in C^\infty_c\)
+	\[
+		\begin{aligned}
+		\ind_{[0,\infty)}'(\varphi) 
+		&= -\ind_{[0,\infty)}(\varphi')
+		= -\int \ind_{[0,\infty)}(x)\varphi'(x)dx
+		= -\varphi(x)\Bigl|_0^\infty\\
+		&= \varphi(0)\\
+		&= \int \varphi(x)d\delta_0(x)
+		= \delta_0(\varphi).
+		\end{aligned}
+	\]
+	Somit gilt \(\ind_{[0,\infty)}'=\delta_0\) im Sinne von Distributionen.
+ \end{example}
 
 \clearpage
 
