@@ -578,8 +578,8 @@ macht diese Frage durchaus Sinn.
 	Sei o.B.d.A. \(x<b\). Dann gilt	
 	\begin{align*}
 		\frac{\partial}{\partial t}\int f(x,\omega)d\mu(\omega)
-		&= \lim_{\epsilon\to 0}
-		\frac{\int f(x+\epsilon,\omega)d\mu(\omega) - \int f(x,\omega)d\mu(\omega)}{\epsilon}\\
+		% &= \lim_{\epsilon\to 0}
+		% \frac{\int f(x+\epsilon,\omega)d\mu(\omega) - \int f(x,\omega)d\mu(\omega)}{\epsilon}\\
 		\overset{\text{linear}}&= \lim_{\epsilon\to 0}\int
 		\frac{f(x+\epsilon,\omega) - f(x,\omega)}{\epsilon}d\mu(\omega)\\
 		\overset{\text{Hauptsatz II}}&= \lim_{\epsilon\to 0}\int
@@ -597,10 +597,8 @@ macht diese Frage durchaus Sinn.
 \end{proof}
 
 Wie man sieht, brauchen wir eigentlich alle Voraussetzungen nur, damit die Objekte
-über die wir sprechen wohldefiniert sind. So wie Fubini ``immer'' geht, geht
-also auch das Vertauschen von Ableitung und Integral ``immer''. Die einzige
-Stelle, an der das nicht ganz richtig ist, ist bei der ``lokalen Integrierbarkeit''.
-Es genügt nicht, dass die Ableitung nur in \(x\) über \(\omega\) \(\mu\)-integrierbar
+über die wir sprechen wohldefiniert sind. Nur die ``lokalen Integrierbarkeit''
+ist wirklich zusätzlich. Denn es genügt nicht, dass die Ableitung nur in \(x\) über \(\omega\) \(\mu\)-integrierbar
 ist. Die resultierende Funktion in \(x\)
 \[
 	F: x\to \int \left|\frac{\partial}{\partial t}f(x,\omega)\right|d\mu(\omega)
@@ -616,6 +614,41 @@ integrieren kann. Die Folgenden Bedingungen sind also hinreichend:
 	ist lokal um \(x\) monoton in \(t\).
 \end{enumerate}
 
+\begin{example}[Geometrische Verteilung]
+	Sei \(\mu=\sum_{k=1}^\infty(1-p)^{k-1}p\delta_k\) die geometrische Verteilung,
+	Dann gilt
+	\[
+		\int x d\mu(x) = \frac1p.
+	\]
+\end{example}
+\begin{proof}
+	Sei \(\nu(A):= |A\cap\nat|\) bzw. \(\nu=\sum_{k=1}^\infty \delta_k\) das Zählmaß auf den natürlichen Zahlen. Dies
+	ermöglicht es uns, eine Summe als Integral aufzufassen:
+	\begin{align*}
+		\int x d\mu(x)
+		&= \sum_{k=1}^\infty k(1-p)^{k-1}p
+		= p \int \frac{d}{dp}-(1-p)^{k} d\nu(k)\\
+		&= p \frac{d}{dp} -{\underbrace{\sum_{k=1}^\infty(1-p)^k}_{
+				=\frac1{1-(1-p)} - 1
+				\mathrlap{= \frac1p -1}
+			}}
+		= p\frac1{p^2} \\
+		&= \frac1p.
+		\qedhere
+	\end{align*}
+\end{proof}
+
+\begin{example}[Stochastic Gradient Descent]
+	Sei \(L:\theta\to \E[l(\theta, X)]\) eine Loss Funktion die wir minimieren wollen,
+	für eine Zufallsvariable \(X\). Dann gilt
+	\[
+		\nabla L(\theta) = \nabla\E[l(\theta, X)]
+		=\nabla \int l(\theta, x)d\Pr_X(x)
+		=\int \nabla l(\theta, x)d\Pr_X(x)
+		=\E[\nabla l(\theta, X)].
+	\]
+	\(\nabla l(\theta,X)\) ist also ein erwartungstreuer Schätzer für den Gradient von \(L\).
+\end{example}
 
 \clearpage
 
