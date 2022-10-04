@@ -471,13 +471,15 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 	Sei \(g:\Omega\to\Omega'\) ein Diffeomorphismus (stetig differenzierbar und invertierbar)
 	mit \(\Omega,\Omega'\subseteq\real^n\), dann gilt
 	\[
-		\int_\Omega f\circ g {\color{cyan}d\lambda}
+		\int_\Omega f\circ g(x) {\color{cyan}dx}
 		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\bigl((g^{-1})'(y)\bigr)\bigr| dy}
+		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\Bigl(\frac{dx}{dy}\Bigr)\bigr| dy}
 	\]
 	oder auch
 	\[
 		\int_\Omega f(y) {\color{red}dy}
-		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\bigl(g'(x)\bigr)\bigr| dx}.
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\bigl(g'(x)\bigr)\bigr| dx}
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\Bigl(\frac{dy}{dx}\Bigr)\bigr| dx}.
 	\]
 \end{theorem}
 \begin{proof}[Beweisskizze]
@@ -510,8 +512,41 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 \end{remark}
 
 \begin{example}[Polarkoordinaten]
-	%TODO
+	Ein besonderer Trick, der durch den Transformationssatz möglich wird, sind
+	die Polarkoordinaten
+	\[
+		\phi:\begin{cases}
+			[0,\infty)\times[0,2\pi) \to \real^2\\
+			(r,\varphi) \mapsto r(\cos(\varphi),\sin(\varphi))
+		\end{cases}
+	\]
+	Mit diesem Trick, lässt sich das Quadrat der Gaussdichte integrieren
+	\[
+		\begin{aligned}
+			\left(\int \exp\bigl(-x^2/2\bigr)dx\right)^2
+			&= \int \int \exp\left(-\frac{x^2+y^2}2\right) dxdy\\
+			&= \int_0^{2\pi} \int_0^\infty \exp\Bigl(
+				-\underbrace{\frac{(r\cos(\varphi))^2+(r\sin(\varphi))^2}2}_{=r^2/2}
+			\Bigr)
+			\underbrace{|\det(\phi'(r,\varphi))|}_{\overset{\eqref{eq: determinant}}=r} dr d\varphi
+			\\
+			&= \int_0^{2\pi} -\exp(-r^2/2)\Bigl|_0^\infty d\varphi\\
+			&= 2\pi,
+		\end{aligned}
+	\]
+	da gilt
+	\begin{equation}\label{eq: determinant}
+		\det(\phi'(r,\varphi))= \det\left(\begin{pmatrix}
+			\cos(\varphi)	& -r\sin(\varphi)\\
+			\sin(\varphi) & r\cos(\varphi)
+		\end{pmatrix}\right) = r \cos(\varphi)^2 + r\sin(\varphi)^2 = r.
+	\end{equation}
 \end{example}
+
+Folglich haben wir
+\[
+	\int \exp(-x^2/2)dx = \sqrt{2\pi}.
+\]
 
 \subsection{Vertauschen von Differenzieren und Integrieren}
 
@@ -557,13 +592,15 @@ sonderlich nützlich, weil \(\mu_g\) noch zu bestimmen ist.
 	Sei \(g:\Omega\to\Omega'\) ein Diffeomorphismus (stetig differenzierbar und invertierbar)
 	mit \(\Omega,\Omega'\subseteq\real^n\), dann gilt
 	\[
-		\int_\Omega f\circ g {\color{cyan}d\lambda}
+		\int_\Omega f\circ g(x) {\color{cyan}dx}
 		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\bigl((g^{-1})'(y)\bigr)\bigr| dy}
+		= \int_{\Omega'} f(y) {\color{red}\bigl|\det\Bigl(\frac{dx}{dy}\Bigr)\bigr| dy}
 	\]
 	oder auch
 	\[
 		\int_\Omega f(y) {\color{red}dy}
-		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\bigl(g'(x)\bigr)\bigr| dx}.
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\bigl(g'(x)\bigr)\bigr| dx}
+		= \int_{\Omega'} f\circ g(x) {\color{cyan}\bigl|\det\Bigl(\frac{dy}{dx}\Bigr)\bigr| dx}.
 	\]
 \end{theorem*}
 \begin{proof}
