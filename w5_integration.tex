@@ -482,7 +482,8 @@ gilt. Ist \(f\ge0\) folgt das mit immer mit monotoner Konvergenz. Ist \(f\) bzw.
 	\]
 	da für \(b\ge 1\) gilt \(y e^{-yb} \le ye^{-y} \to 0\) für \(y\to\infty\)
 	und damit uniform über all \(b\ge 1\) beschränkt ist. Damit haben wir eine
-	majorante für dominierte Konvergenz gefunden und können den Limes über \(b\)
+	integeribare\footnote{siehe \eqref{eq: integrate 1/(1+x^2)}}
+	Majorante für dominierte Konvergenz gefunden und können den Limes über \(b\)
 	in das Integral ziehen
 	\[
 		\lim_{b\to\infty}	
@@ -490,14 +491,23 @@ gilt. Ist \(f\ge0\) folgt das mit immer mit monotoner Konvergenz. Ist \(f\) bzw.
 		= \int_0^b \lim_{b\to\infty}	\frac{1-(\cos(b) + y\sin(b))e^{-yb}}{1+y^2}dy
 		= \int_0^b \frac1{1+y^2}dy.
 	\]
-	Nun gilt aber \((\tan^{-1})'(x)=\frac1{1+x^2}\), gilt nach dem Hauptsatz
+	Wegen \((\tan^{-1})'(x)=\frac1{1+x^2}\), gilt aber nach dem Hauptsatz
 	für Integral und Differentialrechnung
-	\[
+	\begin{equation}\label{eq: integrate 1/(1+x^2)}
 		\int_0^\infty \frac1{1+x^2} dx
 		= \tan^{-1}(x)\Bigl|_0^\infty
 		= \lim_{x\to\infty} \tan^{-1}(x) - 0 = \frac{\pi}2.
+	\end{equation}
+	Bleibt noch zu zeigen, dass \(\frac{\sin(x)}x\) nicht Lebesgue integrierbar
+	ist. Hierzu genügt es zu zeigen, dass
+	\begin{align*}
+		\int_{[0,\infty)} \left|\frac{\sin(x)}x\right| dx
+		&\ge \int_{[0,\infty)} \frac{|\sin(x)|}{2\pi\lceil x/2\pi\rceil} dx
+		= \sum_{k=1}^\infty \frac{1}{2\pi k} \int_{[2\pi (k-1), 2\pi k)} |\sin(x)|dx\\
+		&= \underbrace{\frac1{2\pi}\int_0^{2\pi}|\sin(x)|dx}_{> 0} \underbrace{\sum_{k=1}^\infty \frac1k}_{=\infty}
+		=\infty.
 		\qedhere
-	\]
+	\end{align*}
 \end{proof}
 
 
