@@ -27,7 +27,7 @@
 	\[
 		F(x) = \int_a^x f(t) dt,
 	\]	
-	für ein red stetiges \(f\). Dann ist \(F\) stetig differenzierbar
+	für ein stetiges \(f\). Dann ist \(F\) stetig differenzierbar
 	mit \(F'=f\).
 \end{theorem}
 \begin{proof}
@@ -54,26 +54,28 @@
 \end{proof}
 
 \begin{theorem}[Hauptsatz II]
-	Sei \(F\) differenzierbar mit \(F'=f\) für ein Riemann
-	setiges \(f\). Dann gilt
+	Sei \(F\) differenzierbar mit \(F'=f\) für ein setiges \(f\). Dann gilt
 	\[
 		\int_a^b f(t)dt = F(x)\Bigl|_a^b := F(b) - F(a) 
 	\]	
 \end{theorem}
 \begin{proof}
-	Definiere eine Diskretisierung \(a=x_0\le \dots \le x_{n}=b\)
-	\begin{equation*}
-		F(b)-F(a) = \sum_{k=1}^n F(x_{k}) - F(x_{k-1})
-		\overset{\text{\color{red}MWS}}= \sum_{k=1}^n f(\xi_k)\Delta x_k
-		\le \sum_{k=1}^n\sup_{c\in[x_{k-1}, x_k]} f(c) \Delta x_k
-	\end{equation*}	
-	Da \(f\) Riemann integrierbar ist, gilt für \(\Delta x = \sup_k \Delta x_k\)
-	\[
-		\lim_{\Delta x \to 0}\sum_{k=1}^n\sup_{c\in[x_{k-1}, x_k]} f(c) \Delta x_k
-		=\int_a^b f(x)dx.
-	\]
-	Analog bekommt man die untere Schranke.
+	Wir haben \(F'=f\), definiere \(G\) wie \(F\) im Hauptsatz I. Dann gilt
+	nach dem Hauptsatz I, dass \(G'=f=F'\). Also gilt \((F-G)'=0\). Daraus
+	folgt
+	\begin{align*}
+		F(b) - F(a)
+		&= (F-G)(b) - (F-G)(a) + (G(b)-G(a))\\
+		\overset{\text{\color{red} MWS}}&=
+		\underbrace{(F-G)'(\xi)}_{=0} + G(b)-G(a)\\
+		\overset{\text{def}}&= \int_a^b f(x) dx - \underbrace{\int_a^a f(x)dx}_{=0}.
+		\qedhere
+	\end{align*}
 \end{proof}
+\begin{remark}[Stückweise Setig/Differenzierbar]
+	Mit der Linearität des Integrals, können diese Aussagen auch auf stückweise
+	stetige \(f\), bzw. stückweise differenzierbare \(F\) ausgeweitet werden.
+\end{remark}
 
 \begin{example}[\(\sin\) Integration]\label{ex: sin integration}
 	Zeige
@@ -120,12 +122,16 @@ Integral wieder zusammensetzen:
 	}
 	=: F(x)\Bigl|_a^b
 \]
-\begin{example}[\(\exp\) Integration]
+\begin{example}[\(\exp\) Integration]\label{ex: exp integration}
+	Sei \(c\ge 0\), dann gilt
 	\[
-		\int_0^\infty \exp(-t)dt = \lim_{x\to\infty}-\exp(-t)\Bigl|_0^x = -(0-1)=1.
+		\int_0^\infty \exp(-ct)dt = \lim_{x\to\infty}-\frac1c\exp(-ct)\Bigl|_0^x
+		= -\left(0-\frac1c\right)
+		=\frac1c.
 	\]	
 \end{example}
 
+\clearpage
 
 \subsection{Partielle Integration}
 
@@ -148,6 +154,32 @@ Integral wieder zusammensetzen:
 		= f(x)g(x)\Bigl|_a^b - \int_a^b f'(x)g(x) dx.
 		\qedhere
 	\end{equation*}
+\end{proof}
+
+
+\begin{example}[\(\sin\)-\(\exp\) Produkt]\label{ex: sin-exp Product}
+	Zeige
+	\[
+		I=\int_0^b \sin(t)\exp(-ct)dt = 
+		\frac{1-(\cos(b) + c\sin(b))e^{-cb}}{1+c^2}.
+	\]	
+\end{example}
+\begin{proof}
+	\begin{align*}
+		I 
+		&= -\cos(t)\exp(-ct)\Bigl|_0^b - c\int\cos(t)\exp(-ct)dt\\
+		&= \cos(0) - \cos(b)\exp(-cb) - c\left(
+			\sin(t)\exp(-ct)\Bigl|_0^b + c\int\sin(t)\exp(-ct)dt
+		\right)\\
+		&= 1- \cos(b)e^{-cb} - c\left(
+			\sin(b)e^{-cb} + c I
+		\right)
+	\end{align*}
+	Impliziert nach umstellen nach \(I\)
+	\[
+		I = \frac{1-\cos(b)e^{-cb} -c\sin(b)e^{-cb}}{1+c^2}.
+		\qedhere
+	\]
 \end{proof}
 
 \begin{example}[\(\sin\)-Potenzen]
@@ -310,7 +342,9 @@ beschreibt.
 		\end{aligned}
 	\]
 	Somit gilt \(\ind_{[0,\infty)}'=\delta_0\) im Sinne von Distributionen.
- \end{example}
+\end{example}
+
+\clearpage
 
 \subsection{Substitutionsregel}
 
@@ -390,6 +424,82 @@ beschreibt.
 
 
 \section{Lebesgue Integral}
+
+An kaum keiner Stelle haben wir die Definition des Riemann-Integrals wirklich
+benötigt. Wir brauchen nur Linearität und Monotonie für den Hauptsatz I und
+bekommen dann den Hauptsatz II mit dem Mittelwertsatz quasi geschenkt dazu.
+Alle folgenden Rechenregeln basieren dann wiederum nur auf den Hauptsätzen.
+Die gleichen Aussagen gelten also auch für das Lebesgue Integral.
+Folglich müssen beide Integrale für stetige Funktionen übereinstimmen
+\[
+	\int_{[a,b]} f d\lambda = \int_a^b f(x) dx.
+\]
+Mit der Linearität des Integrals bekommt man diese Aussagen dann letztendlich
+auch für stückweise stetige Funktionen.
+
+Die einzige Ausnahme, sind uneigentliche Integrale. Wann gilt also
+\[
+	\int_a^\infty f(x)dx = \int_{[a,\infty)} fd\lambda
+\]
+für (stückweise) stetige f? Das Riemann integral ist definiert als Limes von
+endlichen Integralgrenzen (für die die Gleichheit gilt)
+\[
+	\int_a^\infty f(x)dx
+	= \lim_{b\to\infty}\int_a^b f(x) dx
+	= \lim_{b\to\infty}\int_{[a,b]} fd\lambda
+	= \lim_{b\to\infty}\int \ind_{[a,b]} fd\lambda
+\]
+Nun fragt sich also, ob
+\[
+	\lim_{b\to\infty}\int \ind_{[a,b]} fd\lambda
+	= \int \ind_{[a,\infty)} fd\lambda
+\]
+gilt. Ist \(f\ge0\) folgt das mit immer mit monotoner Konvergenz. Ist \(f\) bzw.
+\(|f|\) integrierbar, folgt das immer mit dominierter Konvergenz.
+\begin{example}[Riemann aber nicht Lebesgue]
+	Berechne (und begründe die Existenz) des uneigentlichen Riemann Integrals
+	\[
+		\int_0^\infty \frac{\sin(x)}{x}dx = \frac{\pi}2.
+	\]
+	Zeige, dass \(\frac{\sin(x)}x\) nicht Lebesgue integrierbar ist.
+\end{example}
+\begin{proof}
+	Nach Beispiel~\eqref{ex: exp integration} gilt \(\int_0^\infty e^{-xy}dy = \frac1x\),
+	also
+	\[
+		\int_0^b \frac{\sin(x)}xdx
+		= \int_0^b \int_0^\infty e^{-xy}\sin(x)dydx
+		\overset{\text{Fubini}}= \int_0^\infty \underbrace{\int_0^b e^{-xy}\sin(x) dx}_{
+			\overset{\text{Bsp.~\ref{ex: sin-exp Product}}}=
+			\frac{1-(\cos(b) + y\sin(b))e^{-yb}}{1+y^2}
+		} dy
+	\]
+	wobei wir hier Fubini verwenden können, da \(|e^{-xy}\sin(x)|\le e^{-xy}\)
+	über \([0,b]\times[0,\infty)\) (auch Lebesgue) integrierbar ist. Nun gilt aber
+	\[
+		\left|\frac{1-(\cos(b) + y\sin(b))e^{-yb}}{1+y^2}\right|
+		\le \frac1{1+y^2} + \frac{(1+y)e^{-yb}}{1+y^2} \le \frac{K}{1+y^2},
+	\]
+	da für \(b\ge 1\) gilt \(y e^{-yb} \le ye^{-y} \to 0\) für \(y\to\infty\)
+	und damit uniform über all \(b\ge 1\) beschränkt ist. Damit haben wir eine
+	majorante für dominierte Konvergenz gefunden und können den Limes über \(b\)
+	in das Integral ziehen
+	\[
+		\lim_{b\to\infty}	
+		\int_0^b \frac{\sin(x)}xdx
+		= \int_0^b \lim_{b\to\infty}	\frac{1-(\cos(b) + y\sin(b))e^{-yb}}{1+y^2}dy
+		= \int_0^b \frac1{1+y^2}dy.
+	\]
+	Nun gilt aber \((\tan^{-1})'(x)=\frac1{1+x^2}\), gilt nach dem Hauptsatz
+	für Integral und Differentialrechnung
+	\[
+		\int_0^\infty \frac1{1+x^2} dx
+		= \tan^{-1}(x)\Bigl|_0^\infty
+		= \lim_{x\to\infty} \tan^{-1}(x) - 0 = \frac{\pi}2.
+		\qedhere
+	\]
+\end{proof}
+
 
 \subsection{Transformationssatz}
 
