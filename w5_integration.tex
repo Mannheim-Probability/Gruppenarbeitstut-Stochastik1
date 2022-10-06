@@ -131,6 +131,34 @@ Integral wieder zusammensetzen:
 	\]	
 \end{example}
 
+\begin{example}[\(tan^{-1}\)]\label{ex: tan^{-1}}
+	Zeige
+	\[
+		\int_0^\infty \frac1{1+x^2} dx = \frac\pi2
+	\]
+\end{example}
+\begin{proof}
+	Es gilt
+	\[
+		\tan'(x)
+		=\left(\frac{\sin(x)}{\cos(x)}\right)'
+		= \frac{\cos(x)}{\cos(x)} + \frac{\sin(x)^2}{\cos(x)^2}
+		=1+\tan(x)^2,
+	\]
+	und folglich
+	\[
+		(\tan^{-1})'(x) = \frac1{\tan'(\tan^{-1}(x))} = \frac1{1+x^2}.
+	\]
+	Also gilt
+	\[
+		\int_0^\infty \frac1{1+x^2} dx
+		= \tan^{-1}(x)\Bigl|_0^\infty
+		= \lim_{x\to\infty} \tan^{-1}(x) - \tan^{-1}(0)
+		= \frac\pi2.
+		\qedhere
+	\]
+\end{proof}
+
 \clearpage
 
 \subsection{Partielle Integration}
@@ -165,6 +193,7 @@ Integral wieder zusammensetzen:
 	\]	
 \end{example}
 \begin{proof}
+	Die Gleichung
 	\begin{align*}
 		I 
 		&= -\cos(t)\exp(-ct)\Bigl|_0^b - c\int\cos(t)\exp(-ct)dt\\
@@ -175,7 +204,7 @@ Integral wieder zusammensetzen:
 			\sin(b)e^{-cb} + c I
 		\right)
 	\end{align*}
-	Impliziert nach umstellen nach \(I\)
+	impliziert nach umstellen nach \(I\)
 	\[
 		I = \frac{1-\cos(b)e^{-cb} -c\sin(b)e^{-cb}}{1+c^2}.
 		\qedhere
@@ -425,34 +454,31 @@ beschreibt.
 
 \section{Lebesgue Integral}
 
-An kaum keiner Stelle haben wir die Definition des Riemann-Integrals wirklich
-benötigt. Wir brauchen nur Linearität und Monotonie für den Hauptsatz I und
-bekommen dann den Hauptsatz II mit dem Mittelwertsatz quasi geschenkt dazu.
-Alle folgenden Rechenregeln basieren dann wiederum nur auf den Hauptsätzen.
-Die gleichen Aussagen gelten also auch für das Lebesgue Integral.
-Folglich müssen beide Integrale für stetige Funktionen übereinstimmen
+Für den Hauptsatz I haben wir nur Linearität und Monotonie des Integrals
+gebraucht und bekommen dann den Hauptsatz II mit dem Mittelwertsatz quasi
+geschenkt dazu. Folglich müssen beide Integrale für stetige Funktionen
+übereinstimmen
 \[
 	\int_{[a,b]} f d\lambda = \int_a^b f(x) dx.
 \]
 Mit der Linearität des Integrals bekommt man diese Aussagen dann letztendlich
-auch für stückweise stetige Funktionen.
+auch für stückweise stetige Funktionen. Partielle Integration und Substitutionsregel
+folgen direkt aus den Hauptsätzen.
 
-Die einzige Ausnahme, sind uneigentliche Integrale. Wann gilt also
-\[
-	\int_a^\infty f(x)dx = \int_{[a,\infty)} fd\lambda
-\]
-für (stückweise) stetige f? Das Riemann integral ist definiert als Limes von
-endlichen Integralgrenzen (für die die Gleichheit gilt)
+Was Probleme verursacht, sind uneigentliche Integrale. Das Riemann Integral ist
+definiert als Limes von ``normalen Integralen'' (für die die Gleichheit, wegen
+den Hauptsätzen für stetige \(f\), gilt)
 \[
 	\int_a^\infty f(x)dx
 	= \lim_{b\to\infty}\int_a^b f(x) dx
 	= \lim_{b\to\infty}\int_{[a,b]} fd\lambda
-	= \lim_{b\to\infty}\int \ind_{[a,b]} fd\lambda
+	\overset{\text{def}}= \lim_{b\to\infty}\int \ind_{[a,b]} fd\lambda.
 \]
 Nun fragt sich also, ob
 \[
 	\lim_{b\to\infty}\int \ind_{[a,b]} fd\lambda
-	= \int \ind_{[a,\infty)} fd\lambda
+	\overset?= \int \ind_{[a,\infty)} fd\lambda
+	\overset{\text{def}}= \int_{[a,\infty)}fd\lambda
 \]
 gilt. Ist \(f\ge0\) folgt das mit immer mit monotoner Konvergenz. Ist \(f\) bzw.
 \(|f|\) integrierbar, folgt das immer mit dominierter Konvergenz.
@@ -482,22 +508,16 @@ gilt. Ist \(f\ge0\) folgt das mit immer mit monotoner Konvergenz. Ist \(f\) bzw.
 	\]
 	da für \(b\ge 1\) gilt \(y e^{-yb} \le ye^{-y} \to 0\) für \(y\to\infty\)
 	und damit uniform über all \(b\ge 1\) beschränkt ist. Damit haben wir eine
-	integeribare\footnote{siehe \eqref{eq: integrate 1/(1+x^2)}}
+	integeribare\footnote{siehe Beispiel~\ref{ex: tan^{-1}}}
 	Majorante für dominierte Konvergenz gefunden und können den Limes über \(b\)
 	in das Integral ziehen
 	\[
 		\lim_{b\to\infty}	
 		\int_0^b \frac{\sin(x)}xdx
 		= \int_0^b \lim_{b\to\infty}	\frac{1-(\cos(b) + y\sin(b))e^{-yb}}{1+y^2}dy
-		= \int_0^b \frac1{1+y^2}dy.
+		= \int_0^b \frac1{1+y^2}dy
+		\overset{\text{Bsp.~\ref{ex: tan^{-1}}}}= \frac{\pi}2.
 	\]
-	Wegen \((\tan^{-1})'(x)=\frac1{1+x^2}\), gilt aber nach dem Hauptsatz
-	für Integral und Differentialrechnung
-	\begin{equation}\label{eq: integrate 1/(1+x^2)}
-		\int_0^\infty \frac1{1+x^2} dx
-		= \tan^{-1}(x)\Bigl|_0^\infty
-		= \lim_{x\to\infty} \tan^{-1}(x) - 0 = \frac{\pi}2.
-	\end{equation}
 	Bleibt noch zu zeigen, dass \(\frac{\sin(x)}x\) nicht Lebesgue integrierbar
 	ist. Hierzu genügt es zu zeigen, dass
 	\begin{align*}
@@ -758,17 +778,17 @@ integrieren kann. Die Folgenden Bedingungen sind also hinreichend:
 	\end{align*}
 \end{proof}
 
-\begin{example}[Stochastic Gradient Descent]
-	Sei \(L:\theta\to \E[l(\theta, X)]\) eine Loss Funktion die wir minimieren wollen,
-	für eine Zufallsvariable \(X\). Dann gilt
-	\[
-		\nabla L(\theta) = \nabla\E[l(\theta, X)]
-		=\nabla \int l(\theta, x)d\Pr_X(x)
-		=\int \nabla l(\theta, x)d\Pr_X(x)
-		=\E[\nabla l(\theta, X)].
-	\]
-	\(\nabla l(\theta,X)\) ist also ein erwartungstreuer Schätzer für den Gradient von \(L\).
-\end{example}
+% \begin{example}[Stochastic Gradient Descent]
+% 	Sei \(L:\theta\to \E[l(\theta, X)]\) eine Loss Funktion die wir minimieren wollen,
+% 	für eine Zufallsvariable \(X\). Dann gilt
+% 	\[
+% 		\nabla L(\theta) = \nabla\E[l(\theta, X)]
+% 		=\nabla \int l(\theta, x)d\Pr_X(x)
+% 		=\int \nabla l(\theta, x)d\Pr_X(x)
+% 		=\E[\nabla l(\theta, X)].
+% 	\]
+% 	\(\nabla l(\theta,X)\) ist also ein erwartungstreuer Schätzer für den Gradient von \(L\).
+% \end{example}
 
 \clearpage
 
