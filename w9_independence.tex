@@ -1,0 +1,40 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+
+\title{(In)dependence}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\begin{exercise}[Idependent vs Uncorrelated]
+	Let \(X\) and \(Y\) be random variables with existing second moments.  Which of these statements are
+	equivalent? There can be multiple equivalence groups. How do they relate to
+	each other? Does one imply the other?
+	\begin{enumerate}
+		\item \(X\) and \(Y\) are independent.
+		\item \(X\) and \(Y\) are uncorrelated.
+		\item for any measurable functions \(f,g\), \(f(X)\) and \(g(Y)\) are uncorrelated.
+		\item for any linear functions \(f,g\) \(f(X)\) and \(g(Y)\) are uncorrelated.
+		\item for any measurable functions \(f,g\), \(f(X)\) and \(g(Y)\) are independent.
+		\item for any linear functions \(f,g\) \(f(X)\) and \(g(Y)\) are independent.
+	\end{enumerate}
+\end{exercise}
+\begin{hint}
+	You may want to assume \(X\) and \(Y\) are centered without loss of generality.
+\end{hint}
+
+\begin{exercise}[Wahrscheinlichekeitsbaum]
+	Verwende 4.4.3 um einen Wahrscheinlichkeitsbaum zu formalisieren.
+\end{exercise}
+
+
+\end{document}
