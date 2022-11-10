@@ -1,0 +1,134 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+\titleformat*{\section}{\Large\bfseries}
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+
+\title{Continuous Mapping}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\section{Almost Sure Convergence}
+
+
+\begin{exercise}
+	Let \(f\) be continuous up to a \(\Pr_X\) zero set. Prove
+	\[
+		X_n\overset{a.s.}\to X \implies f(X_n)\overset{a.s}\to f(X).
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Let \(X_n^{(i)}\overset{a.s.}\to X^{(i)}\) for \(i\in\{1,\dots, m\}\).
+	Prove that we have
+	\[
+		(X_n^{(1)},\dots, X_n^{(m)}) \overset{a.s.}{\to} (X^{(1)},\dots, X^{(m)}).
+	\]
+\end{exercise}
+\begin{hint}
+	In finite dimesion all norms are equivalent.
+\end{hint}
+
+\begin{exercise}[Application]
+	Let \(X_n\overset{iid}\sim\text{Geo}(p)\) be geometrically distributed for
+	\(p>0\). We know by the strong law of lare numbers, that
+	\[
+		\bar{X}_n := \frac1n\sum_{k=1}^n X_k \overset{a.s.}\to \E[X_1] = \frac1p.
+	\]
+	Construct an ``a.s. consistent estimator'' \(\hat{P}_n\) as a function of
+	\(X_1\dots, X_n\), where consistence implies 
+	\[
+		\hat{P}_n \overset{a.s.}\to p.
+	\]
+\end{exercise}
+
+
+\section{\texorpdfstring{\(L^p\)}{Lp} Convergence}
+
+\begin{exercise}\label{ex: Lp cmt}
+	Prove that if either of these statements hold
+	\begin{enumerate}
+		\item \(f\) is Lipschitz continuous
+		\item \(f\) is continuous and bounded,
+	\end{enumerate}
+	then \(X_n \overset{L^p}\to X\) implies \(f(X_n)\overset{L^p}\to f(X)\).
+	You also need to show that \(f(X_n),f(X)\in L^p\).
+\end{exercise}
+
+\begin{exercise}
+	Let \(\Omega=[0,1]\) with \(\Pr=\restr{\lambda}{[0,1]}\) and define the random variables
+	\[
+		X_n :=\sqrt{n}\mathbbm{1}_{[0,1/n]}.
+	\]
+	Prove that \(X_n\overset{L^1}\to 0\), but for \(g(x):= x^2\) we have
+	\(g(X_n) \overset{L^1}{\not\to} g(0)=0\). Why is this not a contradiction to
+	Exercise~\ref{ex: Lp cmt}?
+\end{exercise}
+
+\section{Convergence in Probability}
+
+\begin{exercise}[Difficult]
+	Let \(f\) be continuous up to a \(\Pr_X\) zero set. Prove
+	\[
+		X_n\overset{p}\to X \implies f(X_n)\overset{p}\to f(X).
+	\]
+\end{exercise}
+\begin{hint}
+	Prove that \(B_{m+1}^\complement \subseteq B_m^\complement\) for
+	\[
+		B_m := \{x\in\real^d : \forall y\in B_{\frac1m(x)} : \| f(x)- f(y)\| < \epsilon\},
+	\]
+	and that \(\bigcap_{m\in\nat} B_m^\complement\) is a \(\Pr_X\) zero set. What
+	does this imply for \(\lim_{m\to\infty}\Pr(X\not\in B_m)\)? Use the ``good
+	set principle'' to finish the proof.
+\end{hint}
+
+
+\begin{exercise}
+	Let \(X_n^{(i)}\overset{p}\to X^{(i)}\) for \(i\in\{1,\dots, m\}\).
+	Prove that 
+	\[
+		(X_n^{(1)},\dots, X_n^{(m)}) \overset{p}{\to} (X^{(1)},\dots, X^{(m)}).
+	\]
+\end{exercise}
+\begin{hint}
+	Sup-norm.
+\end{hint}
+\section{Convergence in Distribution}
+
+\begin{exercise}\label{ex: conv in dist cmt}
+	For a continuous function \(f\), prove that \(X_n\overset{d}\to X\) implies
+	\(f(X_n)\overset{d}\to f(X)\).
+\end{exercise}
+
+\begin{exercise}
+	Explain why it is not true in general, that
+	\[
+		X_n\overset{d}\to X \text{ and } Y_n\overset{d}\to Y
+		\implies X_n + Y_n \overset{d}\to X+Y.
+	\]
+	Why is this not a contradiction to Exercise~\ref{ex: conv in dist cmt}?
+\end{exercise}
+\begin{hint}
+	\(X_n := Y := X \sim \Normal(0,1)\) and \(Y_n:=-X_n\).
+\end{hint}
+
+\begin{exercise}
+	Prove that \(X_n\overset{d}\to X\) and \(Y_n\overset{p}\to c\in\real\)
+	implies \((X_n,Y_n)\overset{d}\to (X,c)\).
+\end{exercise}
+
+\begin{exercise}[Application]
+
+\end{exercise}
+
+
+\end{document}
