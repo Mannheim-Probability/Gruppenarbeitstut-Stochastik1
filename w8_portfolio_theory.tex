@@ -1,0 +1,76 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+
+\title{Portfolio Theory}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\section{Modern Portfolio Theory}
+
+\begin{exercise}[Diversification]
+	Let \(R^{(1)},R^{(2)},\dots\) be random variables representing the stock
+	returns of different companies. Assume that the variance of the stock returns
+	are all equal \(\Var(R^{(i)}) = 1\), and that the stock returns are correlated
+	positively \(\Cov(R^{(i)},R^{(j)}) = \sigma^2 < 1\), which we call market volatility.
+
+	Assume \(\sigma^2=0.5\). How many stocks need to be in an equal weight
+	portfolio, until the variance of the portfolio is smaller than \(0.6\)?
+	Can the variance of the portfolio become arbitrarily small?
+\end{exercise}
+\begin{hint}
+	Bienaymé	
+\end{hint}
+
+\section{Black-Scholes}
+
+Instead of modelling multiple companies in one time step, we now want to model
+a single stock over time. The most famous model for that, is the Black-Scholes
+model.  It is based on the Geometric Brownian Motion
+\[
+	S_t = S_0\exp( (\mu - \tfrac{\sigma^2}{2}) t + \sigma W_t),
+\]
+where \(W_t\) is a Brownian Motion over time \(t\ge 0\), with \(\mu\ge0\) and
+\(\sigma > 0\). Since stochastic processes (including the Brownian Motion) are
+too advanced for now, we are going to discretize the Brownian motion to a random
+walk
+\[
+	W_t = \sum_{k=0}^{t-1} \Delta W_k
+\]
+where \(\Delta W_k\overset{iid}\sim\Normal(0,1)\) and restrict ourselves to \(t\in\nat\).
+
+\begin{exercise}[Expected Return]
+	Calculate the expected return \(\E[R_t]\) for time \(t\), where \(R_t=S_t/S_0\).
+\end{exercise}
+
+\begin{exercise}[Geometric Average]
+	Find the (random) interest rate \(\bar{R}_t\), such that investing \(S_0\)
+	at this interest rate for \(t\) years is equal to \(S_t\), i.e.
+	\[
+		(\bar{R}_t)^t S_0 = S_t.
+	\]
+	Argue, why this random geometric average should stabilize for \(t\to\infty\).
+\end{exercise}
+\begin{hint} The \(\log\) function.
+\end{hint}
+
+\begin{exercise}[Concentration Inequalities]
+	Let \(\sigma=1\), \(\mu=0.1\). For how long do you have to be exposed to the
+	stock for the risk free alternative interest \(r=0.03\) to be worse than the
+	investment into the stock with at least \(90\%\) probability? I.e. find 
+	the smallest \(t\), such that
+	\[
+		\Pr(\bar{R}_t > r) \ge 0.9.
+	\]
+\end{exercise}
+
+\end{document}
