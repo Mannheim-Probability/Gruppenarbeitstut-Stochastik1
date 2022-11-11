@@ -73,6 +73,16 @@
 	Exercise~\ref{ex: Lp cmt}?
 \end{exercise}
 
+\begin{exercise}
+	Prove for iid \(X_i\)
+	\[
+		\frac1{n-1}\sum_{i=1}^n (X_i - \bar{X}_n) \overset{L^2}\to \Var(X_1) \quad n\to\infty.
+	\]
+\end{exercise}
+\begin{hint}
+	Calculate expectation and variance (no CM necessary).
+\end{hint}
+
 \section{Convergence in Probability}
 
 \begin{exercise}[Difficult]
@@ -102,6 +112,13 @@
 \begin{hint}
 	Sup-norm.
 \end{hint}
+
+\begin{exercise}
+	Prove for iid \(X_i\) with \(\Var(X_1) = \sigma^2\)
+	\[
+		\sqrt{\frac1{n}\sum_{i=1}^n (X_i - \bar{X}_n)} \overset{p}\to \sigma \quad n\to\infty.
+	\]
+\end{exercise}
 \section{Convergence in Distribution}
 
 \begin{exercise}\label{ex: conv in dist cmt}
@@ -126,8 +143,17 @@
 	implies \((X_n,Y_n)\overset{d}\to (X,c)\).
 \end{exercise}
 
-\begin{exercise}[Application]
-
+\begin{exercise}
+	Let \(X_i\) be iid with \(\E[X_1]=0\) and \(\Var(X_1)=\sigma^2\). Then by the
+	central limit theorem
+	\[
+		\frac{1}{\sqrt{n}\sigma} \sum_{k=1}^n X_i \overset{d}\to \Normal(0,1).
+	\]
+	Deduce
+	\[
+		\frac{\sum_{k=1}^n X_i}{\sqrt{\sum_{i=1}^n (X_i - \bar{X}_n)^2}}
+		\overset{d}\to \Normal(0,1).
+	\]
 \end{exercise}
 
 
