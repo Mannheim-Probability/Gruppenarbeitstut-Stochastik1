@@ -38,17 +38,19 @@
 	\[
 		L_0^2 := \{ [X]\in L^2 : \E[X] = 0\}.
 	\]
-	Show that these two linear subspaces are orthogonal in \(L^2\). Finally show,
+	Prove that there is an isomorphism between \(L_\real^2\) and \(\real\). This
+	allows us to identify \(L_\real^2\) with \(\real\), i.e. write \(L_\real^2=\real\).
+	Show that \(\real\) and \(L_0^2\) are orthogonal in \(L^2\). Finally show,
 	that
 	\begin{equation}\label{eq: direct sum of linear subspaces}
-		L^2 = L_\real^2 + L_0^2 = \{ X + Y : X\in L_\real^2, Y\in L_0^2\}
+		L^2 = \real + L_0^2 = \{ X + Y : X\in \real, Y\in L_0^2\}
 	\end{equation}
 \end{exercise}
 
 \begin{exercise}[Projections]
 	Calculate and interpret the projection
 	\[
-		\pi_\real(Y):=\pi_{L_\real^2}(Y) = \argmin_{X\in L_\real^2} \| X-Y\|^2.
+		\pi_\real(Y)=\pi_{L_\real^2}(Y) = \argmin_{X\in \real} \| X-Y\|^2.
 	\]	
 	Do the same for \(\pi_0:=\pi_{L_0^2}\).
 \end{exercise}
@@ -68,7 +70,7 @@
 \begin{exercise}[Linear Model]
 	For the \(L^2\) subspace
 	\[
-		U = L_0^2 + \Span\{X_1,\dots, X_n\} = \Span\{\underbrace{X_0}_{:=1}, X_1,\dots, X_n\}
+		U = \real + \Span\{X_1,\dots, X_n\} = \Span\{\underbrace{X_0}_{:=1}, X_1,\dots, X_n\}
 	\]
 	calculate the projection
 	\[
