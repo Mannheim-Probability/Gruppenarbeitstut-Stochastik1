@@ -68,7 +68,7 @@
 \begin{exercise}[Linear Model]
 	For the \(L^2\) subspace
 	\[
-		U = L_0^2 + \Span\{X_1,\dots, X_n\}
+		U = L_0^2 + \Span\{X_1,\dots, X_n\} = \Span\{\underbrace{X_0}_{:=1}, X_1,\dots, X_n\}
 	\]
 	calculate the projection
 	\[
@@ -76,5 +76,12 @@
 	\]
 	You will encounter this linear model again in Stochastik 2.
 \end{exercise}
+\begin{hint}
+	Use the parametrization \(\tilde{Y} = a^T X\) where \(X:=(X_0,\dots, X_n)^T\)
+	and \(a\in \real^{n+1}\). Then consider
+	\[
+		\nabla_a \| a^T X - Y \|^2 = \nabla_a \E[(a^T X - Y )^2].
+	\]
+\end{hint}
 
 \end{document}
