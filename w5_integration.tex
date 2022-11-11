@@ -708,8 +708,8 @@ macht diese Frage durchaus Sinn.
 		\int_a^b \int_\Omega
 		\left|\frac{d}{dt}f(t,\omega)\right| d\mu(\omega)dt<\infty
 	\]
-	gilt, dann darf man Ableitung und Integral an der Stelle \(x\) vertauschen
-	\[
+	gilt, oder \(\frac{\partial}{\partial t}f\ge 0\) in der Umgebung \([a,b]\),
+	dann darf man Ableitung und Integral an der Stelle \(x\) vertauschen \[
 		\frac{\partial}{\partial t}\int f(x, \omega)d\mu(\omega)
 		= \int \frac{\partial}{\partial t}f(x,\omega)d\mu(\omega).
 	\]
@@ -751,7 +751,9 @@ integrieren kann. Die Folgenden Bedingungen sind also hinreichend:
 	\item uniform \(\bigl|\frac{\partial}{\partial t}f(t,\omega)\bigr| \le
 	g(\omega)\) für ein integrierbares \(g\)
 	\item \(t\mapsto |\frac{\partial}{\partial t}f(t,\omega)|\)
-	ist lokal um \(x\) monoton in \(t\).
+	ist lokal um \(x\) monoton in \(t\)
+	\item\label{it: positiv} \(\frac{\partial}{\partial t}f(t,\omega) \ge 0\) für alle \(t\) in einer
+	Umgebung von \(x\).
 \end{enumerate}
 
 \begin{example}[Geometrische Verteilung]
@@ -767,8 +769,8 @@ integrieren kann. Die Folgenden Bedingungen sind also hinreichend:
 	\begin{align*}
 		\int x d\mu(x)
 		&= \sum_{k=1}^\infty k(1-p)^{k-1}p
-		= p \int \frac{d}{dp}-(1-p)^{k} d\nu(k)\\
-		&= p \frac{d}{dp} -{\underbrace{\sum_{k=1}^\infty(1-p)^k}_{
+		= - p \int \frac{d}{dp}(1-p)^{k} d\nu(k)\\
+		\overset{\ref{it: positiv}}&= - p \frac{d}{dp} {\underbrace{\sum_{k=1}^\infty(1-p)^k}_{
 				=\frac1{1-(1-p)} - 1
 				\mathrlap{= \frac1p -1}
 			}}
