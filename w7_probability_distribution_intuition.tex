@@ -1,0 +1,150 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt]{article}
+\usepackage{exerciseHead}
+
+\input{Macros.tex} 
+
+% Meta Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{semester_info.tex} % (file) for one update per semester
+
+\title{Important Probability Distributions}
+
+%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\section{Useful Lemmas}
+
+\begin{definition*}[Semigroup Homomorphism]
+	A \emph{Semigroup homomorphism} \(f:(G,*)\to (H,\circ)\) respects the operation of the
+	semigroups \((G,*), (H,\circ)\) in the sense of
+	\[
+		f(a * b) = f(a) \circ f(b)	\quad \forall a,b\in G.
+	\]
+	An \emph{endomorphism} is a semigroup homomorphism where \((G,*)=(H,\circ)\).
+\end{definition*}
+
+\begin{exercise}[Group Endomorphisms of \((\real, +)\)]
+	For an arbitrary group endomorphism \(f\) on \((\real,+)\), i.e.
+	\[
+		f(a + b) = f(a) + f(b) \quad \forall a,b\in \real
+	\]
+	prove
+	\begin{enumerate}
+		\item \(f(n) = nf(1)\) for all \(n\in \nat\),
+		\item \(f(q) = qf(1)\) for all \(q\in \rational\),
+		\item \(f(x) = f(1)x\) for all \(x\in \real\) if \(f\) is continuous.
+	\end{enumerate}
+	So we have proven that the set of continuous endomorphisms on \((\real,+)\) is limeted to
+	\[
+		\{ x \mapsto ax : a \in \real\}
+	\]
+	\begin{enumerate}[resume]
+		\item To understand why ``continuous'' is a necessary requirement, prove that
+		\(\real\) is a vector space over \(\rational\). This implies that there exists a
+		basis \(S\) (which includes \(1\) without loss of generality), such that any
+		\(r\in \real\) can be uniquely represented by
+		\[
+			r = q_1 1 + q_2 s_2 + \dots q_n s_n	
+		\]
+		for some finite \(n\in\nat\), basis elements \(s_i \in S\) and coefficients \(q_i\in\rational\).
+		Deduce that
+		\[
+			f(r) = q_1
+		\]
+		is a discontinuous endomorphism on \(\real\).
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Group Homomorphisms from \((\real,+)\) to \((\real,\cdot)\)]
+	Prove that the set of continous group homomorphisms from \((\real,+)\) to
+	\((\real,\cdot)\), i.e. \(f\) such that
+	\[
+		f(a+b) = f(a)f(b)\quad \forall a,b\in \real
+	\]
+	is given by
+	\[
+		\{ x\mapsto \exp(ax): a\in \real\}.
+	\]
+\end{exercise}
+
+\begin{exercise}
+	Characterize all continuous monoid (semigroup with identity) homeomorphisms
+	\begin{enumerate}
+		\item from \((\real_{\ge 0}, +)\) to \((\real_{\le 0}, +)\),
+		\item from \((\real_{\ge 0}, +)\) to \(([0,1], \cdot)\).
+	\end{enumerate}
+\end{exercise}
+
+\section{Distributions}
+
+\begin{exercise}[Memoryless distributions]
+	If the likelihood of an event happening later than \(t+s\) is given by the
+	likelihood of it happening later than \(s\) multiplied by likelihood of it
+	happening later than \(t\)
+	\begin{equation}\label{eq: memoryless}
+		\Pr(X>t+s) = \Pr(X>s)\Pr(X>t).
+	\end{equation}
+	we call the random arrival time \(X\) meomryless. Because
+	the likelihood of taking another time \(s\) given that it already took time \(t\)
+	remains the same (\(X\) has no memory), i.e.
+	\begin{equation}
+		\label{eq: memoryless with condition}
+		\Pr(X > t+s \mid X > t) = \Pr(X > s)
+	\end{equation}
+	\begin{enumerate}
+		\item Prove that \eqref{eq: memoryless with condition} is actually equivalent to \eqref{eq: memoryless}.
+		\item Prove that there is only one continuous memoryless distribution on
+		\(\real_+\) and determine its cumulative distribution function.
+		\item Prove that there is only one discrete meomryless distribution on the natural numbers
+		and represent it as a series of dirac measures.
+		\item Let \(X\) be a continuous memoryless random variable. Prove that
+		\(\lfloor X \rfloor\) is a memoryless discrete random vairable. Represent the
+		parameters of the discrete distribution as a function of the continuous distribution.
+	\end{enumerate}
+
+	Example: In a discrete time setting this might be throwing a dice and waiting for the
+	first time \(6\) is rolled. If it was not rolled after \(3\) rolls, then the likelihood
+	of it happening within the next two rolls is the same as if we did not roll
+	\(3\) dice before.
+\end{exercise}
+
+\begin{exercise}[Rotation invariant distribution]
+	Assume that the likelihood of hitting a point \(x\) only depends on its
+	distance to the origin \(0\) (i.e. it is rotation invariant). This implies
+	we can write our density as
+	\[
+		f(x_1,\dots, x_n) = \tilde{g}\Bigl(\sqrt{x_1^2 + \dots+ x_n^2}\Bigr)
+		= g\bigl(x_1^2 +\dots + x_n^2\bigr)
+	\]
+	Additionally assume that the magnitude of the coordinates \(X_i\) of the random
+	point \(X\) are independent. This implies we can write our density as
+	\[
+		f_1(x_1)\cdots f_2(x_n) = f(x_1,\dots, x_n)
+	\]
+	\begin{enumerate}
+		\item Prove
+		\[
+			f_i(x_i) = c_i g(x_i^2)
+		\]
+		for some \(c_i\in\real\)
+
+		\item Deduce
+		\[
+			\underbrace{\Bigl(\prod_{i=1}^n c_i\Bigr)}_{=c} g(x_1^2)\cdots g(x_n^2)
+			= g(x_1^2 + \dots + x_n^2)
+		\]
+		Prove that either \(g(0)=0\) or \(c=g(0)=1\).
+		
+		\item Prove that \(g(0)=0\) implies that \(g\equiv 0\) and thus it can not
+		be a density.
+
+		\item Set \(x_i = 0\) for all \(i>2\) and apply our characterization of
+		homeomorphisms from \((\real_{\ge 0}, +)\) to \(([0,1], \cdot)\) to prove that
+		\(f\) (if continuous) is the density of a centred normal distribution.
+	\end{enumerate}
+\end{exercise}
+
+\end{document}
