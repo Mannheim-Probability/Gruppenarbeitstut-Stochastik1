@@ -1,0 +1,252 @@
+% SKK-Makros.TEX
+% Dies sind Makros, die f�r alle mathematischen Texte gut sind.
+
+% Aus Article_G&E_11pt, von sk modifiziert 9.3.2004
+\setlength{\textheight}{23cm}
+\setlength{\textwidth}{16cm}
+\setlength{\oddsidemargin}{0.2cm}
+\setlength{\evensidemargin}{0.2cm}
+\setlength{\topmargin}{0cm}
+\setlength{\headheight}{0cm}
+\setlength{\topsep}{0pt}
+\setlength{\headsep}{1.0cm}
+\setlength{\partopsep}{0pt}
+\parindent0pt
+\setlength{\parskip}{0.7\baselineskip}
+
+% Alter Stand
+%\setlength{\parindent}{0pt}
+%%%%\setlength{\parskip}{2ex plus 0.5ex minus 0.3ex}
+%\setlength{\parskip}{0.7\baselineskip}
+%\setlength{\topmargin}{0cm}
+%\setlength{\headheight}{3ex}
+%\textwidth 16cm
+%\setlength{\oddsidemargin}{7mm}
+%\setlength{\evensidemargin}{-0.5mm}
+%\setlength{\textheight}{22cm}
+%\topsep0pt
+%\partopsep0pt
+
+\pagestyle{headings}
+
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\ggT}{\mathrm{ggT}}
+\newcommand{\vol}{\mathop{\mathrm{vol}}\nolimits}
+\newcommand{\sign}{\mathop{\mathrm{sign}}\nolimits}
+%\newcommand{\rk}{\mathop{\mathrm{rk}}\nolimits}
+%\newcommand{\rg}{\mathop{\mathrm{rg}}\nolimits}
+\newcommand{\rang}{\mathop{\mathrm{rang}}\nolimits}
+\newcommand{\Og}{\mathrm{O}}
+\newcommand{\Ug}{\mathrm{U}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\PGL}{\mathrm{PGL}}
+\newcommand{\PU}{\mathrm{PU}}
+\newcommand{\Lg}{\mathrm{L}}
+\newcommand{\Lin}{\mathrm{Lin}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Der}{\mathrm{Der}}
+\newcommand{\RE}{\mathop{\mathrm{Re}}\nolimits}
+\newcommand{\IM}{\mathop{\mathrm{Im}}\nolimits}
+\newcommand{\Kern}{\mathop{\mathrm{Kern}}\nolimits}
+\newcommand{\Rang}{\mathop{\mathrm{Rang}}\nolimits}
+\newcommand{\Eig}{\mathop{\mathrm{Eig}}\nolimits}
+\newcommand{\Aut}{\mathop{\mathrm{Aut}}\nolimits}
+\newcommand{\AAut}{\overline{\Aut}}
+\newcommand{\Bij}{\mathop{\mathrm{Bij}}\nolimits}
+\newcommand{\ad}{\mathop{\mathrm{ad}}\nolimits}
+\newcommand{\Ad}{\mathop{\mathrm{Ad}}\nolimits}
+\newcommand{\Exp}{\mathop{\mathrm{Exp}}\nolimits}
+\newcommand{\Fix}{\mathop{\mathrm{Fix}}\nolimits}
+\newcommand{\spn}{\mathop{\mathrm{span}}\nolimits}
+\newcommand{\tr}{\mathop{\mathrm{tr}}\nolimits}
+\newcommand{\Spec}{\mathop{\mathrm{Spec}}\nolimits}
+\newcommand{\even}{\mathrm{even}}
+\newcommand{\odd}{\mathrm{odd}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\ric}{\mathop{\mathrm{ric}}\nolimits}
+\newcommand{\Ric}{\mathop{\mathrm{Ric}}\nolimits}
+\newcommand{\Geins}{\mathrm{G1}}
+\newcommand{\Gzwei}{\mathrm{G2}}
+\newcommand{\Gdrei}{\mathrm{G3}}
+\newcommand{\Peins}{\mathrm{P1}}
+\newcommand{\Pzwei}{\mathrm{P2}}
+\newcommand{\Atyp}{\mathrm{A}}
+\newcommand{\Ieins}{\mathrm{I1}}
+\newcommand{\Izwei}{\mathrm{I2}}
+\newcommand{\diam}{\mathop{\mathrm{diam}}\nolimits}
+
+\newcommand{\A}{\mathfrak{A}}
+\newcommand{\liea}{\mathfrak{a}}
+\newcommand{\lieb}{\mathfrak{b}}
+\newcommand{\liec}{\mathfrak{c}}
+\newcommand{\lieaut}{\mathfrak{aut}}
+\newcommand{\lief}{\mathfrak{f}}
+\newcommand{\lieg}{\mathfrak{g}}
+\newcommand{\liei}{\mathfrak{i}}
+\newcommand{\liegl}{\mathfrak{gl}}
+\newcommand{\lieh}{\mathfrak{h}}
+\newcommand{\liej}{\mathfrak{j}}
+\newcommand{\liek}{\mathfrak{k}}
+\newcommand{\liel}{\mathfrak{l}}
+\newcommand{\liem}{\mathfrak{m}}
+\newcommand{\lieo}{\mathfrak{o}}
+\newcommand{\liesl}{\mathfrak{sl}}
+\newcommand{\lieso}{\mathfrak{so}}
+\newcommand{\liesp}{\mathfrak{sp}}
+\newcommand{\lieu}{\mathfrak{u}}
+\newcommand{\liesu}{\mathfrak{su}}
+\newcommand{\liez}{\mathfrak{z}}
+\newcommand{\RP}{\ensuremath{\R\mathrm{P}}}
+\newcommand{\CP}{\ensuremath{\C\mathrm{P}}}
+\newcommand{\HP}{\ensuremath{\HH\mathrm{P}}}
+\newcommand{\OP}{\ensuremath{\OO\mathrm{P}}}
+\newcommand{\KP}{\ensuremath{\K\mathrm{P}}}
+\newcommand{\CQ}{\ensuremath{\C\mathrm{Q}}}
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\EE}{\mathbf{E}}
+\newcommand{\PG}{\mathrm{PG}}
+\newcommand{\St}{\mathrm{St}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\TG}{\mathfrak{TG}}
+\newcommand{\Geo}{\mathrm{Geo}}
+\newcommand{\Kon}{\mathrm{Kon}}
+\newcommand{\Con}{\mathrm{Con}}
+\newcommand{\Nil}{\mathrm{Nil}}
+
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakC}{\mathfrak{C}}
+\newcommand{\frakD}{\mathfrak{D}}
+\newcommand{\frakE}{\mathfrak{E}}
+\newcommand{\frakF}{\mathfrak{F}}
+\newcommand{\frakG}{\mathfrak{G}}
+\newcommand{\frakH}{\mathfrak{H}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakM}{\mathfrak{M}}
+\newcommand{\frakN}{\mathfrak{N}}
+\newcommand{\frakO}{\mathfrak{O}}
+\newcommand{\frakP}{\mathfrak{P}}
+\newcommand{\frakQ}{\mathfrak{Q}}
+\newcommand{\frakR}{\mathfrak{R}}
+\newcommand{\frakS}{\mathfrak{S}}
+\newcommand{\frakT}{\mathfrak{T}}
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+\newcommand{\frakY}{\mathfrak{Y}}
+\newcommand{\frakZ}{\mathfrak{Z}}
+
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\gt}{\theta}
+
+\newcommand{\Sph}{\bbS}
+\newcommand{\vrprod}[2]{{\textstyle\bigwedge^{#1}\!#2}}
+\newcommand{\tenprod}[2]{{\textstyle\bigotimes^{#1}\!#2}}
+\newcommand{\spr}[2]{<\!#1,#2\!>}
+\newcommand{\sprr}[3]{\spr{#1}{#2}^{(#3)}}
+\newcommand{\gR}[2]{\langle #1,#2\rangle_{\R}}
+\newcommand{\gC}[2]{\langle #1,#2\rangle_{\C}}
+\newcommand{\gH}[2]{\langle #1,#2\rangle_{\HH}}
+\newcommand{\gJ}[2]{\langle #1,#2\rangle_{\widetilde{\mathfrak{J}}}}
+\newcommand{\gext}[3]{\langle #1,#2 \rangle^{(#3)}}
+\newcommand{\Kovr}[3]{\overset{(#1)}{\nabla}_{\!\!#2\,}#3}
+\newcommand{\wwedge}{\curlywedge}
+\newcommand{\card}[1]{\mathtt{\#}#1}
+\newcommand{\offeneaussage}{\ensuremath{\,\Diamond\,}}
+\newcommand{\beweis}{\emph{Proof. }}
+\newcommand{\beweisende}{\strut\hfill $\Box$\par\medskip}
+\newcommand{\Mengegr}[2]{\{\,#1\,{\bigr |}\,#2\,\}}
+\newcommand{\ns}[1]{\perp\nobreak\!\nobreak\!\nobreak #1}		% "normal space"
+\newcommand{\uns}[1]{\perp^1\nobreak\!\nobreak\!\nobreak #1}		% "unit normal space"
+\newcommand{\nsp}[2]{\perp_{#2}\nobreak\!\nobreak\!\nobreak #1}		% "normal space in p"
+\newcommand{\unsp}[2]{\perp^1_{#2}\nobreak\!\nobreak\!\nobreak #1}	% "unit normal space in p"
+\newcommand{\ddt}{\frac{\mathrm{d}\;}{\mathrm{d}t}}
+\newcommand{\dotddt}{\dot{\ddt}}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+
+\renewcommand{\C}{\mathchoice {\setbox0=\hbox{$\displaystyle\rm
+C$}\hbox{\hbox to0pt{\kern0.4\wd0\vrule
+height0.95\ht0\hss}\box0}}{\setbox0=\hbox{$\textstyle\rm C$}\hbox{\hbox
+to0pt{\kern0.4\wd0\vrule
+height0.95\ht0\hss}\box0}}{\setbox0=\hbox{$\scriptstyle\rm C$}\hbox{\hbox
+to0pt{\kern0.4\wd0\vrule
+height0.95\ht0\hss}\box0}}{\setbox0=\hbox{$\scriptscriptstyle\rm
+C$}\hbox{\hbox to0pt{\kern0.4\wd0\vrule height0.95\ht0\hss}\box0}}}
+
+\newcommand{\hfilll}{\hskip 0pt plus 1filll}
+
+\newcommand{\winzzaesur}{\bigskip{\Large\strut\ \hfill * \hfill}\bigskip}
+\newcommand{\kleinezaesur}{\bigskip{\Huge\strut\ \hfill * \hfill}\bigskip}
+\newcommand{\mittlerezaesur}{\bigskip{\Huge\strut\ \hfill * * \hfill}\bigskip}
+\newcommand{\grossezaesur}{\bigskip{\Huge\strut\ \hfill * * * \hfill}\bigskip}
+
+\newenvironment{myboxed}[0] %
+{\begin{boxedminipage}[t]{\textwidth}} %
+{\end{boxedminipage}}
+
+\newcounter{prtemp}
+\newcommand{\prenumi}[1]{(\alph{#1})}
+\newcommand{\refenumi}[1]{\setcounter{prtemp}{\ref{#1}}\prenumi{prtemp}}
+\renewcommand{\labelenumi}{\prenumi{enumi}}
+
+\newlength{\doubleboxwidth}
+\setlength{\doubleboxwidth}{\textwidth}
+\addtolength{\doubleboxwidth}{-0.35cm}
+
+{
+\selectlanguage{english}
+\hyphenation{Grass-mann-ian}
+\hyphenation{Rie-mann-ian}
+\hyphenation{geo-me-try}
+\hyphenation{ho-lo-morph ho-lo-mor-phic}
+\hyphenation{mani-fold mani-folds sub-mani-fold sub-mani-folds}
+\hyphenation{sub-mani-fold sub-mani-folds}
+\hyphenation{ana-log-ous ana-log-ous-ly}
+\hyphenation{ele-ment ele-ments}
+\hyphenation{or-tho-go-nal}
+\hyphenation{cor-res-pond cor-res-ponding cor-res-pon-dence}
+\hyphenation{com-plexifi-ca-tion}
+\hyphenation{iso-me-try iso-me-tries}
+}
+
+{
+\selectlanguage{german}
+\hyphenation{Rie-mann sym-me-tri-schen Trans-vek-tions-gruppe}
+}
+

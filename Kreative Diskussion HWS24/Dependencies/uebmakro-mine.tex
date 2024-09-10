@@ -1,0 +1,52 @@
+\pagestyle{plain} %erg�nzt
+\baselineskip 1ex
+\parskip 2ex
+\oddsidemargin -0.5cm% Aus 0.5 eine -0.5
+\topmargin 0cm       % Aus 3 eine 0, Druckertreiber #1
+\headheight 0cm
+\headsep 0cm
+%\topskip 0cm
+\textheight 24cm     % Aus 23 eine 24
+\textwidth 17cm      % Aus 15 eine 17
+\footskip 1 cm
+\setlength{\jot}{4.5pt}
+\renewcommand{\baselinestretch}{1.2}% Aus 1.2 eine 1.1
+
+%\renewcommand{\labelenumi}{\large \bf \arabic{enumi}.}%Aus Large ein large
+%\renewcommand{\labelenumii}{(\bf \alph{enumii})}
+%\renewcommand{\labelenumiii}{(\bf \roman{enumiii})}
+%\renewcommand{\labelenumiv}{(\bf \Alph{enumiv}.}
+
+%\renewcommand{\labelenumi}{\large \bf \arabic{enumi}.}%Aus Large ein large
+%\renewcommand{\labelenumii}{(\bf \roman{enumii})}
+%\renewcommand{\labelenumiii}{(\bf \alph{enumiii})}
+
+\renewcommand{\labelenumi}{\large \bf \arabic{enumi}.}%Aus Large ein large
+\renewcommand{\labelenumii}{\bf (\alph{enumii})}
+\renewcommand{\labelenumiii}{\bf (\roman{enumiii})}
+
+\newcommand{\nequiv}{\equiv\hspace{-10pt}/\hspace{6pt}}
+\newcommand{\oarrowint}%
+{\raisebox{1.5pt}{$\scriptscriptstyle\wedge$}%
+\hspace{-14.7pt}\bigcirc\hspace{-13pt}  \int}
+
+\newcommand{\aufg}[1]{\phantom{x}\vspace{1.5ex}\noindent {\large\bf\sffamily {#1}.}}
+
+\newcommand{\weitermitaufgabe}[1]{\setcounter{enumi}%
+{#1}\addtocounter{enumi}{-1}}
+
+\newcommand{\blatt}[1]{\setcounter{enumi}%
+	{#1}\addtocounter{enumi}{-1}}
+
+\newcommand{\naechsteaufgabe}{\bigskip}
+\def \m {{\bf m.}\,\,}
+\def \s {{}\,\,{\bf s.}\,\,\,}
+\newcommand{\Aufgabe}{\bigskip\item}
+
+\DeclareMathAlphabet{\Set}{U}{eur}{m}{n}
+
+\newenvironment{minipageenumerate}%
+{\hspace{-4.5mm}\begin{minipage}[t]{15.9cm}\Abstand{9}\begin{enumerate}}%
+{\end{enumerate}\end{minipage}}
+%\newcommand{\Abstand}[1]{\mbox{}\par\vspace{#1pt}}
+

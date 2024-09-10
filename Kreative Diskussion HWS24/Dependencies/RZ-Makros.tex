@@ -1,0 +1,273 @@
+% RZ-Makros.TEX
+% Dies sind Makros, die f�r alle mathematischen Texte gut sind.
+
+\sloppy
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+\renewcommand{\labelenumiii}{(\arabic{enumiii})}
+
+%  Allgemeine Makros
+
+\newcommand{\R}{\mathrm{I\!R}}
+\newcommand{\N}{\mathrm{I\!N}}
+\newcommand{\HH}{\mathrm{I\!H}}
+\newcommand{\F}{\mathrm{I\!F}}
+\newcommand{\E}{\mathrm{I\!E}}
+\newcommand{\K}{\mathrm{I\!K}}
+\newcommand{\PP}{\mathrm{I\!P}}
+
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\cB}{\mathcal{B}}
+
+\newcommand{\Z}{\mathchoice {\hbox{$\sf\textstyle Z\kern-0.4em
+Z$}}{\hbox{$\sf\textstyle Z\kern-0.4em Z$}}{\hbox{$\sf\scriptstyle
+Z\kern-0.3em Z$}}{\hbox{$\sf\scriptscriptstyle Z\kern-0.2em Z$}}}
+
+\newcommand{\Q}{\mathchoice {\setbox0=\hbox{$\displaystyle\rm
+Q$}\hbox{\raise0.15\ht0\hbox to0pt{\kern0.4\wd0\vrule
+height0.8\ht0\hss}\box0}}{\setbox0=\hbox{$\textstyle\rm
+Q$}\hbox{\raise0.15\ht0\hbox to0pt{\kern0.4\wd0\vrule
+height0.8\ht0\hss}\box0}}{\setbox0=\hbox{$\scriptstyle\rm
+Q$}\hbox{\raise0.15\ht0\hbox to0pt{\kern0.4\wd0\vrule
+height0.7\ht0\hss}\box0}}{\setbox0=\hbox{$\scriptscriptstyle\rm
+Q$}\hbox{\raise0.15\ht0\hbox to0pt{\kern0.4\wd0\vrule
+height0.7\ht0\hss}\box0}}}
+
+\newcommand{\C}{\mathchoice {\setbox0=\hbox{$\displaystyle\rm
+C$}\hbox{\hbox to0pt{\kern0.4\wd0\vrule
+height0.9\ht0\hss}\box0}}{\setbox0=\hbox{$\textstyle\rm C$}\hbox{\hbox
+to0pt{\kern0.4\wd0\vrule
+height0.9\ht0\hss}\box0}}{\setbox0=\hbox{$\scriptstyle\rm C$}\hbox{\hbox
+to0pt{\kern0.4\wd0\vrule
+height0.9\ht0\hss}\box0}}{\setbox0=\hbox{$\scriptscriptstyle\rm
+C$}\hbox{\hbox to0pt{\kern0.4\wd0\vrule height0.9\ht0\hss}\box0}}}
+
+\newcommand{\OO}{\mathchoice {\setbox0=\hbox{$\displaystyle\rm
+O$}\hbox{\hbox to0pt{\kern0.4\wd0\vrule
+height0.9\ht0\hss}\box0}}{\setbox0=\hbox{$\textstyle\rm O$}\hbox{\hbox
+to0pt{\kern0.4\wd0\vrule
+height0.9\ht0\hss}\box0}}{\setbox0=\hbox{$\scriptstyle\rm O$}\hbox{\hbox
+to0pt{\kern0.4\wd0\vrule
+height0.9\ht0\hss}\box0}}{\setbox0=\hbox{$\scriptscriptstyle\rm
+O$}\hbox{\hbox to0pt{\kern0.4\wd0\vrule height0.9\ht0\hss}\box0}}}
+
+\newcommand{\scrA}{\mathcal{A}}
+\newcommand{\scrB}{\mathcal{B}}
+\newcommand{\scrC}{\mathcal{C}}
+\newcommand{\scrD}{\mathcal{D}}
+\newcommand{\scrE}{\mathcal{E}}
+\newcommand{\scrF}{\mathcal{F}}
+\newcommand{\scrG}{\mathcal{G}}
+\newcommand{\scrH}{\mathcal{H}} % alt \Hscr
+\newcommand{\scrI}{\mathcal{I}}
+\newcommand{\scrJ}{\mathcal{J}}
+\newcommand{\scrK}{\mathcal{K}}
+\newcommand{\scrL}{\mathcal{L}}
+\newcommand{\scrM}{\mathcal{M}}
+\newcommand{\scrN}{\mathcal{N}}
+\newcommand{\scrO}{\mathcal{O}}
+\newcommand{\scrP}{\mathcal{P}}
+\newcommand{\scrQ}{\mathcal{Q}}
+\newcommand{\scrR}{\mathcal{R}}
+\newcommand{\scrS}{\mathcal{S}}
+\newcommand{\scrT}{\mathcal{T}}
+\newcommand{\scrU}{\mathcal{U}}
+\newcommand{\scrV}{\mathcal{V}} % alt \Vscr
+\newcommand{\scrW}{\mathcal{W}}
+\newcommand{\scrX}{\mathcal{X}}
+\newcommand{\scrY}{\mathcal{Y}}
+\newcommand{\scrZ}{\mathcal{Z}}
+
+
+%% Es werden Fu�not-Symbolgleichungsnummerierung und Normal-Gleichungsnummerierung
+%% eingef�hrt. Die Z�hler sind seqcounter und neqcouter. In jedem neuen Abschnitt
+%% beginnt die Z�hlung von vorne
+\newcounter{neqcounter}[section]
+\newcounter{seqcounter}[section]
+\newcommand{\numberequation}[1]
+   {\renewcommand{\theequation}{\arabic{equation}}
+    \setcounter{equation}{\value{neqcounter}}
+    \begin{equation}#1\end{equation}\stepcounter{neqcounter}}
+\newcommand{\symbolequation}[1]
+   {\renewcommand{\theequation}{\fnsymbol{equation}}
+    \setcounter{equation}{\value{seqcounter}}
+    \begin{equation}#1\end{equation}\stepcounter{seqcounter}}
+
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\Diff}{\mathrm{D}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Alt}{\mathrm{Alt}}
+\newcommand{\Spur}{\mathrm{Spur}}
+\newcommand{\rk}{\mathrm{rk}}
+\newcommand{\rg}{\mathrm{rg}}
+\newcommand{\Spann}{\mathrm{Spann}}
+\newcommand{\Top}{\mathrm{Top}}
+\newcommand{\del}{\partial}
+\newcommand{\ddel}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\ddeldel}[3]{\frac{\partial^2#1}{\partial#2\:\partial#3}}
+\newcommand{\ddelsquare}[2]{\frac{\partial^2#1}{\partial{#2}^2}}
+\newcommand{\grad}{\mathrm{grad}}
+\newcommand{\hess}{\mathrm{hess}}
+\newcommand{\Hess}{\mathrm{Hess}}
+\newcommand{\Rp}{\R_+}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\vi}{\varphi}
+\newcommand{\vkap}{\varkappa}
+\newcommand{\thet}{\vartheta}
+\newcommand{\UL}{\mathchoice
+{\setbox0=\hbox{$\displaystyle U$}
+ \setbox1=\hbox{$\displaystyle l$}
+ \hbox{\box0\kern-0.80\wd1\lower0.029\ht1\box1}}
+{\setbox0=\hbox{$\displaystyle U$}
+ \setbox1=\hbox{$\displaystyle l$}
+ \hbox{\box0\kern-0.80\wd1\lower0.029\ht1\box1}}
+{\setbox0=\hbox{$\scriptstyle U$}
+ \setbox1=\hbox{$\scriptstyle l$}
+ \hbox{\box0\kern-0.80\wd1\lower0.029\ht1\box1}}
+{\setbox0=\hbox{$\scriptscriptstyle U$}
+ \setbox1=\hbox{$\scriptscriptstyle l$}
+ \hbox{\box0\kern-0.80\wd1\lower0.029\ht1\box1}}
+}
+
+\newcommand{\Uo}{\UL^o}
+\def\fam#1#2#3#4{({#1}_{#2})_{#2=#3,\dotsc,#4}}
+\def\zz#1#2#3{#1=#2,\dotsc,#3}
+\newcommand{\intint}[2]{\{#1,\dotsc,#2\}}
+\newcommand{\Vektor}[2]{({#1}_1,\dotsc,{#1}_{#2})} 
+
+\newcommand{\qmq}[1]{\quad\mbox{#1}\quad}
+\newcommand{\Menge}[2]{\{\,#1\,|\,#2\,\}}
+\newcommand{\Abstand}[1]{\mbox{}\par\vspace{-#1mm}}
+
+\def\bild#1#2#3#4{\leavevmode\vbox to #1{\vfil \hbox to #2{\special{picture #4
+   scaled #3}\hfil}}}
+   %Parametr: #1=H�he,#2=Breite,#3=Skalierung 0.1<f<10,#4=Bildname
+
+%%  Zu den Rahmen:
+%%  grRahmen ist mit rahmen aus dem Alalysisscript identisch.
+%%  grRahmen geht fast �ber die ganze Textbreite
+%%
+%%  klRahmen ist aus kleinerRahmen aus den RZ-Makros von 1996 entstanden;
+%%  seine H�he ist etwas vergr��ert worden,
+%%  seine Breite ist dem Text angepasst, dieser darf nur eine Zeile sein
+%%
+%%  varRahmen ist eine Neusch�pfung: Man stellt eine Breite ein. Dann wird der
+%%  in dem Rahmen wie in einer Minipage behandelt.
+%%
+\newcommand{\grRahmen}[1]{\begin{center}\setlength{\fboxrule}{0.8pt}
+           \setlength{\fboxsep}{8pt}
+              \fbox{\begin{minipage}{140mm}\rule{0mm}{5mm}\hspace*{-2mm} #1
+                    \end{minipage}}\end{center}}
+
+\newcommand{\klRahmen}[1]{\begin{center}\large\setlength{\fboxrule}{0.8pt}
+                     \setlength{\fboxsep}{8pt}
+                     \fbox{\rule[-2mm]{0mm}{7mm} #1 }
+                     \normalsize\end{center}}
+
+\newcommand{\varRahmen}[2]{\begin{center}\setlength{\fboxrule}{0.8pt}
+           \setlength{\fboxsep}{8pt}
+              \fbox{\begin{minipage}{#1}\rule{0mm}{5mm}\hspace*{-2mm} #2
+                    \end{minipage}}\end{center}}
+
+% die 1996-Version
+%\newcommand{\kleinerRahmen}[1]{\begin{center}\large\setlength{\fboxrule}{0.8pt}
+%                     \setlength{\fboxsep}{8pt}\fbox{#1}\normalsize\end{center}}
+
+%% Randnotizen vom Juli 1997
+\setlength{\marginparsep}{5pt}
+\setlength{\marginparwidth}{30pt}
+\newcommand{\marginlabel}[1]           
+                 {\mbox{}\marginpar{\raggedleft\hspace{0pt}#1}}
+\newcommand{\Ausrufezeichen}{\marginlabel{\raisebox{-1.2ex}{\Huge$\boldsymbol{!}$}}}
+\newcommand{\Randbalken}[2]{\marginlabel{{\rule[#1]{0.5mm}{#2}}}}
+\newcommand{\Zeigefinger}{\marginlabel{\raisebox{-0.8ex}{\LARGE\ding{43}}}}
+\newcommand{\Blume}{\marginlabel{\raisebox{-0.6ex}{\LARGE\ding{94}}}}
+
+%  Differentialgeometrie - Makros
+\newcommand{\bigoperp}{\mathop{\bigcirc\raisebox{0.25em}
+ {\hskip-0.53em\hbox{\vrule height1.0ex width0.04em}
+  \hskip-0.77em\hbox{\vrule height0.04em width 0.8em}
+  \hskip- 0.2em}}}
+
+\renewcommand{\bigoplus}{\mathop{\bigcirc
+  \raisebox{-0.22em}{\hskip-0.53em\hbox{\vrule height2.08ex width0.04em}
+  \raisebox{ 0.48em}{\hskip-0.75em\hbox{\vrule height0.04em width 0.8em}}
+  \hskip- 0.2em}}}
+
+\def\NP#1#2#3{\mathchoice
+  {{\textstyle{\prod\limits_{i=#2}^{#3}}{#1}_i}} 
+  {{\textstyle{\prod_{i=#2}^{#3}}{#1}_i}}
+  {}
+  {}
+   }
+\def\DS#1#2#3{\bigoplus_{i=#2}^{#3}\!#1_i} 
+\def\OS#1#2#3{\bigoperp_{i=#2}^{#3}#1_i} 
+\def\WP#1#2#3{#1_0 \times_{#2}\NP {#1}{1}{#3}}
+\def\TP#1#2#3#4{{\rule{0mm}{2ex}}^{#2}\NP{#1}{#3}{#4}}
+
+\newcommand {\cinf}{\ensuremath{\mathrm{C}^{\infty}}}
+\newcommand {\X}{\mathfrak{X}}
+\newcommand{\Tensor}[3]{\mathfrak{T}^{(#2,#3)}(#1)}
+\newcommand{\alphad}{\dot{\alpha}}
+\newcommand {\g}[2]{\langle #1,#2\rangle}
+\def\gg{\g{\cdot}{\cdot}}
+\newcommand {\euc}[2]{\langle\!\langle #1,#2 \rangle\!\rangle}
+\newcommand {\peuc}[2]{\langle\!\langle #1,#2 \rangle\!\rangle\!_s}
+\newcommand {\Kov}[2]{\nabla_{#1}#2}
+\newcommand {\Kovh}[2]{\widehat{\nabla}_{#1}#2}
+\newcommand {\Kovt}[2]{\widetilde{\nabla}_{#1}#2}
+\newcommand {\Kovperp}[2]{\nabla^{\perp}_{#1}#2}
+\newcommand {\Kovv}[3]{{\nabla^{\scriptscriptstyle{#1}}}_{\!#2}#3}
+\newcommand {\operp}{\mathbin{\mbox{$\ominus\raisebox{2.9pt}
+ {\hskip-0.42em\hbox{\vrule height0.7ex width0.02em}\hskip0.42em }$}}}
+\newcommand {\TpM}{T_{p}M}
+\newcommand {\Tpf}{T_{p}f}
+\newcommand {\Nf}{\perp\!\!(f)}
+\newcommand {\NM}{\perp\!\!M}
+\newcommand {\Npf}{\perp_p\!\!(f)}
+\newcommand {\NpM}{\perp_p\!\!M}
+\newcommand {\Nepf}{\perp^{\!\!1}_p\!\!(f)}
+\newcommand {\NepM}{\perp^{\!\!1}_p\!\!M}
+\newcommand{\Shop}[3]{{\mathrm{A}^{^{\scriptscriptstyle{\!\!#1}}}_{#2}}#3} %shape op
+
+% Horizontale/vertikale VR 
+%\def\Vscr{\mathcal{V}}   ersetzt durch \scrV
+%\def\Hscr{\mathcal{H}}   ersetzt durch \scrH
+%\def\Vscrt{\widetilde{\mathcal{V}}}  ersetzt durch
+\def\tscrV{\widetilde{\mathcal{V}}}
+%\def\Hscrt{\widetilde{\mathcal{H}}}  ersetzt durch
+\def\tscrH{\widetilde{\mathcal{H}}}
+\newcommand{\hdisp}[3]{\overset{#2}{\underset{#1}{\parallel}}\!\!#3\,} 
+    % horicontal displacement
+\newcommand{\Hol}{\mathrm{Hol}}
+
+% Reelle projektive R�ume
+\newcommand {\RPn}{\ensuremath{\R\mathrm{P}^{n}}}
+\newcommand {\RPm}{\ensuremath{\R\mathrm{P}^{m}}}
+
+\newcommand {\cA}{\mathcal{A}}
+% Komplexe Raumformen
+\newcommand {\CPn}{\ensuremath{\C\mathrm{P}^{n}}}
+\newcommand {\CPm}{\ensuremath{\C\mathrm{P}^{m}}}
+\newcommand {\CHn}{\ensuremath{\C\mathrm{H}^{n}}}
+\newcommand {\CHm}{\ensuremath{\C\mathrm{H}^{m}}}
+
+\def\Mgf/{Mannigfaltigkeit}
+\def\UMgf/{Untermannigfaltigkeit}
+\def\Abb/{Abbildung}
+\def\zshgd/{zusammenh�ngend}
+\def\FR/{Faserraum}
+\def\FB/{Faserb�ndel}
+\def\VB/{Vektorb�ndel}
+\def\UVB/{Untervektorb�ndel}
+
+\hyphenation{Riemann-sche Riemann-ian}
+
+\endinput
+% Ende von RZ-Makros.TEX
+
