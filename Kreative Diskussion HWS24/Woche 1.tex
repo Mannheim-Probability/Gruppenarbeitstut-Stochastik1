@@ -1,0 +1,125 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc} %Umlaute (Mac)
+\usepackage{amsmath}
+\usepackage{tikzsymbols}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx} 
+\usepackage{epstopdf}
+\usepackage{fancybox,color}
+\usepackage[shortlabels]{enumitem}
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{floatrow}
+\usepackage{dsfont}
+\usepackage{bigints}
+\usepackage[ruled]{algorithm2e}
+\usepackage{hyperref}
+\include{Dependencies/RZ-Makros}
+\include{Dependencies/SKK-Makros}
+\include{Dependencies/uebmakro-mine}
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning}
+\usepackage[pdftex]{pict2e}
+
+\newcommand{\unity}{{1\!\!\!\:\mathrm{l}}}
+\newcommand{\Reg}{\operatorname{Reg}}
+\newcommand{\kompRe}{\operatorname{Re}}
+\newcommand{\kompIm}{\operatorname{Im}}
+
+\begin{document}
+	\vspace*{-1cm}
+	\noindent
+	\includegraphics[viewport=00 25 270 40,scale=.8]{Dependencies/BK1.eps}	\hfill\includegraphics[height=30pt]{Dependencies/logo_uni_neu.pdf}\\
+	\vspace{.05cm}
+	\noindent\hrulefill\\
+	{Prof. Dr. Leif D"oring} \hfill
+	{Stochastik 1}\\
+	{Benedikt Wille \strut}  \hfill
+	%	{29. August 2015} 
+	\\ \normalsize
+	\noindent\vspace{-1.5cm} 
+	\begin{center} {\large \bf
+		Kreative Diskussion Woche 1} \\
+	\end{center}
+	
+In den ersten paar Veranstaltungen wollen wir vor allem zwei Fragen nachgehen, die in der Vorlesung offen gelassen wurden:
+
+\begin{itemize}
+    \item Warum wollen wir nicht immer mit der Potenzmenge $\mathbb{P}(\Omega)$ als $\sigma$-Algebra modellieren? Was wollen wir stattdesssen verwenden?
+    \item Warum sollten wir in der Definition der $\sigma$-Algebren auch (abzählbar) unendliche Vereinigungen zulassen? (Hier wollen wir zumindest eine grobe Idee vermitteln)
+\end{itemize}
+
+\textbf{Frage:} Gibt es Ideen, wie man eine der beiden Fragen sinnvollerweise beantworten könnte?\\
+\textbf{Erwartete Antworten:} In der Vorlesung wurde gesagt, dass man eventuell nicht alle Ereignisse in der Grundmenge (i.e. alle $\omega \in \Omega$) beobachten kann. Das Beispiel dazu, nämlich dass der Würfelwurf, der modelliert werden sollte, nicht beobachtet wird und dass einem nur mitgeteilt wird, ob das Ergebnis gerade oder ungerade ist, scheint allerdings gekünstelt. Zudem kann man das umgehen, indem man eine angepasste Grundmenge (i.e. $\Omega := \{ gerade, ungerade \}$) wählt. In der Vorlesung nicht erwähnt, aber aus der Schule bekannt, könnten folgende zu untersuchende Ereignisse sein, die nur als Vereinigung abzählbar vieler Ereignisse beschrieben werden können: \glqq Bei unendlicher Wiederholung eines Münzwurfes wird unendlich oft Zahl geworfen\grqq, oder \glqq $\frac{1}{n}\sum_{i=1}^n \omega_i \rightarrow \frac{1}{2}$ (GGZ)\grqq.
+
+Wir wollen nun Münzwürfe modellieren, um die beiden Fragen zu beantworten.
+
+\textbf{Frage:} Wie modellieren wir Münzwürfe?\\
+\textbf{Erwartete Antwort:} $\Omega := \{0, 1\},\, \mathcal{A} := \mathcal{P}(\Omega),\, \mathbb{P}(A):= \frac{\#A}{2}$.\\
+\textbf{Frage:} Wenn wir mehrere modellieren wollen?\\
+\textbf{Erwartete Antwort:} $\Omega := \{0, 1\}^n,\, \mathcal{A} := \mathcal{P}(\Omega),\, \mathbb{P}(A):= \frac{\#A}{2^n}$.\\
+\textbf{Frage:} Wenn wir nun kein festes $n$ mehr betrachten, sondern beliebig viele? Zunächst nur $\Omega$\\
+\textbf{Erwartete Antwort:} $\Omega:=\{0,1\}^{\mathbb{N}}:=\{\omega = (\omega_i)_{i\in\mathbb{N}}:\,\omega_i\in\{0,1\}\}$.\\
+\textbf{Anmerkung:} Wir wollen ab sofort annehmen, dass das Ergebnis $1$ dem Wurf von Zahl entspricht.
+
+An dieser Stelle machen wir einen kleinen Einschnitt, dessen Intuition später nochmal relevant wird.
+
+\textbf{Frage:} Wie kann man mit dieser Definition nun Ereignisse über eine feste Zahl $n$ and Würfen zeigen? Als Beispiel sei folgende Aussage gennant: \glqq Bei $n$ Würfen fällt mindestens $k$-mal Zahl\grqq.\\
+\textbf{Antwort:} $A:=\{ \omega = (\omega_i)_{i\in\mathbb{N}}:\, \sum_{i=1}^{n}\omega_i \geq k \}$. Hierbei werden alle Ereignisse $\omega$ betrachtet, deren ersten $n$ Einträge eine gewisse Eigenschaft besitzen. Diese Hervorgehensweise, verschiedene Elemente von $\Omega$ zu vergleichen wird später noch einmal wichtig.
+
+Nun zurück zur Hauptfrage: Welche $\sigma$-Algebra wollen wir nutzen? Wir wollen zeigen, dass, sollten wir die Potenzmenge nutzen, wir kein sinnvolles Maß finden können, womit Frage 1 beantwortet wäre. Aber was macht ein Maß sinnvoll?
+
+\textbf{Frage:} Was sollten wir an ein Maß annehmen, damit wir einen fairen Münzwurf beschreiben können?\\
+\textbf{Erwartete Antwort:} Das Maß muss auf $1$ normiert sein, und es sollte egal sein, ob an einer Stelle Kopf oder Zahl steht (Invarianz). In Formeln:
+\begin{align*}
+    &(N) &\mathbb{P}(\Omega) &= 1\\
+    &(I) &\mathbb{P}(A) &= \mathbb{P}(T_nA),
+\end{align*}
+wobei $T_n$ den Flip an der $n$-ten Stelle modelliert, i.e. $T_n(\omega) = (\omega_1,\dots,\omega_{n-1}, 1 - \omega_{n}, \omega_{n+1},\dots)$.
+
+Zeigen wir also nun, dass auf der Potenzmenge des oben definierten Grundraumes kein Maß existiert, das gleichzeitig normiert und invariant ist, also dass wir den Raum der Münzwürfe nicht sinnvoll mit der Potenz-$\sigma$-Algebra beschreiben können. Die Aufgabe ist äußerst schwer, daher gibt es gleich am Anfang viele Hinweise. Merkt euch die grobe Idee, sie wird später nochmal auftauchen. Mal sehen, ob ihr dann ohne Hinweise darauf kommt!
+
+\textbf{Aufgabe:} Man zeige, dass für $\Omega:=\{0,1\}^{\mathbb{N}}$ kein Maß $\mathbb{P}: \mathcal{P}(\Omega) \rightarrow \lbrack 0,1 \rbrack$ existiert, für das gleichzeitig $(N)$ und $(I)$ gilt.\\
+\textbf{Hinweis 1:} (Gleich zu Beginn) Die grobe Beweisidee funktioniert wie folgt: Wir nehmen an, dass ein solches Maß existiert und folgern einen Widerspruch mit den Gleichungen
+$$1 \stackrel{(N)}{=} \mathbb{P}(\Omega) \stackrel{\sigma-\text{add}?}{=} \sum_{S\in\mathcal{S}} \mathbb{P}(T_SA) \stackrel{(I)}{=} \sum_{S\in \mathcal{S}} \mathbb{P}(A).$$
+Was an $\mathcal{S}$ und $T_SA$ angenommen werden, damit diese Gleichungen folgerbar sind? Wieso folgt dann ein Wiederspruch?\\
+\textbf{Lösungen zu Hinweis 1:} Um $\sigma$-Additivität zu nutzen muss gelten, dass $\mathcal{S}$ abzählbar ist, die einzelnen $T_SA$ disjunkt sind, und dass $\Omega = \bigcup_{S\in\mathcal{S}}T_SA$. Um $(I)$ verwenden zu können, muss der Operator $T_S$ eine endliche Verkettung von Flips der Form $T_n$ sein. Es folgt ein Widerspruch, da $\mathbb{P}(A)$ entweder $0$ oder eine feste Zahl größer Null ist. Im ersten Fall, wäre die Summe $0$, im zweiten unendlich. In beiden Fällen allerdings ungleich $1$.\\
+\textbf{Hinweis 2:} (Definition der Objekte) Wir müssen $A\subset\Omega$, $\mathcal{S}$, und $T_S$ definieren. Zu diesem Zweck definieren wir $\mathcal{S}:=\{S\subset\mathbb{N}:\,\#S<\infty\}$, die Menge aller endlichen Teilmengen von $\mathbb{N}$. Die Definition von $A$ ist etwas vertrackter: Definiere eine Äquivalenzrelation: $\omega \sim \Tilde{\omega}$ genau dann wenn \glqq $\omega_n = \Tilde{\omega}_n$ für alle $n$ \glqq groß genug\grqq \grqq. Das Auswahlaxiom (Nachschauen, sehr spannend!) besagt nun, dass es eine Auswahlfunktion $F$ gibt, die jeder Äquivalenzklasse einen Repräsentanten aus dieser Äquivalenzklasse zuordnet. Mit dieser Hilfe konstruieren wir $A:=F(\Omega \mathbin{/ \mkern-6mu \sim})$ als die Menge, die aus jeder Äquivalenzklasse einen Repräsentanten enthält. Folgende Fragen führen uns näher zum Ziel: Wie kann man die Äquivalenzrelation mathematisch definieren und zeigen, dass es eine Äquivalenzrelation ist? Wie sollte $T_S$ aussehen basierend auf der Definition von $\mathcal{S}$ und der Beobachtung, dass es eine endliche Verkettung von Flips sein soll?\\
+\textbf{Lösungen zu Hinweis 2:}\\
+Wir definieren $\omega\sim\Tilde{\omega}$ genau dann wenn $\lim_{n\rightarrow\infty}\omega_n-\Tilde{\omega}_n = 0$. Reflexivität folgt, da der Limes einer Nullfolge eine Nullfolge ist, Symmetrie, wegen der Kommutativität der Addition, und die Transitivität folgt, da der Limes der Summe von Nullfolgen wieder eine Nullfolge ist. Jede Menge $S\in\mathcal{S}$ besteht aus einer endlichen Anzahl an natürlichen Zahlen $n_1,\dots,n_m$. Wir nutzen die Flip-operatoren $T_n$, die oben definiert wurden und die jeder Folge die Folge zuordnen, die genau an der $n$-ten Stelle statt einer $0$ eine $1$ haben und anders herum, indem wir die endliche Verkettung $T_S:=T_{n_m}\circ\dots\circ T_{n_1}$ definieren.\\
+\textbf{Hinweis 3:} Jetzt bleibt nur noch übrig, die geforderten Eigenschaften aus Hinweis 1 zu prüfen.\\
+\textbf{Lösungen zu Hinweis 3:}\\
+Zunächst definieren wir $\mathcal{S}_m:=\{ S \subset \mathbb{N}:\,\#S=m\}$ und sehen ein, dass $\mathcal{S}_m$ für alle $m\in\mathbb{N}$ abzählbar ist, da wir eine Bijektion zu $\mathbb{N}^m$ herstellen können. Dann ist aber $\mathcal{S}=\bigcup_{m=1}^\infty \mathcal{S}_m$ als abzählbare Vereinigung abzählbarer Mengen selbst abzählbar. Nehmen wir nun an, dass $T_SA\cap T_{\Tilde{S}}A\neq \emptyset$. Wir zeigen nun, dass dann $S=\Tilde{S}$ gilt, woraus die paarweise Disjunktheit folgt. Aus der Annahme folgt direkt, dass $\omega,\Tilde{\omega}\in A$ existieren, sodass $T_S\omega = T_{\Tilde{S}}\Tilde{\omega}$ gilt. Da beide Flip-Operatoren nur endlich viele Elemente beeinflussen, gilt nun aber $\omega\sim T_S\omega= T_{\Tilde{S}}\Tilde{\omega}\sim\Tilde{\omega}$. Da $A$ aber aus jeder Äquivalenzklasse nur ein Element enthält, gilt $\omega=\Tilde{\omega}$ und da die Gleichheit nach den Flip-Operatoren nur dann gelten kann, wenn an denselben Stellen geflippt wurde, auch $S=\Tilde{S}$. Nun bleibt noch zu zeigen, dass $\Omega = \bigcup_{S\in\mathcal{S}}T_SA$. Sei dazu $\omega\in\Omega$. Wenn wir zeigen können, dass $\omega\in T_SA$ für ein $S\in\mathcal{S}$ sind wir fertig. Aus der Definition von $A$ folgt, dass es genau ein $\Tilde{\omega}\in A$ gibt, sodass $\omega\sim\Tilde{\omega}$. Dann folgt daraus, dass ein $N\in\mathbb{N}$ existiert, sodass $\omega_n=\Tilde{\omega}_n$ für alle $n\geq N$. Somit können wir durch das Flippen an endlich vielen Stellen $\omega$ zu $\Tilde{\omega}$ machen, in anderen Worten, es existiert ein $S\in\mathcal{S}$, sodass $T_S\Tilde{\omega}=\omega$, also $\omega\in T_S\Tilde{\omega}$, womit wir den Beweis abschließen.
+
+Wir sehen also: selbst um etwas so einfaches wie Münzwürfe allgemein zu modellieren, reicht die Potenzmenge nicht aus. Welche $\sigma$-Algebra wollen/können wir also nehmen? Ein Hinweis liefert die Definition der Borel-$\sigma$-Algebra aus der Vorlesung, welche wir nun ein wenig Verallgemeinern wollen (an dieser Stelle ist auch ein kleiner Exkurs zu Topologischen Räumen möglich, uns reichen prinzipiell aber auch Metrische Räume an dieser Stelle aus). 
+
+\textbf{Frage:} Die Definition für $\mathcal{B}(\mathbb{R}^d)$ nutzt maßgeblich offene Mengen. In welche Struktur können wir allgemein offene Mengen definieren?\\
+\textbf{Erwartete Antwort:} (Topologische Räume oder) Metrische Räume.\\
+\textbf{Frage:} Wie können wir also die Definition der Borel-$\sigma$-Algebra anpassen?\\
+\textbf{Erwartete Antwort:} Sei $(E,d)$ ein Metrischer Raum und $\mathcal{O}$ die Menge aller offenen Mengen in $E$. Dann ist die Borel-$\sigma$-Algebra $\mathcal{B}(E):=\sigma(\mathcal{O})$ definiert als die durch die offenen Mengen von $E$ erzeugte $\sigma$-Algebra.
+
+Um nun die Borel-$\sigma$-Algebra $\mathcal{B}(\Omega)$ für unseren Raum der Münzwürfe definieren zu können, brauchen wir eine Metrik. Wir definieren sie folgendermaßen: 
+
+$$d:\Omega\times\Omega \rightarrow \mathbb{R}_+,\quad (\omega,\Tilde{\omega})\mapsto d(\omega,\Tilde{\omega}):=\begin{cases}
+    2^{-\inf\{n\in\mathbb{N}:\,\omega_n\neq\Tilde{\omega}_n\}} &,\omega\neq\Tilde{\omega}\\
+    0 &,\omega=\Tilde{\omega}
+\end{cases}.$$
+
+\textbf{Aufgabe:} Man zeige, dass die oben definierte Funktion eine Metrik ist.\\
+\textbf{Lösung:} Positive Definitheit ist klar, da $d(\omega,\omega)=0$ für alle $\omega\in\Omega$ und $d(\omega,\Tilde{\omega})>0$ für alle $\omega,\Tilde{\omega}\in\Omega$ per Definition. Da die Definition nicht von der Reihenfolge der Inputs abhängt, ist die Funktion zudem symmetrisch. Die Dreiecksungleichung ist etwas schwieriger. Seien dafür $\omega_1,\omega_2,\omega_3\in\Omega$ beliebig. Angenommen, $\omega_1=\omega_2$. Dann ist $d(\omega_1,\omega_2)=0$ und wegen der Positivität gilt dann auch sofort $d(\omega_1,\omega_2)\leq d(\omega_1,\omega_3)+d(\omega_3,\omega_2)$. Sei im folgenden also $\omega_1\neq\omega_2$. Dann existiert ein $n_0\in\mathbb{N}$ sodass für alle $n<n_0$ $(\omega_1)_n=(\omega_2)_n$ gilt und damit auch $d(\omega_1,\omega_2)=2^{-n_0}$. Falls $\omega_3=\omega_1$, so gilt unmittelbar $d(\omega_1,\omega_2)=d(\omega_3,\omega_2)$ und damit wie oben mittels Positiver Definitheit die Dreiecksungleichung. Sei also nachfolgend $\omega_3\neq\omega_1$. Dann existiert erneut ein $n_1\in\mathbb{N}$ sodass für alle $n<n_1$ $(\omega_3)_n=(\omega_1)_n$ gilt und wieder $d(\omega_1,\omega_3)=2^{-n_1}$. Angenommen $n_1<n_0$. Da $(\omega_1)_n=(\omega_2)_n$ für alle $n<n_0$ gilt dann auch $(\omega_2)_n=(\omega_3)_n$ für alle $n<n_1$ und $d(\omega_3,\omega_2)=2^{-n_1}$. Damit gilt aber sofort
+$$d(\omega_1,\omega_2)=2^{-n_0}\stackrel{n_1<n_0}{\leq} 2^{-(n_1+1)}=d(\omega_1,\omega_3)+d(\omega_3,\omega_2).$$
+Gelte nun umgekehrt $n_1\geq n_0$. Dann gilt automatisch auch $(\omega_3)_n=(\omega_2)_n$ für alle $n<n_1$, woraus aber sofort $d(\omega_3,\omega_2)=2^{-n_0}=d(\omega_1,\omega_2)$ folgt und damit erneut über die Positive Definitheit auch die Dreiecksungleichung. Da wir nun alle Fälle geprüft haben sind wir fertig.
+
+Prima! Jetzt haben wir also eine $\sigma$-Algebra definiert. Aber mindestens einige der Mengen scheinen unhandlich zu sein und wir haben vermutlich an dieser Stelle noch keine Idee, wie wir Maße auf dieser $\sigma$-Algebra definieren können. Das wird Thema der nächsten paar Vorlesungen sein, weshalb wir an dieser Stelle noch nicht näher darauf eingehen. Stattdessen machen wir einen auf den ersten Blick nicht damit zusammenhängenden Exkurs.
+
+\textbf{Frage:} Wie würden wir \glqq Basisereignisse\grqq auf $\Omega$ definieren?\\
+\textbf{Hinweis:} Gemeint ist hier wie wir Informationen über endlich viele Münzwürfe aus den Folgen in $\omega$ ziehen können. Die Intuition von vorhin kann an dieser Stelle helfen.\\
+\textbf{Lösung:} Wir definieren die Ereignisse \glqq Die ersten $n$ Würfe sind $\omega_1,\dots,\omega_n$\grqq \ und führen für $\omega_1,\dots,\omega_n\in\Omega$ folgende Notation ein:
+$$\lbrack \omega_1,\dots,\omega_n\rbrack :=\{\Tilde{\omega}\in\Omega:\,\Tilde{\omega}_i=\omega_i\,\forall i=1,\dots,n\}.$$
+
+Als kleine Hausaufgabe könnt ihr euch schonmal überlegen, wie diese Definition mit der Metrik und der Definition der Borel-$\sigma$-Algebra über offene Mengen zusammenhängt. Nächste Woche werden wir dann mithilfe von Werkzeugen aus den Vorlesungen (Bitte die erste Aussage, ohne den Beweis, von Vorlesung 5 schonmal anschauen) ein sinnvolles (im oben definierten Sinne) Maß auf $\mathcal{B}(\Omega)$ definieren. Wenn ihr die Hausaufgabe gelöst habt könnt ihr vielleicht schon erahnen, wie das ganze vonstatten gehen wird und auch, was das mit der zweiten, bisher unbeantworteten Frage vom Anfang zusammenhängt.
+	
+\end{document}
+
