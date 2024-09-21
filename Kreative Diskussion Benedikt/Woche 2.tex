@@ -1,0 +1,170 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc} %Umlaute (Mac)
+\usepackage{amsmath}
+\usepackage{tikzsymbols}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx} 
+\usepackage{epstopdf}
+\usepackage{fancybox,color}
+\usepackage[shortlabels]{enumitem}
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{floatrow}
+\usepackage{dsfont}
+\usepackage{bigints}
+\usepackage[ruled]{algorithm2e}
+\usepackage{hyperref}
+\include{Dependencies/RZ-Makros}
+\include{Dependencies/SKK-Makros}
+\include{Dependencies/uebmakro-mine}
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning}
+\usepackage[pdftex]{pict2e}
+
+\newcommand{\unity}{{1\!\!\!\:\mathrm{l}}}
+\newcommand{\Reg}{\operatorname{Reg}}
+\newcommand{\kompRe}{\operatorname{Re}}
+\newcommand{\kompIm}{\operatorname{Im}}
+
+\begin{document}
+	\vspace*{-1cm}
+	\noindent
+	\includegraphics[viewport=00 25 270 40,scale=.8]{Dependencies/BK1.eps}	\hfill\includegraphics[height=30pt]{Dependencies/logo_uni_neu.pdf}\\
+	\vspace{.05cm}
+	\noindent\hrulefill\\
+	{Prof. Dr. Leif D"oring} \hfill
+	{Stochastik 1}\\
+	{Benedikt Wille \strut}  \hfill
+	%{10. September 2024} 
+	\\ \normalsize
+	\noindent\vspace{-1.5cm} 
+	\begin{center} {\large \bf
+		Kreative Diskussion Woche 1} \\
+	\end{center}
+	
+Wir orientieren uns nach wie vor an den Fragen aus dem letzten Tutorium, deren Beantwortung wir anhand eines Beispiels, des unendlich wiederholten Münzwurfs näherkommen wollen:
+
+\begin{itemize}
+    \item Warum wollen wir nicht immer mit der Potenzmenge $\mathbb{P}(\Omega)$ als $\sigma$-Algebra modellieren? Was wollen wir stattdesssen verwenden?
+    \item Warum sollten wir in der Definition der $\sigma$-Algebren auch (abzählbar) unendliche Vereinigungen zulassen? (Hier wollen wir zumindest eine grobe Idee vermitteln)
+\end{itemize}
+
+Eine erste Antwort auf die erste Frage ist dabei, dass wir mit der Potenzmenge als $\sigma$-Algebra nicht einmal das unendlich wiederholte Werfen einer fairen Münze modellieren können (Stichwort Vitali-Mengen) und dass wir stattdessen die Borel-$\sigma$-Algebra verwenden wollen. Heute wollen wir nun ein Maß auf der Borel-$\sigma$-Algebra definieren, das unseren Anforderungen genügt. Das Setting war folgendes:
+
+\begin{itemize}
+    \item Raum der Münzwürfe: $\Omega:=\{0,1\}^{\mathbb{N}}:=\{\omega = (\omega_i)_{i\in\mathbb{N}}:\,\omega_i\in\{0,1\}\}$.
+    \item \glqq Elementarereignisse\grqq: $\lbrack \omega_1,\dots,\omega_n\rbrack :=\{\Tilde{\omega}\in\Omega:\,\Tilde{\omega}_i=\omega_i\,\forall i=1,\dots,n\}$.
+    \item Borel-$\sigma$-Algebra: $\mathcal{B}(E):=\sigma(\mathcal{O})$, $\mathcal{O}$ Menge aller offenen Mengen eines metrischen Raumes $(E,d)$.
+    \item Metrik für unseren Raum $\Omega$:
+    $$d:\Omega\times\Omega \rightarrow \mathbb{R}_+,\quad (\omega,\Tilde{\omega})\mapsto d(\omega,\Tilde{\omega}):=\begin{cases}
+    2^{-\inf\{n\in\mathbb{N}:\,\omega_n\neq\Tilde{\omega}_n\}} &,\omega\neq\Tilde{\omega}\\
+    0 &,\omega=\Tilde{\omega}
+    \end{cases}$$.
+    \item Gesucht: Maß, das normiert und invariant bezüglich Flips ist, also folgendes erfüllt:
+    \begin{align*}
+    &(N) &\mathbb{P}(\Omega) &= 1\\
+    &(I) &\mathbb{P}(A) &= \mathbb{P}(T_nA),
+    \end{align*}
+    wobei $T_n$ den Flip an der $n$-ten Stelle modelliert, i.e. $T_n(\omega) = (\omega_1,\dots,\omega_{n-1}, 1 - \omega_{n}, \omega_{n+1},\dots)$.
+\end{itemize}
+
+Bevor wir mit dem Beispiel weitermachen ein kleiner Einschub: Wir wollen später überlegen, ob unsere Argumente auch funktionieren, falls wir statt Folgen mit Werten in $\{0,1\}$ Folgen mit Werten in $E$ verwenden, wobei $E$ eine beliebige endliche Menge ist. Welche Objekte und Beweise müssen wir ändern und was können wir übernehmen? Versucht im Verlauf der Veranstaltung diese Überlegung schon einmal im Hinterkopf zu behalten.
+
+Am Ende des letzten Tutoriums gab es eine kleine Hausaufgabe. Diese Frage wollen wir nun beantworten.
+
+\textbf{Frage:} Wie hängen die oben definierten \glqq Elementarereignisse\grqq, $\lbrack \omega_1,\dots,\omega_n\rbrack$ zusammen mit der oben definierten Metrik $d$?\\
+\textbf{Hinweis 1:} Wir wollen vor allem die offenen Mengen bezüglich der Metrik $d$ charakterisieren, um die Borel-$\sigma$-Algebra $\mathcal{B}(E)$ besser beschreiben zu können. Was sind die \glqq einfachsten\grqq\,offenen Mengen?\\
+\textbf{Erwartete Antwort 1:} Offene Bälle sind die am einfachsten zu betrachtenden offenen Mengen bezüglich einer Metrik. Sie sind definiert als
+$$B_\epsilon(\omega):=\{\Tilde{\omega}\in\Omega:\,d(\omega,\Tilde{\omega})<\epsilon\}$$
+für alle $\epsilon>0, \omega\in\Omega$.\\
+\textbf{Hinweis 2:} Welche $\epsilon$ müssen wir betrachten? Schreibt anschließend die Definition für diese Werte von $\epsilon$ mithilfe der Definition der Metrik auf.\\
+\textbf{Erwartete Antwort 2:} Da die Metrik nur die Werte $2^{-n}$ (oder $0$) für alle $n\in\mathbb{N}$ annimmt müssen wir nur die Bälle $B_{2^{-n}}(\omega)$ betrachten. Mithilfe der Definition der Metrik können wir erkennen:
+\begin{align*}
+    B_{2^{-n}}(\omega) &= \{\Tilde{\omega}\in\Omega:\,d(\omega,\Tilde{\omega})<2^{-n}\}=\{\Tilde{\omega}\in\Omega:\,\inf\{k\in\mathbb{N}:\,\omega_k\neq\Tilde{\omega}_k\} = n+1\}\\
+    &=\{\Tilde{\omega}\in\Omega:\,\omega_k=\Tilde{\omega}_k \,\forall k=1,\dots,n\} = \lbrack \omega_1,\dots,\omega_n\rbrack.
+\end{align*}
+
+Wir sehen also, dass unsere definierten Elementarereignisse gerade alle relevanten offenen Bälle bezüglich $d$ sind. Analog wie im Fall der Reellen Zahlen wollen wir nun alle offenen Bälle als Erzeuger nutzen und zeigen, dass die erzeugte $\sigma$-Algebra gerade die Borel-$\sigma$-Algebra ist.
+
+\textbf{Frage:} Wie sieht der eben beschrieben Erzeuger also aus und warum ist es ein sinnvoller Erzeuger?\\
+\textbf{Hinweis 1:} Wir wollen im Anschluss ein Maß auf der $\sigma$-Algebra definieren, indem wir es auf dem Erzeuger beschreiben. Was sollte der Erzeuger dafür erfüllen?\\
+\textbf{Lösung 1:} Nach dem Satz von Caratheodory aus der Vorlesung sollte der Erzeuger ein Semiring sein.\\
+\textbf{Hinweis 2:} Wie können wir die Menge aller offenen Mengen hinschreiben?\\
+\textbf{Lösung 2:} Wie oben beshrieben müssen wir nur die Bälle mit den Radien $2^{-n}$ betrachten, die aber gerade durch die Elementarereignisse gebeben sind. Eine Kleinigkeit gilt es, noch zu beachten, und zwar, dass die leere Menge auch im Erzeuger liegt. Wir definieren also:
+$$\mathcal{A}_0:=\emptyset,\,\mathcal{A}_n:=\{\lbrack \omega_1,\dots,\omega_n\rbrack:\,\omega_i\in\{0,1\}\,\forall i = 1,\dots,n\},\,\mathcal{A}:=\bigcup_{i=1}^\infty \mathcal{A}_i.$$
+\textbf{Hinweis 3:} Wir müssen also nur noch checken, dass $\mathcal{A}$ ein Semiring ist.\\
+\textbf{Lösung 3:} Wir checken einfach die Eigenschaften. Die Leere Menge ist per Definition in $\mathcal{A}$. Es gilt zudem
+$$\lbrack \omega_1,\dots,\omega_n\rbrack\cap \lbrack \Tilde{\omega_1},\dots,\Tilde{\omega_m}\rbrack=\begin{cases}
+    \emptyset &\Tilde{\omega}_1\neq\omega_1\\
+    \lbrack \omega_1,\dots,\omega_{n_0}\rbrack &\Tilde{\omega}_k=\omega_k\,\forall k=1,\dots,n_0,\,\Tilde{\omega}_k\neq\omega_k\,\forall k>n_0
+\end{cases},$$
+also die Schnittstabilität. Zudem gilt die dritte Eigenschaft eines Semirings wegen
+\begin{align*}
+    \lbrack \omega_1,\dots,\omega_n\rbrack\setminus \lbrack \Tilde{\omega_1},\dots,\Tilde{\omega_m}\rbrack &=\{\omega'\in\Omega:\,\omega_i=\omega_i'\,\forall i=1,\dots,n \text{ und }\exists j\in\{1,\dots,m\}:\,\Tilde{\omega}_j\neq\omega_j'\}\\
+    &=\begin{cases}
+        \lbrack \omega_1,\dots,\omega_n\rbrack &\Tilde{\omega}_j\neq\omega_j \text{ für ein }j\in\{1,\dots,n\}\\
+        \emptyset &m\leq n,\, \Tilde{\omega}_i=\omega_i\,\forall i=1,\dots,m\\
+        \underset{(\omega'_1,\dots,\omega'_m-n)\neq(\Tilde{\omega}_{n+1},\dots,\Tilde{\omega}_{m})}{\hspace{-3cm}\dot\bigcup}\hspace{-3cm}\lbrack \omega_1,\dots,\omega_n,\omega_1',\dots,\omega_{m-n}'\rbrack &m>n,\,\Tilde{\omega}_i=\omega_i\,\forall i=1,\dots,n
+    \end{cases}.
+\end{align*}
+
+Also haben wir nun gezeigt, dass die Menge der offenen Bälle ein guter Erzeuger ist, auf dem wir ein Maß definieren können und mit Caratheodory zu einem Maß auf $\sigma(\mathcal{A})$ fortsetzen können. Aber ist $\sigma(\mathcal{A})$ tatsächlich dasselbe wie die Borel-$\sigma$-Algebra?
+
+\textbf{Frage: } Wie können wir zeigen, dass $\sigma(\mathcal{A})=\mathcal{B}(E)$?\\
+\textbf{Hinweis 1:} Wie haben wir in der Vorlesung die Äquivalenz von $\sigma$-Algebren gezeigt?\\
+\textbf{Lösung 1:} Es reicht zu zeigen, dass $\mathcal{O}\subseteq\sigma(\mathcal{A})$ und dass zudem $\mathcal{A}\subseteq \sigma(\mathcal{O})$. Denn daraus folgt sofort, dass $\sigma(\mathcal{O})\subseteq\sigma(\sigma(\mathcal{A}))=\sigma(\mathcal{A})$ und $\sigma(\mathcal{A})\subseteq \sigma(\sigma(\mathcal{O}))=\sigma(\mathcal{O})$, also die Aussage. Die zweite Ungleichung ist trivial, da alle offenen Bälle auch offene Mengen sind.\\
+\textbf{Hinweis 2:} Welche Beziehung haben offene Bälle zu offenen Mengen?\\
+\textbf{Lösung 2:} Ist $O\in\mathcal{O}$ eine offene Menge, so kann man um jedes $\omega\in O$ einen Ball legen, der komplett in der Menge $O$ enthalten ist, also $\forall\omega\in O,\,\exists\epsilon>0:B_\epsilon(\omega)\subseteq O$. Dann gilt aber sofort $O=\bigcup_{\omega\in O}B_\epsilon(\omega)$.\\
+\textbf{Hinweis 3:} Wieso sind wir nun nicht fertig? Die Vereinigung oben ist leider nicht abzählbar. Wäre sie abzählbar, so würde wegen $B_\epsilon(\omega)\in\mathcal{A}$ und dem Fakt, dass abzählbare Vereinigungen in $\sigma$-Algebren liegen, $O\in\sigma(\mathcal{A})$ sein und wir sind fertig. Der Knackpunkt ist nun also, wie wir aus der Vereinigung eine abzählbare machen.\\
+\textbf{Lösung 3:} Wie oben können wir uns wieder auf Bälle mit Radius $2^{-n}$ beschränken. Wir können also zu jedem $\omega\in\Omega$ ein $n_\omega$ finden, sodass in der Vereinigung der Ball $B_{n_\omega}(\omega)$ enthalten ist. Es muss nun ein kleinstes solches $n_{\omega_1}:=n_1$ geben. Dann kann es aber maximal $2^{n_1}$ viele unterschiedliche Bälle mit demselben Radius geben, da es nur $2^{n_1}$ viele Möglichkeiten gibt, $n_1$ viele Elemente aus $\{0,1\}$ zu ziehen. Dann gibt es aber wieder ein zweitkleinstes $n_{\omega_2}:=n_2$ und wieder maximal $2^{n_2}$ viele unterschiedliche Bälle. Iterativ erhalten wir dann eine abzählbare Menge von Bällen, die genau der Vereinigung von oben entspricht.
+
+An dieser Stelle lohnt es sich, die Konstruktion zu reflektieren. Wir haben aus einer beliebigen offenen Überdeckung eine abzählbare Überdeckung gemacht. Aus Analysis 1 und 2 sollte ein ähnliches Konzept bekannt sein: Kompaktheit. In der Tat haben wir auch in der Vorlesung eine sehr ähnliche Taktik verfolgt, um die Äquivalenz zwischen der durch die offenen Mengen und der durch die offenen Intervalle erzeugten $\sigma$-Algebra zu zeigen. Bei einer beschränkten offenen Menge können wir Heine-Borel anwenden, um Kompaktheit zu folgern und eine endliche Teilüberdeckung zu finden. Allgemein funktioniert das aber nicht, wir bekommen nur eine abzählbare Teilüberdeckung. Aus diesem Grund können wir das Maßproblem nicht lösen, wenn wir in der Definition der $\sigma$-Algebra nur endliche Vereinigungen postulieren, womit wir Frage $2$ beantwortet hätten.
+
+Jetzt haben wir also einen handlichen Erzeuger der Borel-$\sigma$-Algebra, der ein Semiring ist. Es bleibt also nach dem Satz von Caratheodory nur noch übrig, unser Maß auf dem Erzeuger zu definieren.
+
+\textbf{Frage:} Wie können wir mittels einer Mengenfunktion auf dem Erzeuger $\mathcal{A}$ ein (eindeutiges) Maß definieren, das den fairen Münzwurf modelliert?\\
+\textbf{Hinweis 1:} Ein Elementarereignis in $\mathcal{A}$, $\lbrack\omega_1,\dots,\omega_n\rbrack$ entspricht dem $n$-fachen Wurf einer Münze mit Ergebnis $(\omega_1,\dots,\omega_n)$. Was ist die Wahrscheinlichkeit für ein solches Ergebnis?\\
+\textbf{Erwartete Antwort 1:} Die Wahrscheinlichkeit solle $2^n$ sein für jede beliebige Kombination.\\
+\textbf{Hinweis 2:} In der Vorlesung haben wir schon ein Beispiel gesehen, wie wir aus den Wahrscheinlichkeiten auf Elementarereignissen ein Maß konstruieren können. Ansonsten liefern der Satz von Caratheodory und der Eindeutigkeitssatz einen Hinweis, welche Eigenschaft eine Mengenfunktion haben muss, um zu einem Maß fortgesetzt werden zu können.\\
+\textbf{Erwartete Antwort 2:} Wir brauchen die $\sigma$-Additivität auf dem Erzeuger. Dazu definieren wir einfach, dass die Wahrscheinlichkeit für Vereinigungen von Mengen gerade die Summe ihrer Einzelwahrscheinlichkeiten ist. Wenn das Maß endlich ist (wir wollen ein W-Maß definieren!), dann ist es auch eindeutig. In der Tat gilt $\mathbb{P}(\Omega)=\mathbb{P}(\lbrack 0\rbrack\dot\cup \lbrack 1\rbrack)=\mathbb{P}(\lbrack 0\rbrack)+\mathbb{P}(\lbrack 1\rbrack)=1$.
+
+Jetzt haben wir also über den Fortsetzungssatz von Caratheodory und den Eindeutigkeitssatz ein eindeutiges Maß definiert, das intuitiv den fairen Münzwurf modelliert. Jetzt ist die Frage, ob dieses Maß tatsächlich das Maßproblem löst, also ob es normiert und invariant ist. Die Normierung haben wir im Zuge des Eindeutigkeitssatzes bereits nachgeprüft, es fehlt also die Invarianz.
+
+\textbf{Frage:} Erfüllt das oben definierte W-Maß die Invarianz und löst somit das Maßproblem?\\
+\textbf{Hinweis 1:} Starten wir, die Invarianz auf Elementarereignissen nachzurechnen.\\
+\textbf{Lösung 1:} Für ein Elementarereignis $\lbrack \omega_1,\dots\omega_m\rbrack$ gilt mit $n\leq m$, dass $$T_n\lbrack\omega_1,\dots,\omega_m\rbrack=\{\Tilde{\omega}\in\Omega: (\Tilde{\omega}_1,\dots,\Tilde{\omega}_m)=(\omega_1,\dots,1-\omega_n,\dots,\omega_m)\}=\lbrack \omega_1,\dots,1-\omega_n,\dots,\omega_m\rbrack.$$
+Damit gilt aber sofort mittels obiger Definition, dass $\mathbb{P}(T_n\lbrack\omega_1,\dots,\omega_m\rbrack)=\mathbb{P}(\lbrack\omega_1,\dots,\omega_m\rbrack)=2^{-n}$ und somit die Invarianz.\\
+\textbf{Hinweis 2:} Wieso reicht es bereits aus, $\mathbb{P}(T_nA^c)=\mathbb{P}(A^c)$ zu prüfen?\\
+\textbf{Lösung 2:} Alle Elemente in $\sigma(\mathcal{A})$ lassen sich mittels abzählbarer Vereinigung und Komplementbildung von Elementen in $\mathcal{A}$ bilden. Es gilt aber $T_n(\bigcup_{i=1}^n A_i)=\bigcup_{i=1}^n T_nA_i$ und damit folgt die Invarianz für abzählbare Vereinigungen direkt aus der Definition mittels $\sigma$-Additivität.\\
+\textbf{Hinweis 3:} Wir müssen also nur noch die Invarianz für Komplemente nachprüfen.\\
+\textbf{Lösung 3:} Wie vorhin können wir das Komplent aus einer Vereinigung von Elementarereignissen schreiben mittels
+$$\lbrack\omega_1,\dots,\omega_n\rbrack^c=\dot\bigcup_{(\omega_1,\dots,\omega_n)\neq(\Tilde{\omega}_1,\dots,\Tilde{\omega}_n)}\lbrack\Tilde{\omega}_1,\dots,\Tilde{\omega}_n\rbrack.$$
+Somit gilt aber sofort wieder
+\begin{align*}
+\mathbb{P}(T_n\lbrack\omega_1,\dots,\omega_n\rbrack^c)&=\mathbb{P}(\dot\bigcup_{(\omega_1,\dots,\omega_n)\neq(\Tilde{\omega}_1,\dots,\Tilde{\omega}_n)}T_n\lbrack\Tilde{\omega}_1,\dots,\Tilde{\omega}_n\rbrack)=\hspace{-1.2cm}\sum_{(\omega_1,\dots,\omega_n)\neq(\Tilde{\omega}_1,\dots,\Tilde{\omega}_n)}\hspace{-1.1cm}\mathbb{P}(T_n\lbrack\Tilde{\omega}_1,\dots,\Tilde{\omega}_n\rbrack)\\
+&=\hspace{-1.2cm}\sum_{(\omega_1,\dots,\omega_n)\neq(\Tilde{\omega}_1,\dots,\Tilde{\omega}_n)}\hspace{-1.1cm}\mathbb{P}(\lbrack\Tilde{\omega}_1,\dots,\Tilde{\omega}_n\rbrack) = \mathbb{P}(\dot\bigcup_{(\omega_1,\dots,\omega_n)\neq(\Tilde{\omega}_1,\dots,\Tilde{\omega}_n)}\lbrack\Tilde{\omega}_1,\dots,\Tilde{\omega}_n\rbrack) = \mathbb{P}(\lbrack\omega_1,\dots,\omega_n\rbrack^c).
+\end{align*}
+
+Wir haben nun also beide Fragen zur genüge beantwortet. Wir kennen nun ein Beispiel, in dem wir tatsächlich nicht sinnvoll mit der Potenzmenge als $\sigma$-Algebra arbeiten können und haben gesehen wie wir das entstehende Maßproblem lösen können. Auf dem Weg haben wir ebenfalls gesehen, dass unsere Konstruktion nicht funktionieren kann, wenn wir keine abzählbar unendliche Vereinigungen in der Definition der $\sigma$-Algebra zulassen. Wir werden nun wie angkündigt das Maßproblem im Kontext von \glqq dem Beispiel\grqq\, in der Stochastik diskutieren und anschließend erarbeiten, auf welcher Art von Räumen das Maßproblem immer auftaucht, aber auch gelöst werden kann.
+
+Bevor wir aber zum $\mathbb{R}^d$ und dem Lebesgue-Maß kommen, wollen wir noch wie angekündigt eine Verallgemeinerung unseres Beispiels diskutieren. Dazu definieren wir $E^\mathbb{N}:=\{(\omega_i)_{i\in\mathbb{N}}\subseteq E\}$ für ein endliches $E$ mit $\#E\geq 2$. Im Falle des Münzwurfes ist $E=\{0,1\}$.
+
+\textbf{Frage:} Wie können wir analoge Resultate wie im Münwurfbeispiel für den allgemeinen $E^\mathbb{N}$ zeigen?\\
+\textbf{Löseung:} Zunächst müssen wir die entsprechenden \glqq Flip\grqq-Operatoren definieren. Nun gibt es nicht mehr nur eine andere Möglichkeit, auf die wir die $n$-te Stelle flippen können, sondern wir müssen spezifizieren, auf welchen Wert wir flippen. Wir definieren also für alle $e\in E$ und $n\in\mathbb{N}$ die Operatoren $T_{n,e}$, die an der $n$-ten Stelle auf den Wert $e$ flippen, also $T_{n,e}(\omega_1,\dots)=(\omega_1,\dots,\omega_{n-1},e,\omega_{n+1},\dots)$. Damit kann man sofort wieder die Invarianzeigenschaft definieren. Der Unmöglichkeitsbeweis für ein normiertes, invariantes Maß auf der Potenzmenge von $E^\mathbb{N}$ funktioniert genau analog, da die Äquivalenzrelation im Limes definiert ist. Das Maßproblem tritt also auch hier auf. Die Metrik kann genau analog definiert werden und auch die Äquivalenz von Bällen und Elementarereignissen bleibt bestehen. Ebenso funktioniert die Konstruktion des Semirings aus der Vereinigung aller Elementarereignisse. Im Beweis dafür, dass $\sigma(\mathcal{A})=\mathcal{B}(E)$ gibt es im Schritt, in dem wir aus einer Vereinigung über alle Punkte einer offenen Menge eine abzählbare Vereinigung machen, nunmehr maximal $\#E^{n_i}$ viele verschiedene offene Bälle in jedem Schritt, aber sonst funktioniert der Beweis auch analog. Auch die Definition des Maßes ist ähnlich, wir definieren nämlich $\mathbb{P}(\lbrack\omega_1,\dots,\omega_n\rbrack)=\#E^{-n}$ und funktioniert geht der Beweis der Invarianz und Normiertheit genau gleich.
+
+Wir sehen nun also, dass an unserem Beispiel des Münzwurfes prinzipiell nichts besonderes ist, dass es also eine breite Klasse von Beispielen gibt, in denen das Maßproblem besteht und mittels einer Borel-$\sigma$-Algebra gelöst werden kann. Wir machen jetzt einen scheinbaren Sprung, Hausaufgabe wird es allerdings sein, zu überlegen, weshalb der scheinbare Sprung eigentlich kein wirklicher Sprung ist.
+
+Die ursprüngliche Frage in der Maßtheorie, und wieso wir überhaupt von Maßen sprechen, ist, wie man das Volumen von Mengen im $\mathbb{R}^d$ sinnvoll bestimmen kann. Für $n=1$ wollen wir also ein Längenmaß, für $n=2$ ein Flächenmaß, für $n=3$ ein Volumenmaß, und so weiter.
+
+\textbf{Frage:} Welche Eigenschaften sollten wir von solch einem Maß fordern?\\
+\textbf{Hinweis 1:} Wie bestimmt man Flächeninhalte von Quadern/Kreisen? Wie verändert sich der Flächeninhalt unter Vergrößerung/Verschiebung?\\
+\textbf{Hinweis 2:} Den Flächeninhalt des Kreises können wir von unten annähern, indem wir ihn durch eine Folge von immer kleiner werdenden, disjunkten Quadern, die im Kreis drin liegen berechnen. Dabei sollte die Summe der Flächeninhalte aller Quadrate am Ende, wenn wir \glqq im Limes\grqq\, den gesamten Kreis ausgefüllt haben dasselbe wie das Volumen des Kreises sein.\\
+\textbf{Lösung 1+2:} Es sollte die $\sigma$-Additivität gelten, um die obige Konstruktion durchführen zu können. Des weiteren sollte sich das Volumen unter jeglichen Verschiebungen nicht änder, es sollte also $\lambda(A+x)=\lambda(A)$ gelten. Das nennen wir Verschiebungsinvarianz.\\
+\textbf{Hinweis 3:} Eine übrige Eigenschaft ist eher mathematischer Notwendigkeit geschuldet und die andere legt gewissermaßen ein Basis für die Größe. Wenn wir die Größe unter Dehnung und Stauchung entsprechend skalieren wollen brauchen wir eine Art Einheitsgröße, anhand derer wir das tun können.\\
+\textbf{Lösung 3:} Wir brauchen, dass $\lambda(\emptyset)=0$ und die Normierung, also $\lambda(\lbrack 0,1\rbrack^d)=1$.
+
+Nun haben wir im Endeffekt wieder von einem Maß gefordert, dass es die Definition aus der Vorlesung erfüllt und zusätzlich normiert und invariant ist. Überlegt euch für nächste Woche schonmal, wie hier das Maßproblem auftauchen wird und wie wir es lösen können (Die Vorlesung wird zumindest auf die Lösung auch eingehen). Überlegt euch auch, wie wir dieses Problem mit unserem Münzwurfbeispiel zusammenhängt, das kann euch helfen die erste Frage zu beantworten. Als kleinen Hinweis sei gesagt: Denkt über den Raum $\{0,\dots,9\}^\mathbb{N}$ nach, welche Operatoren $T_x$ wir definieren wollen, um die Invarianz zu definieren, und wie sie mit den Operatoren $T_{n,e}$ zusammenhängen. Außerdem können wir uns fragen, welche Art von Zufall hier beschrieben wird. Fragt vielleicht außerdem mal in eurem \glqq Nicht-Mathematiker\grqq-Umfeld nach, welche Art von Zufall den Menschen als erstes in den Sinn kommt, z.B. anhand eines \glqq zufälligen\grqq\, Ziehens aus mehreren Optionen. Nächste Woche werden wir dann unsere Fragen endgültig beantworten, indem wir anhand unserer bisherigen Insights diese ganz allgemein diskutieren.
+
+\end{document}
